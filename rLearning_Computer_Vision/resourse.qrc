@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/1-home/background.jpg</file>
+        <file>images/left-navigator/func-g.png</file>
+        <file>images/left-navigator/func-w.png</file>
+        <file>images/left-navigator/home-g.png</file>
+        <file>images/left-navigator/home-w.png</file>
+        <file>images/company-logo.png</file>
+        <file>images/2-training/subpage/background/classification-others.jpg</file>
+        <file>images/2-training/subpage/background/classification-pets.jpg</file>
+        <file>images/2-training/subpage/background/detection-creature.jpg</file>
+        <file>images/2-training/subpage/background/detection-fruits.jpg</file>
+        <file>images/2-training/subpage/background/pose-estimation.jpg</file>
+        <file>images/2-training/subpage/image-path.png</file>
+        <file>images/2-training/subpage/model-path.png</file>
+        <file>images/3-visualization/open-camera.png</file>
+        <file>images/3-visualization/open-image.png</file>
+        <file>images/2-training/subpage/background/classification-others.png</file>
+        <file>images/2-training/subpage/background/classification-pets.png</file>
+        <file>images/2-training/subpage/background/detection-creature.png</file>
+        <file>images/2-training/subpage/background/detection-fruits.png</file>
+        <file>images/2-training/subpage/background/pose-estimation.png</file>
+    </qresource>
+</RCC>
