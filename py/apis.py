@@ -119,7 +119,6 @@ def decode(len):
         if (len == 8):
             if ((0x00 == RxBuffer[4]) and (0x00 == RxBuffer[5])):
                 ParaCB.Module_Index = 0
-                ParaCB.Data_Path = ''
                 ParaCB.Model_Path = ''
                 ParaCB.Epoch = 15
                 ParaCB.Image_Path = ''

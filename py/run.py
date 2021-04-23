@@ -1,15 +1,16 @@
 from apis import *
+from Module_init import Module
+from Parse_signal import SignalParser
 
-
-def process_handler(signal):
-    if signal != 0:
-        print(signal)
 
 
 if __name__ == '__main__':
+    parse = SignalParser()
     Comm_Init()
     while True:
         comm_handler()
         signal = ParaCB.Get_Signal()
-        process_handler(signal)
+        # Module_singal = ParaCB.Module_Index
+        parse.parse(ParaCB,signal)
+
 
