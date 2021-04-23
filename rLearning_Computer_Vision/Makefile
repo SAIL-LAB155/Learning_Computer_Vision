@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -I. -I. -I/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++
+CXXFLAGS      = -pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+INCPATH       = -I. -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtNetwork -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -I. -I. -I/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++
 QMAKE         = /usr/lib/qt5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -35,10 +35,10 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = Learning_Computer_Vision1.0.0
-DISTDIR = /home/bleu/Desktop/qt/Learning_Computer_Vision/.tmp/Learning_Computer_Vision1.0.0
+DISTDIR = /home/nvidia/Desktop/Learning_Computer_Vision/rLearning_Computer_Vision/.tmp/Learning_Computer_Vision1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
-LIBS          = $(SUBLIBS) -lQt5Widgets -lQt5Gui -lQt5Core -lGLESv2 -lpthread 
+LIBS          = $(SUBLIBS) -lQt5Widgets -lQt5Gui -lQt5Network -lQt5Core -lGLESv2 -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -57,13 +57,16 @@ SOURCES       = main.cpp \
 		TrainWidget.cpp \
 		VisualizationWidget.cpp \
 		AnnotationWidget.cpp \
-		ParameterControlBlock.cpp moc_Learn_Computer_Vision_Dialog.cpp \
+		ParameterControlBlock.cpp \
+		pythoncomm.cpp moc_Learn_Computer_Vision_Dialog.cpp \
 		moc_HomepageWidget.cpp \
 		moc_SelectModuleWidget.cpp \
 		moc_TrainWidget.cpp \
 		moc_VisualizationWidget.cpp \
-		moc_AnnotationWidget.cpp
-OBJECTS       = main.o \
+		moc_AnnotationWidget.cpp \
+		moc_pythoncomm.cpp
+OBJECTS       = qrc_resourse.o \
+		main.o \
 		Learn_Computer_Vision_Dialog.o \
 		HomepageWidget.o \
 		SelectModuleWidget.o \
@@ -71,12 +74,14 @@ OBJECTS       = main.o \
 		VisualizationWidget.o \
 		AnnotationWidget.o \
 		ParameterControlBlock.o \
+		pythoncomm.o \
 		moc_Learn_Computer_Vision_Dialog.o \
 		moc_HomepageWidget.o \
 		moc_SelectModuleWidget.o \
 		moc_TrainWidget.o \
 		moc_VisualizationWidget.o \
-		moc_AnnotationWidget.o
+		moc_AnnotationWidget.o \
+		moc_pythoncomm.o
 DIST          = /usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/aarch64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/aarch64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -130,7 +135,6 @@ DIST          = /usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -155,14 +159,16 @@ DIST          = /usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		TrainWidget.h \
 		VisualizationWidget.h \
 		AnnotationWidget.h \
-		ParameterControlBlock.h main.cpp \
+		ParameterControlBlock.h \
+		pythoncomm.h main.cpp \
 		Learn_Computer_Vision_Dialog.cpp \
 		HomepageWidget.cpp \
 		SelectModuleWidget.cpp \
 		TrainWidget.cpp \
 		VisualizationWidget.cpp \
 		AnnotationWidget.cpp \
-		ParameterControlBlock.cpp
+		ParameterControlBlock.cpp \
+		pythoncomm.cpp
 QMAKE_TARGET  = Learning_Computer_Vision
 DESTDIR       = 
 TARGET        = Learning_Computer_Vision
@@ -227,7 +233,6 @@ Makefile: Learning_Computer_Vision.pro /usr/lib/aarch64-linux-gnu/qt5/mkspecs/li
 		/usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -247,8 +252,10 @@ Makefile: Learning_Computer_Vision.pro /usr/lib/aarch64-linux-gnu/qt5/mkspecs/li
 		/usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		Learning_Computer_Vision.pro \
+		resourse.qrc \
 		/usr/lib/aarch64-linux-gnu/libQt5Widgets.prl \
 		/usr/lib/aarch64-linux-gnu/libQt5Gui.prl \
+		/usr/lib/aarch64-linux-gnu/libQt5Network.prl \
 		/usr/lib/aarch64-linux-gnu/libQt5Core.prl
 	$(QMAKE) -o Makefile Learning_Computer_Vision.pro -spec linux-g++
 /usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/spec_pre.prf:
@@ -304,7 +311,6 @@ Makefile: Learning_Computer_Vision.pro /usr/lib/aarch64-linux-gnu/qt5/mkspecs/li
 /usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -324,8 +330,10 @@ Makefile: Learning_Computer_Vision.pro /usr/lib/aarch64-linux-gnu/qt5/mkspecs/li
 /usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/yacc.prf:
 /usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/lex.prf:
 Learning_Computer_Vision.pro:
+resourse.qrc:
 /usr/lib/aarch64-linux-gnu/libQt5Widgets.prl:
 /usr/lib/aarch64-linux-gnu/libQt5Gui.prl:
+/usr/lib/aarch64-linux-gnu/libQt5Network.prl:
 /usr/lib/aarch64-linux-gnu/libQt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile Learning_Computer_Vision.pro -spec linux-g++
@@ -341,9 +349,10 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents resourse.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents Learn_Computer_Vision_Dialog.h HomepageWidget.h SelectModuleWidget.h TrainWidget.h VisualizationWidget.h AnnotationWidget.h ParameterControlBlock.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp Learn_Computer_Vision_Dialog.cpp HomepageWidget.cpp SelectModuleWidget.cpp TrainWidget.cpp VisualizationWidget.cpp AnnotationWidget.cpp ParameterControlBlock.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents Learn_Computer_Vision_Dialog.h HomepageWidget.h SelectModuleWidget.h TrainWidget.h VisualizationWidget.h AnnotationWidget.h ParameterControlBlock.h pythoncomm.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp Learn_Computer_Vision_Dialog.cpp HomepageWidget.cpp SelectModuleWidget.cpp TrainWidget.cpp VisualizationWidget.cpp AnnotationWidget.cpp ParameterControlBlock.cpp pythoncomm.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents Learn_Computer_Vision_Dialog.ui HomepageWidget.ui SelectModuleWidget.ui TrainWidget.ui VisualizationWidget.ui AnnotationWidget.ui $(DISTDIR)/
 
 
@@ -368,18 +377,46 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_resourse.o
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_resourse.cpp qrc_resourse.tmp.o
+qrc_resourse.o: resourse.qrc \
+		/usr/lib/qt5/bin/rcc \
+		images/company-logo.png \
+		images/left-navigator/home-g.png \
+		images/left-navigator/home-w.png \
+		images/left-navigator/func-g.png \
+		images/left-navigator/func-w.png \
+		images/2-training/subpage/model-path.png \
+		images/2-training/subpage/image-path.png \
+		images/2-training/subpage/background/classification-pets.jpg \
+		images/2-training/subpage/background/pose-estimation.png \
+		images/2-training/subpage/background/classification-others.png \
+		images/2-training/subpage/background/detection-creature.png \
+		images/2-training/subpage/background/detection-fruits.png \
+		images/2-training/subpage/background/pose-estimation.jpg \
+		images/2-training/subpage/background/classification-pets.png \
+		images/2-training/subpage/background/classification-others.jpg \
+		images/2-training/subpage/background/detection-creature.jpg \
+		images/2-training/subpage/background/detection-fruits.jpg \
+		images/1-home/background.jpg \
+		images/3-visualization/open-camera.png \
+		images/3-visualization/open-image.png
+	/usr/lib/qt5/bin/rcc -name resourse resourse.qrc -pass 1 -o ./qrc_resourse.cpp 
+	 g++ $(CXXFLAGS) -c ./qrc_resourse.cpp -o ./qrc_resourse.tmp.o 
+	 /usr/lib/qt5/bin/rcc -name resourse resourse.qrc -pass 2 -temp ./qrc_resourse.tmp.o -o qrc_resourse.o
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: /usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
-	g++ -pipe -O2 -Wall -W -dM -E -o moc_predefs.h /usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
+	g++ -pipe -O2 -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /usr/lib/aarch64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_Learn_Computer_Vision_Dialog.cpp moc_HomepageWidget.cpp moc_SelectModuleWidget.cpp moc_TrainWidget.cpp moc_VisualizationWidget.cpp moc_AnnotationWidget.cpp
+compiler_moc_header_make_all: moc_Learn_Computer_Vision_Dialog.cpp moc_HomepageWidget.cpp moc_SelectModuleWidget.cpp moc_TrainWidget.cpp moc_VisualizationWidget.cpp moc_AnnotationWidget.cpp moc_pythoncomm.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_Learn_Computer_Vision_Dialog.cpp moc_HomepageWidget.cpp moc_SelectModuleWidget.cpp moc_TrainWidget.cpp moc_VisualizationWidget.cpp moc_AnnotationWidget.cpp
-moc_Learn_Computer_Vision_Dialog.cpp: HomepageWidget.h \
+	-$(DEL_FILE) moc_Learn_Computer_Vision_Dialog.cpp moc_HomepageWidget.cpp moc_SelectModuleWidget.cpp moc_TrainWidget.cpp moc_VisualizationWidget.cpp moc_AnnotationWidget.cpp moc_pythoncomm.cpp
+moc_Learn_Computer_Vision_Dialog.cpp: pythoncomm.h \
+		HomepageWidget.h \
 		SelectModuleWidget.h \
 		ParameterControlBlock.h \
 		TrainWidget.h \
@@ -388,33 +425,40 @@ moc_Learn_Computer_Vision_Dialog.cpp: HomepageWidget.h \
 		Learn_Computer_Vision_Dialog.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/bleu/Desktop/qt/Learning_Computer_Vision -I/usr/include/aarch64-linux-gnu/qt5 -I/usr/include/aarch64-linux-gnu/qt5/QtWidgets -I/usr/include/aarch64-linux-gnu/qt5/QtGui -I/usr/include/aarch64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/aarch64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/aarch64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/aarch64-linux-gnu/7/include-fixed -I/usr/include/aarch64-linux-gnu -I/usr/include Learn_Computer_Vision_Dialog.h -o moc_Learn_Computer_Vision_Dialog.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/nvidia/Desktop/Learning_Computer_Vision/rLearning_Computer_Vision -I/usr/include/aarch64-linux-gnu/qt5 -I/usr/include/aarch64-linux-gnu/qt5/QtWidgets -I/usr/include/aarch64-linux-gnu/qt5/QtGui -I/usr/include/aarch64-linux-gnu/qt5/QtNetwork -I/usr/include/aarch64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/aarch64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/aarch64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/aarch64-linux-gnu/7/include-fixed -I/usr/include/aarch64-linux-gnu -I/usr/include Learn_Computer_Vision_Dialog.h -o moc_Learn_Computer_Vision_Dialog.cpp
 
 moc_HomepageWidget.cpp: HomepageWidget.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/bleu/Desktop/qt/Learning_Computer_Vision -I/usr/include/aarch64-linux-gnu/qt5 -I/usr/include/aarch64-linux-gnu/qt5/QtWidgets -I/usr/include/aarch64-linux-gnu/qt5/QtGui -I/usr/include/aarch64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/aarch64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/aarch64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/aarch64-linux-gnu/7/include-fixed -I/usr/include/aarch64-linux-gnu -I/usr/include HomepageWidget.h -o moc_HomepageWidget.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/nvidia/Desktop/Learning_Computer_Vision/rLearning_Computer_Vision -I/usr/include/aarch64-linux-gnu/qt5 -I/usr/include/aarch64-linux-gnu/qt5/QtWidgets -I/usr/include/aarch64-linux-gnu/qt5/QtGui -I/usr/include/aarch64-linux-gnu/qt5/QtNetwork -I/usr/include/aarch64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/aarch64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/aarch64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/aarch64-linux-gnu/7/include-fixed -I/usr/include/aarch64-linux-gnu -I/usr/include HomepageWidget.h -o moc_HomepageWidget.cpp
 
 moc_SelectModuleWidget.cpp: ParameterControlBlock.h \
 		SelectModuleWidget.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/bleu/Desktop/qt/Learning_Computer_Vision -I/usr/include/aarch64-linux-gnu/qt5 -I/usr/include/aarch64-linux-gnu/qt5/QtWidgets -I/usr/include/aarch64-linux-gnu/qt5/QtGui -I/usr/include/aarch64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/aarch64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/aarch64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/aarch64-linux-gnu/7/include-fixed -I/usr/include/aarch64-linux-gnu -I/usr/include SelectModuleWidget.h -o moc_SelectModuleWidget.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/nvidia/Desktop/Learning_Computer_Vision/rLearning_Computer_Vision -I/usr/include/aarch64-linux-gnu/qt5 -I/usr/include/aarch64-linux-gnu/qt5/QtWidgets -I/usr/include/aarch64-linux-gnu/qt5/QtGui -I/usr/include/aarch64-linux-gnu/qt5/QtNetwork -I/usr/include/aarch64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/aarch64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/aarch64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/aarch64-linux-gnu/7/include-fixed -I/usr/include/aarch64-linux-gnu -I/usr/include SelectModuleWidget.h -o moc_SelectModuleWidget.cpp
 
-moc_TrainWidget.cpp: TrainWidget.h \
+moc_TrainWidget.cpp: ParameterControlBlock.h \
+		TrainWidget.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/bleu/Desktop/qt/Learning_Computer_Vision -I/usr/include/aarch64-linux-gnu/qt5 -I/usr/include/aarch64-linux-gnu/qt5/QtWidgets -I/usr/include/aarch64-linux-gnu/qt5/QtGui -I/usr/include/aarch64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/aarch64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/aarch64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/aarch64-linux-gnu/7/include-fixed -I/usr/include/aarch64-linux-gnu -I/usr/include TrainWidget.h -o moc_TrainWidget.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/nvidia/Desktop/Learning_Computer_Vision/rLearning_Computer_Vision -I/usr/include/aarch64-linux-gnu/qt5 -I/usr/include/aarch64-linux-gnu/qt5/QtWidgets -I/usr/include/aarch64-linux-gnu/qt5/QtGui -I/usr/include/aarch64-linux-gnu/qt5/QtNetwork -I/usr/include/aarch64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/aarch64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/aarch64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/aarch64-linux-gnu/7/include-fixed -I/usr/include/aarch64-linux-gnu -I/usr/include TrainWidget.h -o moc_TrainWidget.cpp
 
-moc_VisualizationWidget.cpp: VisualizationWidget.h \
+moc_VisualizationWidget.cpp: ParameterControlBlock.h \
+		VisualizationWidget.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/bleu/Desktop/qt/Learning_Computer_Vision -I/usr/include/aarch64-linux-gnu/qt5 -I/usr/include/aarch64-linux-gnu/qt5/QtWidgets -I/usr/include/aarch64-linux-gnu/qt5/QtGui -I/usr/include/aarch64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/aarch64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/aarch64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/aarch64-linux-gnu/7/include-fixed -I/usr/include/aarch64-linux-gnu -I/usr/include VisualizationWidget.h -o moc_VisualizationWidget.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/nvidia/Desktop/Learning_Computer_Vision/rLearning_Computer_Vision -I/usr/include/aarch64-linux-gnu/qt5 -I/usr/include/aarch64-linux-gnu/qt5/QtWidgets -I/usr/include/aarch64-linux-gnu/qt5/QtGui -I/usr/include/aarch64-linux-gnu/qt5/QtNetwork -I/usr/include/aarch64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/aarch64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/aarch64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/aarch64-linux-gnu/7/include-fixed -I/usr/include/aarch64-linux-gnu -I/usr/include VisualizationWidget.h -o moc_VisualizationWidget.cpp
 
 moc_AnnotationWidget.cpp: AnnotationWidget.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/bleu/Desktop/qt/Learning_Computer_Vision -I/usr/include/aarch64-linux-gnu/qt5 -I/usr/include/aarch64-linux-gnu/qt5/QtWidgets -I/usr/include/aarch64-linux-gnu/qt5/QtGui -I/usr/include/aarch64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/aarch64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/aarch64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/aarch64-linux-gnu/7/include-fixed -I/usr/include/aarch64-linux-gnu -I/usr/include AnnotationWidget.h -o moc_AnnotationWidget.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/nvidia/Desktop/Learning_Computer_Vision/rLearning_Computer_Vision -I/usr/include/aarch64-linux-gnu/qt5 -I/usr/include/aarch64-linux-gnu/qt5/QtWidgets -I/usr/include/aarch64-linux-gnu/qt5/QtGui -I/usr/include/aarch64-linux-gnu/qt5/QtNetwork -I/usr/include/aarch64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/aarch64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/aarch64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/aarch64-linux-gnu/7/include-fixed -I/usr/include/aarch64-linux-gnu -I/usr/include AnnotationWidget.h -o moc_AnnotationWidget.cpp
+
+moc_pythoncomm.cpp: pythoncomm.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/nvidia/Desktop/Learning_Computer_Vision/rLearning_Computer_Vision -I/usr/include/aarch64-linux-gnu/qt5 -I/usr/include/aarch64-linux-gnu/qt5/QtWidgets -I/usr/include/aarch64-linux-gnu/qt5/QtGui -I/usr/include/aarch64-linux-gnu/qt5/QtNetwork -I/usr/include/aarch64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/aarch64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/aarch64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/aarch64-linux-gnu/7/include-fixed -I/usr/include/aarch64-linux-gnu -I/usr/include pythoncomm.h -o moc_pythoncomm.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -451,11 +495,12 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
 main.o: main.cpp Learn_Computer_Vision_Dialog.h \
+		pythoncomm.h \
 		HomepageWidget.h \
 		SelectModuleWidget.h \
 		ParameterControlBlock.h \
@@ -465,6 +510,7 @@ main.o: main.cpp Learn_Computer_Vision_Dialog.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 Learn_Computer_Vision_Dialog.o: Learn_Computer_Vision_Dialog.cpp Learn_Computer_Vision_Dialog.h \
+		pythoncomm.h \
 		HomepageWidget.h \
 		SelectModuleWidget.h \
 		ParameterControlBlock.h \
@@ -484,19 +530,27 @@ SelectModuleWidget.o: SelectModuleWidget.cpp SelectModuleWidget.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SelectModuleWidget.o SelectModuleWidget.cpp
 
 TrainWidget.o: TrainWidget.cpp TrainWidget.h \
-		ui_TrainWidget.h
+		ParameterControlBlock.h \
+		ui_TrainWidget.h \
+		pythoncomm.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TrainWidget.o TrainWidget.cpp
 
 VisualizationWidget.o: VisualizationWidget.cpp VisualizationWidget.h \
-		ui_VisualizationWidget.h
+		ParameterControlBlock.h \
+		ui_VisualizationWidget.h \
+		pythoncomm.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o VisualizationWidget.o VisualizationWidget.cpp
 
 AnnotationWidget.o: AnnotationWidget.cpp AnnotationWidget.h \
 		ui_AnnotationWidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o AnnotationWidget.o AnnotationWidget.cpp
 
-ParameterControlBlock.o: ParameterControlBlock.cpp ParameterControlBlock.h
+ParameterControlBlock.o: ParameterControlBlock.cpp ParameterControlBlock.h \
+		pythoncomm.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ParameterControlBlock.o ParameterControlBlock.cpp
+
+pythoncomm.o: pythoncomm.cpp pythoncomm.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pythoncomm.o pythoncomm.cpp
 
 moc_Learn_Computer_Vision_Dialog.o: moc_Learn_Computer_Vision_Dialog.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Learn_Computer_Vision_Dialog.o moc_Learn_Computer_Vision_Dialog.cpp
@@ -515,6 +569,9 @@ moc_VisualizationWidget.o: moc_VisualizationWidget.cpp
 
 moc_AnnotationWidget.o: moc_AnnotationWidget.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_AnnotationWidget.o moc_AnnotationWidget.cpp
+
+moc_pythoncomm.o: moc_pythoncomm.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_pythoncomm.o moc_pythoncomm.cpp
 
 ####### Install
 
