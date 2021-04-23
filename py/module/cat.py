@@ -1,5 +1,5 @@
 import os
-import jetson_inference.python
+from jetson_inference.python.training.classification.train import main
 
 class CAT:
     def __init__(self):
@@ -10,9 +10,11 @@ class CAT:
         print('data_path:', data_path)
         print('model_path:', model_path)
         print('epoch_num: ', epoch)
-        cmd = 'python3 /home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/train.py --epochs {} --model-dir {} {}'.format(epoch, '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/models', data_path[:-1])
-        print(cmd)
-        os.system(cmd)
+        # cmd = 'python3 /home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/train.py --epochs {} --model-dir {} {}'.format(epoch, '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/models', data_path[:-1])
+        # print(cmd)
+        # os.system(cmd)
+        model_path = '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/models'
+        main(epoch,model_path,data_path[:-1])
 
     def plot(self):
 
@@ -34,8 +36,6 @@ class CAT:
         pass
 
 # For testing
-def main():
-    pass
 
 
 
