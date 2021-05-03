@@ -60,7 +60,7 @@ class OpenImagesDataset:
         return image
 
     def _read_data(self):
-        annotation_file = f"{self.root}/sub-{self.dataset_type}-annotations-bbox.csv"
+        annotation_file = f"/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/data/fruit/sub-{self.dataset_type}-annotations-bbox.csv"
         logging.info(f'loading annotations from: {annotation_file}')
         annotations = pd.read_csv(annotation_file)
         logging.info(f'annotations loaded from:  {annotation_file}')

@@ -10,5 +10,13 @@
     <mapping directory="$PROJECT_DIR$/jetson-inference/python/training/segmentation" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/jetson-inference/tools/camera-capture" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/jetson-inference/utils" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jetson_inference" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jetson_inference/build/torchvision-36" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jetson_inference/python/training/classification" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jetson_inference/python/training/detection" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jetson_inference/python/training/detection/ssd" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jetson_inference/python/training/segmentation" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jetson_inference/tools/camera-capture" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jetson_inference/utils" vcs="Git" />
   </component>
 </project>

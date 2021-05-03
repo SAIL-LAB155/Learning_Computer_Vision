@@ -11,20 +11,22 @@ import torch
 from torch.utils.data import DataLoader, ConcatDataset
 from torch.optim.lr_scheduler import CosineAnnealingLR, MultiStepLR
 
-from vision.utils.misc import str2bool, Timer, freeze_net_layers, store_labels
-from vision.ssd.ssd import MatchPrior
-from vision.ssd.vgg_ssd import create_vgg_ssd
-from vision.ssd.mobilenetv1_ssd import create_mobilenetv1_ssd
-from vision.ssd.mobilenetv1_ssd_lite import create_mobilenetv1_ssd_lite
-from vision.ssd.mobilenet_v2_ssd_lite import create_mobilenetv2_ssd_lite
-from vision.ssd.squeezenet_ssd_lite import create_squeezenet_ssd_lite
-from vision.datasets.voc_dataset import VOCDataset
-from vision.datasets.open_images import OpenImagesDataset
-from vision.nn.multibox_loss import MultiboxLoss
-from vision.ssd.config import vgg_ssd_config
-from vision.ssd.config import mobilenetv1_ssd_config
-from vision.ssd.config import squeezenet_ssd_config
-from vision.ssd.data_preprocessing import TrainAugmentation, TestTransform
+from jetson_inference.python.training.detection.ssd.vision.utils.misc import str2bool, Timer, freeze_net_layers, store_labels
+from jetson_inference.python.training.detection.ssd.vision.ssd.ssd import MatchPrior
+from jetson_inference.python.training.detection.ssd.vision.ssd.vgg_ssd import create_vgg_ssd
+from jetson_inference.python.training.detection.ssd.vision.ssd.mobilenetv1_ssd import create_mobilenetv1_ssd
+from jetson_inference.python.training.detection.ssd.vision.ssd.mobilenetv1_ssd_lite import create_mobilenetv1_ssd_lite
+from jetson_inference.python.training.detection.ssd.vision.ssd.mobilenet_v2_ssd_lite import create_mobilenetv2_ssd_lite
+from jetson_inference.python.training.detection.ssd.vision.ssd.squeezenet_ssd_lite import create_squeezenet_ssd_lite
+from jetson_inference.python.training.detection.ssd.vision.datasets.voc_dataset import VOCDataset
+from jetson_inference.python.training.detection.ssd.vision.datasets.open_images import OpenImagesDataset
+from jetson_inference.python.training.detection.ssd.vision.nn.multibox_loss import MultiboxLoss
+from jetson_inference.python.training.detection.ssd.vision.ssd.config import vgg_ssd_config
+from jetson_inference.python.training.detection.ssd.vision.ssd.config import mobilenetv1_ssd_config
+from jetson_inference.python.training.detection.ssd.vision.ssd.config import squeezenet_ssd_config
+from jetson_inference.python.training.detection.ssd.vision.ssd.data_preprocessing import TrainAugmentation, TestTransform
+from apis import *
+
 
 parser = argparse.ArgumentParser(
     description='Single Shot MultiBox Detector Training With PyTorch')
@@ -48,7 +50,7 @@ parser.add_argument('--mb2-width-mult', default=1.0, type=float,
 
 # Params for loading pretrained basenet or checkpoints.
 parser.add_argument('--base-net', help='Pretrained base model')
-parser.add_argument('--pretrained-ssd', default='models/mobilenet-v1-ssd-mp-0_675.pth', type=str, help='Pre-trained base model')
+parser.add_argument('--pretrained-ssd', default='/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/models/mobilenet-v1-ssd-mp-0_675.pth', type=str, help='Pre-trained base model')
 parser.add_argument('--resume', default=None, type=str,
                     help='Checkpoint state_dict file to resume training from')
 
@@ -79,9 +81,9 @@ parser.add_argument('--t-max', default=100, type=float,
                     help='T_max value for Cosine Annealing Scheduler.')
 
 # Train params
-parser.add_argument('--batch-size', default=4, type=int,
+parser.add_argument('--batch-size', default=2, type=int,
                     help='Batch size for training')
-parser.add_argument('--num-epochs', '--epochs', default=30, type=int,
+parser.add_argument('--num_epochs', '--epochs', default=30, type=int,
                     help='the number epochs')
 parser.add_argument('--num-workers', '--workers', default=2, type=int,
                     help='Number of workers used in dataloading')
@@ -136,6 +138,11 @@ def train(loader, net, criterion, optimizer, device, debug_steps=100, epoch=-1):
                 f"Avg Regression Loss {avg_reg_loss:.4f}, " +
                 f"Avg Classification Loss: {avg_clf_loss:.4f}"
             )
+            msg =  (f"Epoch: {epoch}, Step: {i}/{len(loader)}, " +
+                f"Avg Loss: {avg_loss:.4f}, " +
+                f"Avg Regression Loss {avg_reg_loss:.4f}, " +
+                f"Avg Classification Loss: {avg_clf_loss:.4f}")
+            SendToQt_Log(msg)
             running_loss = 0.0
             running_regression_loss = 0.0
             running_classification_loss = 0.0
@@ -164,20 +171,19 @@ def test(loader, net, criterion, device):
         running_classification_loss += classification_loss.item()
     return running_loss / num, running_regression_loss / num, running_classification_loss / num
 
-
-if __name__ == '__main__':
+def main(epochs, model_dir, data_path):
     timer = Timer()
 
     logging.info(args)
-    
+
     # make sure that the checkpoint output dir exists
     if args.checkpoint_folder:
         args.checkpoint_folder = os.path.expanduser(args.checkpoint_folder)
 
         if not os.path.exists(args.checkpoint_folder):
             os.mkdir(args.checkpoint_folder)
-            
-    # select the network architecture and config     
+
+    # select the network architecture and config
     if args.net == 'vgg16-ssd':
         create_net = create_vgg_ssd
         config = vgg_ssd_config
@@ -197,7 +203,7 @@ if __name__ == '__main__':
         logging.fatal("The net type is wrong.")
         parser.print_help(sys.stderr)
         sys.exit(1)
-        
+
     # create data transforms for train/test/val
     train_transform = TrainAugmentation(config.image_size, config.image_mean, config.image_std)
     target_transform = MatchPrior(config.priors, config.center_variance,
@@ -216,9 +222,9 @@ if __name__ == '__main__':
             store_labels(label_file, dataset.class_names)
             num_classes = len(dataset.class_names)
         elif args.dataset_type == 'open_images':
-            dataset = OpenImagesDataset(dataset_path,
-                 transform=train_transform, target_transform=target_transform,
-                 dataset_type="train", balance_data=args.balance_data)
+            dataset = OpenImagesDataset(data_path,
+                                        transform=train_transform, target_transform=target_transform,
+                                        dataset_type="train", balance_data=args.balance_data)
             label_file = os.path.join(args.checkpoint_folder, "labels.txt")
             store_labels(label_file, dataset.class_names)
             logging.info(dataset)
@@ -227,7 +233,7 @@ if __name__ == '__main__':
         else:
             raise ValueError(f"Dataset type {args.dataset_type} is not supported.")
         datasets.append(dataset)
-        
+
     # create training dataset
     logging.info(f"Stored labels into file {label_file}.")
     train_dataset = ConcatDataset(datasets)
@@ -235,8 +241,8 @@ if __name__ == '__main__':
     train_loader = DataLoader(train_dataset, args.batch_size,
                               num_workers=args.num_workers,
                               shuffle=True)
-                           
-    # create validation dataset                           
+
+    # create validation dataset
     logging.info("Prepare Validation datasets.")
     if args.dataset_type == "voc":
         val_dataset = VOCDataset(dataset_path, transform=test_transform,
@@ -251,7 +257,7 @@ if __name__ == '__main__':
     val_loader = DataLoader(val_dataset, args.batch_size,
                             num_workers=args.num_workers,
                             shuffle=False)
-                            
+
     # create the network
     logging.info("Build network.")
     net = create_net(num_classes)
@@ -261,7 +267,7 @@ if __name__ == '__main__':
     # freeze certain layers (if requested)
     base_net_lr = args.base_net_lr if args.base_net_lr is not None else args.lr
     extra_layers_lr = args.extra_layers_lr if args.extra_layers_lr is not None else args.lr
-    
+
     if args.freeze_base_net:
         logging.info("Freeze base net.")
         freeze_net_layers(net.base_net)
@@ -325,7 +331,7 @@ if __name__ == '__main__':
         logging.info("Uses MultiStepLR scheduler.")
         milestones = [int(v.strip()) for v in args.milestones.split(",")]
         scheduler = MultiStepLR(optimizer, milestones=milestones,
-                                                     gamma=0.1, last_epoch=last_epoch)
+                                gamma=0.1, last_epoch=last_epoch)
     elif args.scheduler == 'cosine':
         logging.info("Uses CosineAnnealingLR scheduler.")
         scheduler = CosineAnnealingLR(optimizer, args.t_max, last_epoch=last_epoch)
@@ -336,13 +342,13 @@ if __name__ == '__main__':
 
     # train for the desired number of epochs
     logging.info(f"Start training from epoch {last_epoch + 1}.")
-    
-    for epoch in range(last_epoch + 1, args.num_epochs):
+
+    for epoch in range(last_epoch + 1, epochs):
         scheduler.step()
         train(train_loader, net, criterion, optimizer,
               device=DEVICE, debug_steps=args.debug_steps, epoch=epoch)
-        
-        if epoch % args.validation_epochs == 0 or epoch == args.num_epochs - 1:
+
+        if epoch % args.validation_epochs == 0 or epoch == epochs - 1:
             val_loss, val_regression_loss, val_classification_loss = test(val_loader, net, criterion, DEVICE)
             logging.info(
                 f"Epoch: {epoch}, " +
@@ -350,8 +356,10 @@ if __name__ == '__main__':
                 f"Validation Regression Loss {val_regression_loss:.4f}, " +
                 f"Validation Classification Loss: {val_classification_loss:.4f}"
             )
-            model_path = os.path.join(args.checkpoint_folder, f"{args.net}-Epoch-{epoch}-Loss-{val_loss}.pth")
+            model_path = os.path.join(model_dir, f"{args.net}-Epoch-{epoch}-Loss-{val_loss}.pth")
             net.save(model_path)
             logging.info(f"Saved model {model_path}")
 
     logging.info("Task done, exiting program.")
+if __name__ == '__main__':
+    main()

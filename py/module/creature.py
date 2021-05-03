@@ -20,6 +20,7 @@ class Creature:
         print("Image is currently showing!")
         img = cv2.imread(img_path[:-1])
         img = cv2.flip(img, 1)
+        print("Image finishes showing!")
         SendToQt_Update_Display(img)
 
     def visualize_webcam(self, model_path=None):

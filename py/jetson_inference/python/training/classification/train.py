@@ -26,6 +26,8 @@ import torchvision.datasets as datasets
 import torchvision.models as models
 
 from jetson_inference.python.training.classification.reshape import reshape_model
+from apis import *
+import numpy as np
 
 model_names = sorted(name for name in models.__dict__
     if name.islower() and not name.startswith("__")
@@ -60,7 +62,7 @@ parser.add_argument('-b', '--batch-size', default=8, type=int,
                     help='mini-batch size (default: 8), this is the total '
                          'batch size of all GPUs on the current node when '
                          'using Data Parallel or Distributed Data Parallel')
-parser.add_argument('--lr', '--learning-rate', default=0.1, type=float,
+parser.add_argument('--lr', '--learning-rate', default=0.001, type=float,
                     metavar='LR', help='initial learning rate', dest='lr')
 parser.add_argument('--momentum', default=0.9, type=float, metavar='M',
                     help='momentum')
@@ -133,7 +135,7 @@ def main(epochs, model_dir, data_path):
     else:
         # Simply call main_worker function
         main_worker(args.gpu, ngpus_per_node, args,epochs,model_dir,data_path)
-
+    SendToQt_Train_Ok()
 
 #
 # worker thread (per-GPU)
@@ -335,6 +337,12 @@ def train(train_loader, model, criterion, optimizer, epoch, num_classes, args):
         losses.update(loss.item(), images.size(0))
         top1.update(acc1[0], images.size(0))
         top5.update(acc5[0], images.size(0))
+        # print(np.array(loss).tolist()[0], np.array(acc1[0]).tolist()[0])
+        # if i == len(train_loader) - 1:
+
+        message = "Acc:{}: Loss:{}".format(round(acc1.cpu().tolist()[0]/100,2),round(loss.cpu().tolist(),2))
+        # print(message)
+
 
         # compute gradient and do SGD step
         optimizer.zero_grad()
@@ -346,8 +354,9 @@ def train(train_loader, model, criterion, optimizer, epoch, num_classes, args):
         end = time.time()
 
         if i % args.print_freq == 0:
-            progress.display(i)
-    
+            msg = progress.display(i)
+            SendToQt_Log(msg)
+
     print("Epoch: [{:d}] completed, elapsed time {:6.3f} seconds".format(epoch, time.time() - epoch_start))
 
 
@@ -464,7 +473,7 @@ class ProgressMeter(object):
     def display(self, batch):
         entries = [self.prefix + self.batch_fmtstr.format(batch)]
         entries += [str(meter) for meter in self.meters]
-        print('  '.join(entries))
+        return '  '.join(entries)
 
     def _get_batch_fmtstr(self, num_batches):
         num_digits = len(str(num_batches // 1))
@@ -504,3 +513,4 @@ def accuracy(output, target, topk=(1,)):
 
 if __name__ == '__main__':
     main()
+
