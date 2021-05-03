@@ -35,6 +35,9 @@ private:
 
 private slots:
 	void Train_OK(void);
+
+	void Update_Plot(void);
+
 private slots:
 	void on_horizontalSlider_valueChanged(int value);
 

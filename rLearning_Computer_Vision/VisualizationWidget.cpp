@@ -52,6 +52,7 @@ void VisualizationWidget::Init(void)
 	ModelPath_Init();
 	OpenImage_Init();
 	OpenCamera_Init();
+    ui->frame->show();
 }
 
 void VisualizationWidget::ImagePath_Init(void)
@@ -59,6 +60,7 @@ void VisualizationWidget::ImagePath_Init(void)
 	QString nullImagePath = QString("");
 	ParaCB.Set_Visualization_ImagePath(nullImagePath);
 
+    ui->m_btn_ImagePath->setEnabled(true);
 	ui->m_btn_ImagePath_Reset->setEnabled(false);
 	ui->m_btn_ImagePath_Reset->setStyleSheet("background-color: rgb(255, 0, 0)");
 }
@@ -68,6 +70,7 @@ void VisualizationWidget::ModelPath_Init(void)
 	QString nullModelPath = QString("");
 	ParaCB.Set_Visualization_ModelPath(nullModelPath);
 
+    ui->m_btn_ModelPath->setEnabled(true);
 	ui->m_btn_ModelPath_Reset->setEnabled(false);
 	ui->m_btn_ModelPath_Reset->setStyleSheet("background-color: rgb(255, 0, 0)");
 }
@@ -207,6 +210,7 @@ void VisualizationWidget::paintEvent(QPaintEvent*)
 
 void VisualizationWidget::Update_Picture(void)
 {
+    ui->frame->hide();
 	m_isRequestUpdate = true;
 	update();
 }
@@ -229,7 +233,8 @@ void VisualizationWidget::on_m_btn_ImagePath_clicked()
 		tr("Select Image Path"),
 		defaultDirName,
 		"Images (*.png *.jpg)",
-		0);
+        0,
+        QFileDialog::DontUseNativeDialog);
 
 	if("" != imagePath)
 	{
@@ -268,7 +273,8 @@ void VisualizationWidget::on_m_btn_ModelPath_clicked()
 		tr("Select Image Path"),
 		defaultDirName,
 		"model(*)",
-		0);
+        0,
+        QFileDialog::DontUseNativeDialog);
 
 	if("" != modelPath)
 	{

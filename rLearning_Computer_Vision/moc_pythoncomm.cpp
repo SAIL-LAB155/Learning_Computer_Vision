@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_PythonComm_t {
-    QByteArrayData data[6];
-    char stringdata0[68];
+    QByteArrayData data[7];
+    char stringdata0[87];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,13 +34,15 @@ static const qt_meta_stringdata_PythonComm_t qt_meta_stringdata_PythonComm = {
 QT_MOC_LITERAL(0, 0, 10), // "PythonComm"
 QT_MOC_LITERAL(1, 11, 15), // "Signal_Train_Ok"
 QT_MOC_LITERAL(2, 27, 0), // ""
-QT_MOC_LITERAL(3, 28, 17), // "Signal_Update_Pic"
-QT_MOC_LITERAL(4, 46, 12), // "newConnected"
-QT_MOC_LITERAL(5, 59, 8) // "recvData"
+QT_MOC_LITERAL(3, 28, 18), // "Signal_Update_Plot"
+QT_MOC_LITERAL(4, 47, 17), // "Signal_Update_Pic"
+QT_MOC_LITERAL(5, 65, 12), // "newConnected"
+QT_MOC_LITERAL(6, 78, 8) // "recvData"
 
     },
     "PythonComm\0Signal_Train_Ok\0\0"
-    "Signal_Update_Pic\0newConnected\0recvData"
+    "Signal_Update_Plot\0Signal_Update_Pic\0"
+    "newConnected\0recvData"
 };
 #undef QT_MOC_LITERAL
 
@@ -50,22 +52,24 @@ static const uint qt_meta_data_PythonComm[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   34,    2, 0x06 /* Public */,
-       3,    0,   35,    2, 0x06 /* Public */,
+       1,    0,   39,    2, 0x06 /* Public */,
+       3,    0,   40,    2, 0x06 /* Public */,
+       4,    0,   41,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    0,   36,    2, 0x08 /* Private */,
-       5,    0,   37,    2, 0x08 /* Private */,
+       5,    0,   42,    2, 0x08 /* Private */,
+       6,    0,   43,    2, 0x08 /* Private */,
 
  // signals: parameters
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -83,9 +87,10 @@ void PythonComm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->Signal_Train_Ok(); break;
-        case 1: _t->Signal_Update_Pic(); break;
-        case 2: _t->newConnected(); break;
-        case 3: _t->recvData(); break;
+        case 1: _t->Signal_Update_Plot(); break;
+        case 2: _t->Signal_Update_Pic(); break;
+        case 3: _t->newConnected(); break;
+        case 4: _t->recvData(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -99,8 +104,15 @@ void PythonComm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         }
         {
             typedef void (PythonComm::*_t)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&PythonComm::Signal_Update_Pic)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&PythonComm::Signal_Update_Plot)) {
                 *result = 1;
+                return;
+            }
+        }
+        {
+            typedef void (PythonComm::*_t)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&PythonComm::Signal_Update_Pic)) {
+                *result = 2;
                 return;
             }
         }
@@ -133,13 +145,13 @@ int PythonComm::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }
@@ -151,9 +163,15 @@ void PythonComm::Signal_Train_Ok()
 }
 
 // SIGNAL 1
-void PythonComm::Signal_Update_Pic()
+void PythonComm::Signal_Update_Plot()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
+}
+
+// SIGNAL 2
+void PythonComm::Signal_Update_Pic()
+{
+    QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

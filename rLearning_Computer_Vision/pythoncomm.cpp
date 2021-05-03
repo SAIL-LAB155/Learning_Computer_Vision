@@ -113,6 +113,18 @@ void PythonComm::Parse_Data(uint8_t* buffer,uint16_t length)
 			}
 			break;
 
+		case RX_CMD_UPDATE_PLOT:
+			if(RX_CMD_UPDATE_PLOT_LEN == length)
+			{
+				emit Signal_Update_Plot();
+			}
+			else
+			{
+				qDebug() << "cmd " << buffer[3] << " error len " <<
+							length;
+			}
+			break;
+
 		case RX_CMD_UPDATE_PIC:
 			if(RX_CMD_UPDATE_PIC_LEN == length)
 			{

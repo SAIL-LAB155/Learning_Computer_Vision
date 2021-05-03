@@ -29,6 +29,7 @@ TrainWidget::TrainWidget(QWidget *parent) :
 	if(pPythonCommInshtance)
 	{
 		connect(pPythonCommInshtance,SIGNAL(Signal_Train_Ok()),this,SLOT(Train_OK()));
+		connect(pPythonCommInshtance,SIGNAL(Signal_Update_Plot()),this,SLOT(Update_Plot()));
 	}
 }
 
@@ -184,7 +185,8 @@ void TrainWidget::on_m_btn_Image_clicked()
 				this,
 				tr("Select DATA Path"),
 				defaultDirName,
-				QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+                QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks |
+                QFileDialog::DontUseNativeDialog);
 
 	if("" != imagePath)
 	{
@@ -222,7 +224,8 @@ void TrainWidget::on_m_btn_Model_clicked()
 		tr("Select Image Path"),
 		defaultDirName,
 		"model(*)",
-		0);
+        0,
+        QFileDialog::DontUseNativeDialog);
 
 	if("" != modelPath)
 	{
@@ -330,6 +333,11 @@ void TrainWidget::recvData()
 }
 
 void TrainWidget::on_m_btn_Display_clicked()
+{
+
+}
+
+void TrainWidget::Update_Plot(void)
 {
 	m_isPlotDisplay = true;
 	update();

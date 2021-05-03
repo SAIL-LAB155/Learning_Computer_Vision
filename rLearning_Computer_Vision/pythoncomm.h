@@ -42,6 +42,8 @@
 
 #define RX_CMD_TRAIN_OK					0x80
 #define		RX_CMD_TRAIN_OK_LEN				0x08
+#define RX_CMD_UPDATE_PLOT				0x81
+#define		RX_CMD_UPDATE_PLOT_LEN			0x08
 #define RX_CMD_UPDATE_PIC				0x82
 #define		RX_CMD_UPDATE_PIC_LEN			0x08
 
@@ -55,6 +57,7 @@ public:
 
 signals:
 	void Signal_Train_Ok();
+	void Signal_Update_Plot();
 	void Signal_Update_Pic();
 
 private:
