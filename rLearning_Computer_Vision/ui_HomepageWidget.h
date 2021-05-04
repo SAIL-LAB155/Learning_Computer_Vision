@@ -13,9 +13,11 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -23,21 +25,43 @@ QT_BEGIN_NAMESPACE
 class Ui_HomepageWidget
 {
 public:
-    QPushButton *m_btn_Get_Started;
+    QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout;
     QLabel *label;
+    QPushButton *m_btn_Get_Started;
 
     void setupUi(QWidget *HomepageWidget)
     {
         if (HomepageWidget->objectName().isEmpty())
             HomepageWidget->setObjectName(QStringLiteral("HomepageWidget"));
         HomepageWidget->resize(700, 500);
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(HomepageWidget->sizePolicy().hasHeightForWidth());
+        HomepageWidget->setSizePolicy(sizePolicy);
         HomepageWidget->setStyleSheet(QStringLiteral("background-image: url(:/images/1-home/background.jpg);"));
+        horizontalLayout = new QHBoxLayout(HomepageWidget);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        verticalLayout->setContentsMargins(50, 100, 50, 100);
+        label = new QLabel(HomepageWidget);
+        label->setObjectName(QStringLiteral("label"));
+        QFont font;
+        font.setPointSize(30);
+        label->setFont(font);
+        label->setStyleSheet(QLatin1String("color: rgb(255, 255, 255);\n"
+"background: transparent;"));
+
+        verticalLayout->addWidget(label);
+
         m_btn_Get_Started = new QPushButton(HomepageWidget);
         m_btn_Get_Started->setObjectName(QStringLiteral("m_btn_Get_Started"));
-        m_btn_Get_Started->setGeometry(QRect(90, 300, 201, 51));
-        QFont font;
-        font.setPointSize(26);
-        m_btn_Get_Started->setFont(font);
+        QFont font1;
+        font1.setPointSize(26);
+        m_btn_Get_Started->setFont(font1);
         m_btn_Get_Started->setFocusPolicy(Qt::StrongFocus);
         m_btn_Get_Started->setStyleSheet(QLatin1String("background-color: rgb(82, 255, 244);\n"
 "color: rgb(255, 170, 0);\n"
@@ -49,14 +73,12 @@ public:
         m_btn_Get_Started->setAutoExclusive(false);
         m_btn_Get_Started->setAutoDefault(false);
         m_btn_Get_Started->setFlat(false);
-        label = new QLabel(HomepageWidget);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(90, 130, 421, 131));
-        QFont font1;
-        font1.setPointSize(30);
-        label->setFont(font1);
-        label->setStyleSheet(QLatin1String("color: rgb(255, 255, 255);\n"
-"background: transparent;"));
+
+        verticalLayout->addWidget(m_btn_Get_Started);
+
+
+        horizontalLayout->addLayout(verticalLayout);
+
 
         retranslateUi(HomepageWidget);
 
@@ -69,9 +91,9 @@ public:
     void retranslateUi(QWidget *HomepageWidget)
     {
         HomepageWidget->setWindowTitle(QApplication::translate("HomepageWidget", "Form", Q_NULLPTR));
-        m_btn_Get_Started->setText(QApplication::translate("HomepageWidget", "Get Started", Q_NULLPTR));
         label->setText(QApplication::translate("HomepageWidget", "Learning\n"
 "Computer Vision", Q_NULLPTR));
+        m_btn_Get_Started->setText(QApplication::translate("HomepageWidget", "Get Started", Q_NULLPTR));
     } // retranslateUi
 
 };

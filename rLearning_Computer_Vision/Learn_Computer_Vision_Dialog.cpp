@@ -3,6 +3,15 @@
 
 #include <QDebug>
 #include "ParameterControlBlock.h"
+#include <iostream>
+
+void Learn_Computer_Vision_Dialog::resizeEvent(QResizeEvent *event){
+    m_pHomepageDlg->resize(width()-100, height()-100);
+    m_pSelectModuleDlg->resize(width()-100, height()-100);
+    m_pTrainDlg->resize(width()-100, height()-100);
+    m_pVisualizationDlg->resize(width()-100, height()-100);
+    m_pAnnotationDlg->resize(width()-100, height()-100);
+}
 
 Learn_Computer_Vision_Dialog::Learn_Computer_Vision_Dialog(QWidget *parent) :
     QDialog(parent),
@@ -10,7 +19,7 @@ Learn_Computer_Vision_Dialog::Learn_Computer_Vision_Dialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-	if(NULL == pPythonCommInshtance)
+    if(NULL == pPythonCommInshtance)
 	{
 		pPythonCommInshtance = new PythonComm;
 		if(NULL == pPythonCommInshtance)
@@ -46,8 +55,9 @@ Learn_Computer_Vision_Dialog::Learn_Computer_Vision_Dialog(QWidget *parent) :
         m_pCurrentWidgetArr[Widget_Index_Visualization] = m_pVisualizationDlg;
         m_pCurrentWidgetArr[Widget_Index_Annotation] = m_pAnnotationDlg;
 
-        //this->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-        this->setFixedSize(800,600);
+        // this->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+        // this->setFixedSize(width,height);
+        // this->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
 
         m_CurrentWidgetIndex = Widget_Index_Max;
         SwitchWidget(Widget_Index_Homepage);

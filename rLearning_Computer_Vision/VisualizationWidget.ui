@@ -16,233 +16,207 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(177, 181, 182);</string>
   </property>
-  <widget class="QFrame" name="frame">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>40</y>
-     <width>481</width>
-     <height>341</height>
-    </rect>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::StyledPanel</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="m_btn_Visualize">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>420</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(225, 225, 225);</string>
-   </property>
-   <property name="text">
-    <string>VISUALIZE</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="m_btn_ImagePath">
-   <property name="geometry">
-    <rect>
-     <x>570</x>
-     <y>70</y>
-     <width>75</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(0, 0, 255);
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="10,0">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QFrame" name="frame">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btn_Visualize">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(225, 225, 225);</string>
+       </property>
+       <property name="text">
+        <string>VISUALIZE</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0,0,0,0,0">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Load Dataset &amp; Model:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btn_ImagePath">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 255);
 border-image: url(:/images/2-training/subpage/image-path.png);</string>
-   </property>
-   <property name="text">
-    <string>IMAGE
+       </property>
+       <property name="text">
+        <string>IMAGE
 PATH</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="m_btn_ModelPath">
-   <property name="geometry">
-    <rect>
-     <x>570</x>
-     <y>155</y>
-     <width>75</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(0, 0, 255);
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btn_ImagePath_Reset">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(225, 225, 225);</string>
+       </property>
+       <property name="text">
+        <string>reset</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btn_ModelPath">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 255);
 border-image: url(:/images/2-training/subpage/model-path.png);</string>
-   </property>
-   <property name="text">
-    <string>MODEL
+       </property>
+       <property name="text">
+        <string>MODEL
 PATH</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="m_btn_OpenImage">
-   <property name="geometry">
-    <rect>
-     <x>570</x>
-     <y>290</y>
-     <width>75</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(0, 0, 255);
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btn_ModelPath_Reset">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(225, 225, 225);</string>
+       </property>
+       <property name="text">
+        <string>reset</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Import Image for Visualization:</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btn_OpenImage">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 255);
 border-image: url(:/images/3-visualization/open-image.png);</string>
-   </property>
-   <property name="text">
-    <string>OPEN
+       </property>
+       <property name="text">
+        <string>OPEN
 IMAGE</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="m_btn_OpenCamera">
-   <property name="geometry">
-    <rect>
-     <x>570</x>
-     <y>380</y>
-     <width>75</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(0, 0, 255);
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btn_OpenImage_Reset">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(225, 225, 225);</string>
+       </property>
+       <property name="text">
+        <string>reset</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btn_OpenCamera">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 255);
 border-image: url(:/images/3-visualization/open-camera.png);</string>
-   </property>
-   <property name="text">
-    <string>OPEN
+       </property>
+       <property name="text">
+        <string>OPEN
 CAMERA</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>560</x>
-     <y>30</y>
-     <width>131</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="text">
-    <string>Load Dataset &amp; Model:</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="m_btn_ImagePath_Reset">
-   <property name="geometry">
-    <rect>
-     <x>585</x>
-     <y>110</y>
-     <width>51</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(225, 225, 225);</string>
-   </property>
-   <property name="text">
-    <string>reset</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="m_btn_ModelPath_Reset">
-   <property name="geometry">
-    <rect>
-     <x>585</x>
-     <y>201</y>
-     <width>51</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(225, 225, 225);</string>
-   </property>
-   <property name="text">
-    <string>reset</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="m_btn_OpenImage_Reset">
-   <property name="geometry">
-    <rect>
-     <x>585</x>
-     <y>338</y>
-     <width>51</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(225, 225, 225);</string>
-   </property>
-   <property name="text">
-    <string>reset</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="m_btn_OpenCamera_Reset">
-   <property name="geometry">
-    <rect>
-     <x>585</x>
-     <y>430</y>
-     <width>51</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(225, 225, 225);</string>
-   </property>
-   <property name="text">
-    <string>reset</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>560</x>
-     <y>240</y>
-     <width>111</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="text">
-    <string>Import Image for Visualization:</string>
-   </property>
-   <property name="wordWrap">
-    <bool>true</bool>
-   </property>
-  </widget>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btn_OpenCamera_Reset">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(225, 225, 225);</string>
+       </property>
+       <property name="text">
+        <string>reset</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

@@ -39,6 +39,7 @@ public:
 
 public:
     void SwitchWidget(Widget_Index_t index);
+    void resizeEvent(QResizeEvent *event);
 
 private slots:
     void on_m_btn_Home_clicked();

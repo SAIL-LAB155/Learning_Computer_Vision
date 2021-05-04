@@ -14,9 +14,11 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QFrame>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -24,18 +26,21 @@ QT_BEGIN_NAMESPACE
 class Ui_VisualizationWidget
 {
 public:
+    QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout_2;
     QFrame *frame;
     QPushButton *m_btn_Visualize;
-    QPushButton *m_btn_ImagePath;
-    QPushButton *m_btn_ModelPath;
-    QPushButton *m_btn_OpenImage;
-    QPushButton *m_btn_OpenCamera;
+    QVBoxLayout *verticalLayout;
     QLabel *label;
+    QPushButton *m_btn_ImagePath;
     QPushButton *m_btn_ImagePath_Reset;
+    QPushButton *m_btn_ModelPath;
     QPushButton *m_btn_ModelPath_Reset;
-    QPushButton *m_btn_OpenImage_Reset;
-    QPushButton *m_btn_OpenCamera_Reset;
     QLabel *label_2;
+    QPushButton *m_btn_OpenImage;
+    QPushButton *m_btn_OpenImage_Reset;
+    QPushButton *m_btn_OpenCamera;
+    QPushButton *m_btn_OpenCamera_Reset;
 
     void setupUi(QWidget *VisualizationWidget)
     {
@@ -43,67 +48,122 @@ public:
             VisualizationWidget->setObjectName(QStringLiteral("VisualizationWidget"));
         VisualizationWidget->resize(700, 500);
         VisualizationWidget->setStyleSheet(QStringLiteral("background-color: rgb(177, 181, 182);"));
+        horizontalLayout = new QHBoxLayout(VisualizationWidget);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         frame = new QFrame(VisualizationWidget);
         frame->setObjectName(QStringLiteral("frame"));
-        frame->setGeometry(QRect(40, 40, 481, 341));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Raised);
+
+        verticalLayout_2->addWidget(frame);
+
         m_btn_Visualize = new QPushButton(VisualizationWidget);
         m_btn_Visualize->setObjectName(QStringLiteral("m_btn_Visualize"));
-        m_btn_Visualize->setGeometry(QRect(240, 420, 75, 23));
         m_btn_Visualize->setStyleSheet(QStringLiteral("background-color: rgb(225, 225, 225);"));
+
+        verticalLayout_2->addWidget(m_btn_Visualize);
+
+
+        horizontalLayout->addLayout(verticalLayout_2);
+
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        label = new QLabel(VisualizationWidget);
+        label->setObjectName(QStringLiteral("label"));
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy);
+        label->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
+
+        verticalLayout->addWidget(label);
+
         m_btn_ImagePath = new QPushButton(VisualizationWidget);
         m_btn_ImagePath->setObjectName(QStringLiteral("m_btn_ImagePath"));
-        m_btn_ImagePath->setGeometry(QRect(570, 70, 75, 40));
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(m_btn_ImagePath->sizePolicy().hasHeightForWidth());
+        m_btn_ImagePath->setSizePolicy(sizePolicy1);
         QFont font;
         font.setBold(true);
         font.setWeight(75);
         m_btn_ImagePath->setFont(font);
         m_btn_ImagePath->setStyleSheet(QLatin1String("color: rgb(0, 0, 255);\n"
 "border-image: url(:/images/2-training/subpage/image-path.png);"));
+
+        verticalLayout->addWidget(m_btn_ImagePath);
+
+        m_btn_ImagePath_Reset = new QPushButton(VisualizationWidget);
+        m_btn_ImagePath_Reset->setObjectName(QStringLiteral("m_btn_ImagePath_Reset"));
+        m_btn_ImagePath_Reset->setStyleSheet(QStringLiteral("background-color: rgb(225, 225, 225);"));
+
+        verticalLayout->addWidget(m_btn_ImagePath_Reset);
+
         m_btn_ModelPath = new QPushButton(VisualizationWidget);
         m_btn_ModelPath->setObjectName(QStringLiteral("m_btn_ModelPath"));
-        m_btn_ModelPath->setGeometry(QRect(570, 155, 75, 40));
+        sizePolicy1.setHeightForWidth(m_btn_ModelPath->sizePolicy().hasHeightForWidth());
+        m_btn_ModelPath->setSizePolicy(sizePolicy1);
         m_btn_ModelPath->setFont(font);
         m_btn_ModelPath->setStyleSheet(QLatin1String("color: rgb(0, 0, 255);\n"
 "border-image: url(:/images/2-training/subpage/model-path.png);"));
+
+        verticalLayout->addWidget(m_btn_ModelPath);
+
+        m_btn_ModelPath_Reset = new QPushButton(VisualizationWidget);
+        m_btn_ModelPath_Reset->setObjectName(QStringLiteral("m_btn_ModelPath_Reset"));
+        m_btn_ModelPath_Reset->setStyleSheet(QStringLiteral("background-color: rgb(225, 225, 225);"));
+
+        verticalLayout->addWidget(m_btn_ModelPath_Reset);
+
+        label_2 = new QLabel(VisualizationWidget);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        sizePolicy.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy);
+        label_2->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
+        label_2->setWordWrap(true);
+
+        verticalLayout->addWidget(label_2);
+
         m_btn_OpenImage = new QPushButton(VisualizationWidget);
         m_btn_OpenImage->setObjectName(QStringLiteral("m_btn_OpenImage"));
-        m_btn_OpenImage->setGeometry(QRect(570, 290, 75, 40));
+        sizePolicy1.setHeightForWidth(m_btn_OpenImage->sizePolicy().hasHeightForWidth());
+        m_btn_OpenImage->setSizePolicy(sizePolicy1);
         m_btn_OpenImage->setFont(font);
         m_btn_OpenImage->setStyleSheet(QLatin1String("color: rgb(0, 0, 255);\n"
 "border-image: url(:/images/3-visualization/open-image.png);"));
+
+        verticalLayout->addWidget(m_btn_OpenImage);
+
+        m_btn_OpenImage_Reset = new QPushButton(VisualizationWidget);
+        m_btn_OpenImage_Reset->setObjectName(QStringLiteral("m_btn_OpenImage_Reset"));
+        m_btn_OpenImage_Reset->setStyleSheet(QStringLiteral("background-color: rgb(225, 225, 225);"));
+
+        verticalLayout->addWidget(m_btn_OpenImage_Reset);
+
         m_btn_OpenCamera = new QPushButton(VisualizationWidget);
         m_btn_OpenCamera->setObjectName(QStringLiteral("m_btn_OpenCamera"));
-        m_btn_OpenCamera->setGeometry(QRect(570, 380, 75, 40));
+        sizePolicy1.setHeightForWidth(m_btn_OpenCamera->sizePolicy().hasHeightForWidth());
+        m_btn_OpenCamera->setSizePolicy(sizePolicy1);
         m_btn_OpenCamera->setFont(font);
         m_btn_OpenCamera->setStyleSheet(QLatin1String("color: rgb(0, 0, 255);\n"
 "border-image: url(:/images/3-visualization/open-camera.png);"));
-        label = new QLabel(VisualizationWidget);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(560, 30, 131, 31));
-        label->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
-        m_btn_ImagePath_Reset = new QPushButton(VisualizationWidget);
-        m_btn_ImagePath_Reset->setObjectName(QStringLiteral("m_btn_ImagePath_Reset"));
-        m_btn_ImagePath_Reset->setGeometry(QRect(585, 110, 51, 23));
-        m_btn_ImagePath_Reset->setStyleSheet(QStringLiteral("background-color: rgb(225, 225, 225);"));
-        m_btn_ModelPath_Reset = new QPushButton(VisualizationWidget);
-        m_btn_ModelPath_Reset->setObjectName(QStringLiteral("m_btn_ModelPath_Reset"));
-        m_btn_ModelPath_Reset->setGeometry(QRect(585, 201, 51, 23));
-        m_btn_ModelPath_Reset->setStyleSheet(QStringLiteral("background-color: rgb(225, 225, 225);"));
-        m_btn_OpenImage_Reset = new QPushButton(VisualizationWidget);
-        m_btn_OpenImage_Reset->setObjectName(QStringLiteral("m_btn_OpenImage_Reset"));
-        m_btn_OpenImage_Reset->setGeometry(QRect(585, 338, 51, 23));
-        m_btn_OpenImage_Reset->setStyleSheet(QStringLiteral("background-color: rgb(225, 225, 225);"));
+
+        verticalLayout->addWidget(m_btn_OpenCamera);
+
         m_btn_OpenCamera_Reset = new QPushButton(VisualizationWidget);
         m_btn_OpenCamera_Reset->setObjectName(QStringLiteral("m_btn_OpenCamera_Reset"));
-        m_btn_OpenCamera_Reset->setGeometry(QRect(585, 430, 51, 23));
         m_btn_OpenCamera_Reset->setStyleSheet(QStringLiteral("background-color: rgb(225, 225, 225);"));
-        label_2 = new QLabel(VisualizationWidget);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(560, 240, 111, 41));
-        label_2->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
-        label_2->setWordWrap(true);
+
+        verticalLayout->addWidget(m_btn_OpenCamera_Reset);
+
+
+        horizontalLayout->addLayout(verticalLayout);
+
+        horizontalLayout->setStretch(0, 10);
 
         retranslateUi(VisualizationWidget);
 
@@ -114,20 +174,20 @@ public:
     {
         VisualizationWidget->setWindowTitle(QApplication::translate("VisualizationWidget", "Form", Q_NULLPTR));
         m_btn_Visualize->setText(QApplication::translate("VisualizationWidget", "VISUALIZE", Q_NULLPTR));
+        label->setText(QApplication::translate("VisualizationWidget", "Load Dataset & Model:", Q_NULLPTR));
         m_btn_ImagePath->setText(QApplication::translate("VisualizationWidget", "IMAGE\n"
 "PATH", Q_NULLPTR));
+        m_btn_ImagePath_Reset->setText(QApplication::translate("VisualizationWidget", "reset", Q_NULLPTR));
         m_btn_ModelPath->setText(QApplication::translate("VisualizationWidget", "MODEL\n"
 "PATH", Q_NULLPTR));
+        m_btn_ModelPath_Reset->setText(QApplication::translate("VisualizationWidget", "reset", Q_NULLPTR));
+        label_2->setText(QApplication::translate("VisualizationWidget", "Import Image for Visualization:", Q_NULLPTR));
         m_btn_OpenImage->setText(QApplication::translate("VisualizationWidget", "OPEN\n"
 "IMAGE", Q_NULLPTR));
+        m_btn_OpenImage_Reset->setText(QApplication::translate("VisualizationWidget", "reset", Q_NULLPTR));
         m_btn_OpenCamera->setText(QApplication::translate("VisualizationWidget", "OPEN\n"
 "CAMERA", Q_NULLPTR));
-        label->setText(QApplication::translate("VisualizationWidget", "Load Dataset & Model:", Q_NULLPTR));
-        m_btn_ImagePath_Reset->setText(QApplication::translate("VisualizationWidget", "reset", Q_NULLPTR));
-        m_btn_ModelPath_Reset->setText(QApplication::translate("VisualizationWidget", "reset", Q_NULLPTR));
-        m_btn_OpenImage_Reset->setText(QApplication::translate("VisualizationWidget", "reset", Q_NULLPTR));
         m_btn_OpenCamera_Reset->setText(QApplication::translate("VisualizationWidget", "reset", Q_NULLPTR));
-        label_2->setText(QApplication::translate("VisualizationWidget", "Import Image for Visualization:", Q_NULLPTR));
     } // retranslateUi
 
 };

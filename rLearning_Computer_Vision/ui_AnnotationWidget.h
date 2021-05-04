@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -21,13 +22,21 @@ QT_BEGIN_NAMESPACE
 class Ui_AnnotationWidget
 {
 public:
+    QVBoxLayout *verticalLayout;
 
     void setupUi(QWidget *AnnotationWidget)
     {
         if (AnnotationWidget->objectName().isEmpty())
             AnnotationWidget->setObjectName(QStringLiteral("AnnotationWidget"));
         AnnotationWidget->resize(700, 500);
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(AnnotationWidget->sizePolicy().hasHeightForWidth());
+        AnnotationWidget->setSizePolicy(sizePolicy);
         AnnotationWidget->setStyleSheet(QStringLiteral(""));
+        verticalLayout = new QVBoxLayout(AnnotationWidget);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
 
         retranslateUi(AnnotationWidget);
 
