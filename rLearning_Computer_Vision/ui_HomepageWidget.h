@@ -40,7 +40,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(HomepageWidget->sizePolicy().hasHeightForWidth());
         HomepageWidget->setSizePolicy(sizePolicy);
-        HomepageWidget->setStyleSheet(QStringLiteral("background-image: url(:/images/1-home/background.jpg);"));
+        HomepageWidget->setStyleSheet(QStringLiteral("background-image: url(:/images/1-home/background.jpg)"));
         horizontalLayout = new QHBoxLayout(HomepageWidget);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         verticalLayout = new QVBoxLayout();
@@ -54,6 +54,7 @@ public:
         label->setFont(font);
         label->setStyleSheet(QLatin1String("color: rgb(255, 255, 255);\n"
 "background: transparent;"));
+        label->setTextFormat(Qt::AutoText);
 
         verticalLayout->addWidget(label);
 

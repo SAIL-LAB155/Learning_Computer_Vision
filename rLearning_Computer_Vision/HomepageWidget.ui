@@ -20,7 +20,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/images/1-home/background.jpg);</string>
+   <string notr="true">background-image: url(:/images/1-home/background.jpg)</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
@@ -54,6 +54,9 @@ background: transparent;</string>
        <property name="text">
         <string>Learning
 Computer Vision</string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::AutoText</enum>
        </property>
       </widget>
      </item>

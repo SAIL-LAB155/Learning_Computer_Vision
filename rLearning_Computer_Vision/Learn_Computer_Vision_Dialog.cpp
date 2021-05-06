@@ -7,6 +7,7 @@
 
 void Learn_Computer_Vision_Dialog::resizeEvent(QResizeEvent *event){
     m_pHomepageDlg->resize(width()-100, height()-100);
+    m_pHomepageDlg->setStyleSheet("HomepageWidget{ border-image: url(:/images/1-home/background.jpg) }");
     m_pSelectModuleDlg->resize(width()-100, height()-100);
     m_pTrainDlg->resize(width()-100, height()-100);
     m_pVisualizationDlg->resize(width()-100, height()-100);
@@ -57,7 +58,6 @@ Learn_Computer_Vision_Dialog::Learn_Computer_Vision_Dialog(QWidget *parent) :
 
         // this->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
         // this->setFixedSize(width,height);
-        // this->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
 
         m_CurrentWidgetIndex = Widget_Index_Max;
         SwitchWidget(Widget_Index_Homepage);
@@ -105,7 +105,7 @@ void Learn_Computer_Vision_Dialog::SwitchWidget(Widget_Index_t index)
             ui->m_btn_Visualization->hide();
             ui->m_btn_Annotation->hide();
 
-			ui->m_btn_Home->setStyleSheet("border-image: url(:/images/left-navigator/home-w.png);");
+            ui->m_btn_Home->setStyleSheet("border-image: url(:/images/left-navigator/home-w.png);");
 			ui->m_btn_Brain->setStyleSheet("border-image: url(:/images/left-navigator/func-g.png);");
 			ui->m_btn_Training->setStyleSheet("");
 			ui->m_btn_Visualization->setStyleSheet("");
@@ -148,22 +148,22 @@ void Learn_Computer_Vision_Dialog::SwitchWidget(Widget_Index_t index)
 			switch (ParaCB.Get_ModuleIndex())
 			{
 				case Module_Fruit:
-					m_pCurrentWidgetArr[Widget_Index_Train]->setStyleSheet("background-image: url(:/images/2-training/subpage/background/detection-fruits.png);");
+                    m_pCurrentWidgetArr[Widget_Index_Train]->setStyleSheet("background-image: url(:/images/2-training/subpage/background/detection-fruits.png)");
 					break;
 				case Module_Creatures:
-					m_pCurrentWidgetArr[Widget_Index_Train]->setStyleSheet("background-image: url(:/images/2-training/subpage/background/detection-creature.png);");
+                    m_pCurrentWidgetArr[Widget_Index_Train]->setStyleSheet("background-image: url(:/images/2-training/subpage/background/detection-creature.png)");
 					break;
 				case Module_Cat_and_Dog:
-					m_pCurrentWidgetArr[Widget_Index_Train]->setStyleSheet("background-image: url(:/images/2-training/subpage/background/classification-pets.png);");
+                    m_pCurrentWidgetArr[Widget_Index_Train]->setStyleSheet("background-image: url(:/images/2-training/subpage/background/classification-pets.png)");
 					break;
 				case Module_Vehicles:
-					m_pCurrentWidgetArr[Widget_Index_Train]->setStyleSheet("background-image: url(:/images/2-training/subpage/background/classification-others.png);");
+                    m_pCurrentWidgetArr[Widget_Index_Train]->setStyleSheet("background-image: url(:/images/2-training/subpage/background/classification-others.png)");
 					break;
 				case Module_Human:
-					m_pCurrentWidgetArr[Widget_Index_Train]->setStyleSheet("background-image: url(:/images/2-training/subpage/background/pose-estimation.png);");
+                    m_pCurrentWidgetArr[Widget_Index_Train]->setStyleSheet("background-image: url(:/images/2-training/subpage/background/pose-estimation.png)");
 					break;
 				default:
-					m_pCurrentWidgetArr[Widget_Index_Train]->setStyleSheet("background-color: rgb(177, 181, 182);");
+                    m_pCurrentWidgetArr[Widget_Index_Train]->setStyleSheet("TrainWidget { background-color: rgb(177, 181, 182) }");
 					break;
 			}
         }

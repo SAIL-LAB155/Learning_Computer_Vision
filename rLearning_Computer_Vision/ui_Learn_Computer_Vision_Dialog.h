@@ -48,6 +48,7 @@ public:
         Learn_Computer_Vision_Dialog->setEnabled(true);
         Learn_Computer_Vision_Dialog->resize(800, 600);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy.setRetainSizeWhenHidden(true);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(Learn_Computer_Vision_Dialog->sizePolicy().hasHeightForWidth());
@@ -64,6 +65,7 @@ public:
         m_btn_Back = new QPushButton(Learn_Computer_Vision_Dialog);
         m_btn_Back->setObjectName(QStringLiteral("m_btn_Back"));
         QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy1.setRetainSizeWhenHidden(true);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(m_btn_Back->sizePolicy().hasHeightForWidth());
@@ -100,11 +102,8 @@ public:
         label = new QLabel(Learn_Computer_Vision_Dialog);
         label->setObjectName(QStringLiteral("label"));
         label->setEnabled(false);
-        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Minimum);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
-        label->setSizePolicy(sizePolicy2);
+        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy);
         label->setStyleSheet(QStringLiteral("border-image: url(:/images/company-logo.png);"));
 
         horizontalLayout->addWidget(label);
