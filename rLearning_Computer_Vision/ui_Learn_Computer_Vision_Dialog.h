@@ -48,7 +48,6 @@ public:
         Learn_Computer_Vision_Dialog->setEnabled(true);
         Learn_Computer_Vision_Dialog->resize(800, 600);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy.setRetainSizeWhenHidden(true);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(Learn_Computer_Vision_Dialog->sizePolicy().hasHeightForWidth());
@@ -58,18 +57,22 @@ public:
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(20, 20, 20, 0);
+        verticalLayout->setContentsMargins(20, 10, 20, 0);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         m_btn_Back = new QPushButton(Learn_Computer_Vision_Dialog);
         m_btn_Back->setObjectName(QStringLiteral("m_btn_Back"));
-        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Fixed);
-        sizePolicy1.setRetainSizeWhenHidden(true);
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(m_btn_Back->sizePolicy().hasHeightForWidth());
         m_btn_Back->setSizePolicy(sizePolicy1);
+        QFont font;
+        font.setFamily(QStringLiteral("Purisa"));
+        font.setBold(true);
+        font.setWeight(75);
+        m_btn_Back->setFont(font);
         m_btn_Back->setStyleSheet(QLatin1String("color: rgb(255, 0, 0);\n"
 "background-color: rgb(155, 255, 255);"));
 
@@ -79,6 +82,7 @@ public:
         m_btn_Training->setObjectName(QStringLiteral("m_btn_Training"));
         sizePolicy1.setHeightForWidth(m_btn_Training->sizePolicy().hasHeightForWidth());
         m_btn_Training->setSizePolicy(sizePolicy1);
+        m_btn_Training->setFont(font);
         m_btn_Training->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
 
         horizontalLayout->addWidget(m_btn_Training);
@@ -87,6 +91,7 @@ public:
         m_btn_Visualization->setObjectName(QStringLiteral("m_btn_Visualization"));
         sizePolicy1.setHeightForWidth(m_btn_Visualization->sizePolicy().hasHeightForWidth());
         m_btn_Visualization->setSizePolicy(sizePolicy1);
+        m_btn_Visualization->setFont(font);
         m_btn_Visualization->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
 
         horizontalLayout->addWidget(m_btn_Visualization);
@@ -95,6 +100,8 @@ public:
         m_btn_Annotation->setObjectName(QStringLiteral("m_btn_Annotation"));
         sizePolicy1.setHeightForWidth(m_btn_Annotation->sizePolicy().hasHeightForWidth());
         m_btn_Annotation->setSizePolicy(sizePolicy1);
+        m_btn_Annotation->setMinimumSize(QSize(0, 0));
+        m_btn_Annotation->setFont(font);
         m_btn_Annotation->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
 
         horizontalLayout->addWidget(m_btn_Annotation);
@@ -102,8 +109,12 @@ public:
         label = new QLabel(Learn_Computer_Vision_Dialog);
         label->setObjectName(QStringLiteral("label"));
         label->setEnabled(false);
-        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
-        label->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy2);
+        label->setMinimumSize(QSize(150, 60));
         label->setStyleSheet(QStringLiteral("border-image: url(:/images/company-logo.png);"));
 
         horizontalLayout->addWidget(label);
@@ -124,16 +135,18 @@ public:
         verticalLayout_2->setSizeConstraint(QLayout::SetDefaultConstraint);
         m_btn_Home = new QPushButton(Learn_Computer_Vision_Dialog);
         m_btn_Home->setObjectName(QStringLiteral("m_btn_Home"));
-        sizePolicy.setHeightForWidth(m_btn_Home->sizePolicy().hasHeightForWidth());
-        m_btn_Home->setSizePolicy(sizePolicy);
+        sizePolicy2.setHeightForWidth(m_btn_Home->sizePolicy().hasHeightForWidth());
+        m_btn_Home->setSizePolicy(sizePolicy2);
+        m_btn_Home->setMinimumSize(QSize(50, 50));
         m_btn_Home->setStyleSheet(QStringLiteral("border-image: url(:/images/left-navigator/home-g.png);"));
 
         verticalLayout_2->addWidget(m_btn_Home);
 
         m_btn_Brain = new QPushButton(Learn_Computer_Vision_Dialog);
         m_btn_Brain->setObjectName(QStringLiteral("m_btn_Brain"));
-        sizePolicy.setHeightForWidth(m_btn_Brain->sizePolicy().hasHeightForWidth());
-        m_btn_Brain->setSizePolicy(sizePolicy);
+        sizePolicy2.setHeightForWidth(m_btn_Brain->sizePolicy().hasHeightForWidth());
+        m_btn_Brain->setSizePolicy(sizePolicy2);
+        m_btn_Brain->setMinimumSize(QSize(50, 50));
         m_btn_Brain->setStyleSheet(QStringLiteral("border-image: url(:/images/left-navigator/func-w.png);"));
 
         verticalLayout_2->addWidget(m_btn_Brain);
@@ -153,7 +166,6 @@ public:
         verticalLayout->addItem(verticalSpacer);
 
         verticalLayout->setStretch(0, 1);
-        verticalLayout->setStretch(1, 1);
         verticalLayout->setStretch(2, 2);
         verticalLayout->setStretch(3, 8);
 
@@ -165,7 +177,7 @@ public:
     void retranslateUi(QDialog *Learn_Computer_Vision_Dialog)
     {
         Learn_Computer_Vision_Dialog->setWindowTitle(QApplication::translate("Learn_Computer_Vision_Dialog", "Learn_Computer_Vision_Dialog", Q_NULLPTR));
-        m_btn_Back->setText(QApplication::translate("Learn_Computer_Vision_Dialog", "back", Q_NULLPTR));
+        m_btn_Back->setText(QApplication::translate("Learn_Computer_Vision_Dialog", "Back", Q_NULLPTR));
         m_btn_Training->setText(QApplication::translate("Learn_Computer_Vision_Dialog", "Training", Q_NULLPTR));
         m_btn_Visualization->setText(QApplication::translate("Learn_Computer_Vision_Dialog", "Visualization", Q_NULLPTR));
         m_btn_Annotation->setText(QApplication::translate("Learn_Computer_Vision_Dialog", "Annotation", Q_NULLPTR));

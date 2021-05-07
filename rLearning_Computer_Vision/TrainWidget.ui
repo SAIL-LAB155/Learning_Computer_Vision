@@ -21,6 +21,7 @@
     <widget class="QGroupBox" name="m_groupBox_Setting">
      <property name="font">
       <font>
+       <family>Purisa</family>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -44,21 +45,21 @@
       </item>
       <item row="5" column="0" colspan="5">
        <widget class="QLabel" name="label_7">
+        <property name="font">
+         <font>
+          <family>Purisa</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>Select the Number of Epochs:</string>
         </property>
-       </widget>
-      </item>
-      <item row="5" column="6">
-       <widget class="QLabel" name="m_label_Epochs">
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>15</string>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -70,86 +71,74 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="font">
+         <font>
+          <family>Purisa</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(225, 225, 225);</string>
         </property>
         <property name="text">
-         <string>reset</string>
+         <string>Reset</string>
         </property>
        </widget>
       </item>
       <item row="0" column="7">
        <widget class="QLabel" name="label_3">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Purisa</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>System Status</string>
         </property>
-       </widget>
-      </item>
-      <item row="1" column="3" rowspan="3" colspan="3">
-       <widget class="QPushButton" name="m_btn_Model">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border-image: url(:/images/2-training/subpage/model-path.png);
-color: rgb(255, 0, 0);</string>
-        </property>
-        <property name="text">
-         <string>MODEL
-PATH</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0" rowspan="3" colspan="3">
-       <widget class="QPushButton" name="m_btn_Image">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border-image: url(:/images/2-training/subpage/image-path.png);
-color: rgb(255, 0, 0);</string>
-        </property>
-        <property name="text">
-         <string>DATA
-PATH</string>
+        <property name="margin">
+         <number>5</number>
         </property>
        </widget>
       </item>
       <item row="6" column="0">
        <widget class="QLabel" name="label_8">
+        <property name="font">
+         <font>
+          <family>Purisa</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>1</string>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
        </widget>
       </item>
       <item row="6" column="1" colspan="4">
        <widget class="QSlider" name="horizontalSlider">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -170,11 +159,21 @@ PATH</string>
       </item>
       <item row="6" column="5" colspan="2">
        <widget class="QLabel" name="label_9">
+        <property name="font">
+         <font>
+          <family>Purisa</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>30</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -188,6 +187,13 @@ PATH</string>
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Purisa</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(225, 225, 225);</string>
@@ -205,21 +211,18 @@ PATH</string>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="font">
+         <font>
+          <family>Purisa</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(225, 225, 225);</string>
         </property>
         <property name="text">
          <string>RESET</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" colspan="4">
-       <widget class="QLabel" name="label_4">
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>Load Dataset and Model</string>
         </property>
        </widget>
       </item>
@@ -231,11 +234,138 @@ PATH</string>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="font">
+         <font>
+          <family>Purisa</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(225, 225, 225);</string>
         </property>
         <property name="text">
-         <string>reset</string>
+         <string>Reset</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="5" colspan="2">
+       <widget class="QLabel" name="m_label_Epochs">
+        <property name="font">
+         <font>
+          <family>Purisa</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>15</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="7">
+       <widget class="QLabel" name="label_4">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Purisa</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>Load Dataset and Model</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="m_btn_Image">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>140</width>
+          <height>140</height>
+         </size>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Purisa</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-image: url(:/images/2-training/subpage/image-path.png);
+color: rgb(255, 0, 0);</string>
+        </property>
+        <property name="text">
+         <string>DATA
+PATH</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="4">
+       <widget class="QPushButton" name="m_btn_Model">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>140</width>
+          <height>140</height>
+         </size>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Purisa</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-image: url(:/images/2-training/subpage/model-path.png);
+color: rgb(255, 0, 0);</string>
+        </property>
+        <property name="text">
+         <string>MODEL
+PATH</string>
         </property>
        </widget>
       </item>
@@ -246,6 +376,7 @@ PATH</string>
     <widget class="QLabel" name="label">
      <property name="font">
       <font>
+       <family>Purisa</family>
        <pointsize>20</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -277,6 +408,7 @@ p, li { white-space: pre-wrap; }
     <widget class="QGroupBox" name="groupBox_2">
      <property name="font">
       <font>
+       <family>Purisa</family>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -333,11 +465,21 @@ p, li { white-space: pre-wrap; }
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="font">
+           <font>
+            <family>Purisa</family>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
            <string>Plot the Loss-Function</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
@@ -351,6 +493,16 @@ p, li { white-space: pre-wrap; }
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Purisa</family>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
           </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(225, 225, 225);</string>

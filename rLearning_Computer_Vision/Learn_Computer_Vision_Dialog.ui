@@ -25,12 +25,12 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(0, 0, 0);</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,2,8">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,0,2,8">
    <property name="leftMargin">
     <number>20</number>
    </property>
    <property name="topMargin">
-    <number>20</number>
+    <number>10</number>
    </property>
    <property name="rightMargin">
     <number>20</number>
@@ -43,27 +43,41 @@
      <item>
       <widget class="QPushButton" name="m_btn_Back">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Purisa</family>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(255, 0, 0);
 background-color: rgb(155, 255, 255);</string>
        </property>
        <property name="text">
-        <string>back</string>
+        <string>Back</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="m_btn_Training">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Purisa</family>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(255, 0, 0);</string>
@@ -76,10 +90,17 @@ background-color: rgb(155, 255, 255);</string>
      <item>
       <widget class="QPushButton" name="m_btn_Visualization">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Purisa</family>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(255, 0, 0);</string>
@@ -92,10 +113,23 @@ background-color: rgb(155, 255, 255);</string>
      <item>
       <widget class="QPushButton" name="m_btn_Annotation">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Purisa</family>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(255, 0, 0);</string>
@@ -111,10 +145,16 @@ background-color: rgb(155, 255, 255);</string>
         <bool>false</bool>
        </property>
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>60</height>
+        </size>
        </property>
        <property name="styleSheet">
         <string notr="true">border-image: url(:/images/company-logo.png);</string>
@@ -130,6 +170,9 @@ background-color: rgb(155, 255, 255);</string>
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Expanding</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
@@ -149,10 +192,16 @@ background-color: rgb(155, 255, 255);</string>
        <item>
         <widget class="QPushButton" name="m_btn_Home">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
          </property>
          <property name="styleSheet">
           <string notr="true">border-image: url(:/images/left-navigator/home-g.png);</string>
@@ -165,10 +214,16 @@ background-color: rgb(155, 255, 255);</string>
        <item>
         <widget class="QPushButton" name="m_btn_Brain">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
          </property>
          <property name="styleSheet">
           <string notr="true">border-image: url(:/images/left-navigator/func-w.png);</string>
@@ -199,6 +254,9 @@ background-color: rgb(155, 255, 255);</string>
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Expanding</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>

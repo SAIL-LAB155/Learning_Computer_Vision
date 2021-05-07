@@ -181,14 +181,14 @@ void TrainWidget::on_m_btn_Image_clicked()
 	}
 
 
-	QString imagePath = QFileDialog::getExistingDirectory(
-				this,
-				tr("Select DATA Path"),
-				defaultDirName,
+    QString imagePath = QFileDialog::getExistingDirectory(
+                nullptr,
+                tr("Select DATA Path"),
+                defaultDirName,
                 QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks |
                 QFileDialog::DontUseNativeDialog);
 
-	if("" != imagePath)
+    if("" != imagePath)
 	{
 		ParaCB.Set_ImagePath(imagePath);
 		if("" != ParaCB.Get_ImagePath())
@@ -220,7 +220,7 @@ void TrainWidget::on_m_btn_Model_clicked()
 
 
 	QString modelPath = QFileDialog::getOpenFileName(
-		this,
+        nullptr,
 		tr("Select Image Path"),
 		defaultDirName,
 		"model(*)",

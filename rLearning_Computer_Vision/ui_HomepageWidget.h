@@ -50,7 +50,10 @@ public:
         label = new QLabel(HomepageWidget);
         label->setObjectName(QStringLiteral("label"));
         QFont font;
+        font.setFamily(QStringLiteral("Purisa"));
         font.setPointSize(30);
+        font.setBold(true);
+        font.setWeight(75);
         label->setFont(font);
         label->setStyleSheet(QLatin1String("color: rgb(255, 255, 255);\n"
 "background: transparent;"));
@@ -61,7 +64,10 @@ public:
         m_btn_Get_Started = new QPushButton(HomepageWidget);
         m_btn_Get_Started->setObjectName(QStringLiteral("m_btn_Get_Started"));
         QFont font1;
+        font1.setFamily(QStringLiteral("Purisa"));
         font1.setPointSize(26);
+        font1.setBold(true);
+        font1.setWeight(75);
         m_btn_Get_Started->setFont(font1);
         m_btn_Get_Started->setFocusPolicy(Qt::StrongFocus);
         m_btn_Get_Started->setStyleSheet(QLatin1String("background-color: rgb(82, 255, 244);\n"
