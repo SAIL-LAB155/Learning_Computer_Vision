@@ -82,13 +82,19 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="2" column="1" alignment="Qt::AlignHCenter">
       <widget class="QPushButton" name="m_btn_Vehicles">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>100</height>
+        </size>
        </property>
        <property name="font">
         <font>
@@ -136,13 +142,19 @@ border-image: url(:/images/2-training/subpage/background/classification-others.j
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
+     <item row="0" column="0" alignment="Qt::AlignHCenter">
       <widget class="QPushButton" name="m_btn_Fruit">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>100</height>
+        </size>
        </property>
        <property name="font">
         <font>
@@ -162,6 +174,18 @@ border-image: url(:/images/2-training/subpage/background/detection-fruits.jpg);<
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="label_9">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <family>Purisa</family>
@@ -178,13 +202,19 @@ border-image: url(:/images/2-training/subpage/background/detection-fruits.jpg);<
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
+     <item row="2" column="0" alignment="Qt::AlignHCenter">
       <widget class="QPushButton" name="m_btn_Creatures">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>100</height>
+        </size>
        </property>
        <property name="font">
         <font>
@@ -235,10 +265,10 @@ border-image: url(:/images/2-training/subpage/background/detection-creature.jpg)
        </property>
       </widget>
      </item>
-     <item row="2" column="2">
+     <item row="2" column="2" alignment="Qt::AlignHCenter">
       <widget class="QLabel" name="label_4">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -246,7 +276,7 @@ border-image: url(:/images/2-training/subpage/background/detection-creature.jpg)
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>50</height>
+         <height>0</height>
         </size>
        </property>
        <property name="font">
@@ -269,13 +299,19 @@ border-image: url(:/images/2-training/subpage/background/detection-creature.jpg)
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
+     <item row="0" column="1" alignment="Qt::AlignHCenter">
       <widget class="QPushButton" name="m_btn_Cat_and_Dog">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>100</height>
+        </size>
        </property>
        <property name="font">
         <font>
@@ -296,10 +332,16 @@ border-image: url(:/images/2-training/subpage/background/classification-pets.jpg
      <item row="3" column="1">
       <widget class="QLabel" name="label_10">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>25</height>
+        </size>
        </property>
        <property name="font">
         <font>
@@ -317,13 +359,19 @@ border-image: url(:/images/2-training/subpage/background/classification-pets.jpg
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
+     <item row="0" column="2" alignment="Qt::AlignHCenter">
       <widget class="QPushButton" name="m_btn_Human">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>100</height>
+        </size>
        </property>
        <property name="font">
         <font>
@@ -342,7 +390,7 @@ border-image: url(:/images/2-training/subpage/background/pose-estimation.jpg);
        </property>
       </widget>
      </item>
-     <item row="4" column="0">
+     <item row="4" column="0" alignment="Qt::AlignHCenter">
       <widget class="QLabel" name="label_2">
        <property name="font">
         <font>
@@ -373,7 +421,7 @@ border-image: url(:/images/2-training/subpage/background/pose-estimation.jpg);
        </property>
       </widget>
      </item>
-     <item row="4" column="1">
+     <item row="4" column="1" alignment="Qt::AlignHCenter">
       <widget class="QLabel" name="label_3">
        <property name="font">
         <font>
@@ -393,7 +441,7 @@ border-image: url(:/images/2-training/subpage/background/pose-estimation.jpg);
        </property>
       </widget>
      </item>
-     <item row="4" column="2">
+     <item row="4" column="2" alignment="Qt::AlignHCenter">
       <widget class="QLabel" name="label_5">
        <property name="font">
         <font>
