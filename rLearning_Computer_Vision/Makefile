@@ -395,10 +395,12 @@ qrc_resourse.o: resourse.qrc \
 		images/2-training/subpage/background/classification-pets.jpg \
 		images/2-training/subpage/background/pose-estimation.png \
 		images/2-training/subpage/background/classification-others.png \
+		images/2-training/subpage/background/pets.jpg \
 		images/2-training/subpage/background/detection-creature.png \
 		images/2-training/subpage/background/detection-fruits.png \
 		images/2-training/subpage/background/pose-estimation.jpg \
 		images/2-training/subpage/background/classification-pets.png \
+		images/2-training/subpage/background/fruits.jpg \
 		images/2-training/subpage/background/classification-others.jpg \
 		images/2-training/subpage/background/detection-creature.jpg \
 		images/2-training/subpage/background/detection-fruits.jpg \

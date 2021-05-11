@@ -45,14 +45,19 @@ public:
     {
         if (Learn_Computer_Vision_Dialog->objectName().isEmpty())
             Learn_Computer_Vision_Dialog->setObjectName(QStringLiteral("Learn_Computer_Vision_Dialog"));
+        Learn_Computer_Vision_Dialog->setWindowModality(Qt::NonModal);
         Learn_Computer_Vision_Dialog->setEnabled(true);
         Learn_Computer_Vision_Dialog->resize(800, 600);
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(Learn_Computer_Vision_Dialog->sizePolicy().hasHeightForWidth());
         Learn_Computer_Vision_Dialog->setSizePolicy(sizePolicy);
+        Learn_Computer_Vision_Dialog->setMinimumSize(QSize(800, 600));
+        Learn_Computer_Vision_Dialog->setMaximumSize(QSize(1024, 768));
+        Learn_Computer_Vision_Dialog->setSizeIncrement(QSize(0, 0));
         Learn_Computer_Vision_Dialog->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
+        Learn_Computer_Vision_Dialog->setSizeGripEnabled(false);
         verticalLayout = new QVBoxLayout(Learn_Computer_Vision_Dialog);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);

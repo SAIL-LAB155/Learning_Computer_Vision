@@ -72,6 +72,9 @@ public:
 
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        gridLayout_2->setSizeConstraint(QLayout::SetDefaultConstraint);
+        gridLayout_2->setHorizontalSpacing(6);
+        gridLayout_2->setContentsMargins(-1, -1, 0, -1);
         label_8 = new QLabel(SelectModuleWidget);
         label_8->setObjectName(QStringLiteral("label_8"));
         sizePolicy.setHeightForWidth(label_8->sizePolicy().hasHeightForWidth());
@@ -83,13 +86,15 @@ public:
         font1.setBold(true);
         font1.setWeight(75);
         label_8->setFont(font1);
+        label_8->setScaledContents(true);
         label_8->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
+        label_8->setWordWrap(true);
 
         gridLayout_2->addWidget(label_8, 1, 2, 1, 1);
 
         m_btn_Vehicles = new QPushButton(SelectModuleWidget);
         m_btn_Vehicles->setObjectName(QStringLiteral("m_btn_Vehicles"));
-        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(m_btn_Vehicles->sizePolicy().hasHeightForWidth());
@@ -103,7 +108,7 @@ public:
         m_btn_Vehicles->setStyleSheet(QLatin1String("color: rgb(255, 0, 0);\n"
 "border-image: url(:/images/2-training/subpage/background/classification-others.jpg);"));
 
-        gridLayout_2->addWidget(m_btn_Vehicles, 2, 1, 1, 1, Qt::AlignHCenter);
+        gridLayout_2->addWidget(m_btn_Vehicles, 2, 1, 1, 1);
 
         label_7 = new QLabel(SelectModuleWidget);
         label_7->setObjectName(QStringLiteral("label_7"));
@@ -111,7 +116,9 @@ public:
         label_7->setSizePolicy(sizePolicy);
         label_7->setMinimumSize(QSize(0, 25));
         label_7->setFont(font1);
+        label_7->setScaledContents(true);
         label_7->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
+        label_7->setWordWrap(true);
 
         gridLayout_2->addWidget(label_7, 1, 1, 1, 1);
 
@@ -122,9 +129,9 @@ public:
         m_btn_Fruit->setMinimumSize(QSize(200, 100));
         m_btn_Fruit->setFont(font2);
         m_btn_Fruit->setStyleSheet(QLatin1String("color: rgb(0, 0, 0);\n"
-"border-image: url(:/images/2-training/subpage/background/detection-fruits.jpg);"));
+"border-image: url(:/images/2-training/subpage/background/fruits.jpg);"));
 
-        gridLayout_2->addWidget(m_btn_Fruit, 0, 0, 1, 1, Qt::AlignHCenter);
+        gridLayout_2->addWidget(m_btn_Fruit, 0, 0, 1, 1);
 
         label_9 = new QLabel(SelectModuleWidget);
         label_9->setObjectName(QStringLiteral("label_9"));
@@ -132,7 +139,9 @@ public:
         label_9->setSizePolicy(sizePolicy);
         label_9->setMinimumSize(QSize(0, 25));
         label_9->setFont(font1);
+        label_9->setScaledContents(true);
         label_9->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
+        label_9->setWordWrap(true);
 
         gridLayout_2->addWidget(label_9, 3, 0, 1, 1);
 
@@ -145,7 +154,7 @@ public:
         m_btn_Creatures->setStyleSheet(QLatin1String("color: rgb(255, 0, 0);\n"
 "border-image: url(:/images/2-training/subpage/background/detection-creature.jpg);"));
 
-        gridLayout_2->addWidget(m_btn_Creatures, 2, 0, 1, 1, Qt::AlignHCenter);
+        gridLayout_2->addWidget(m_btn_Creatures, 2, 0, 1, 1);
 
         label_6 = new QLabel(SelectModuleWidget);
         label_6->setObjectName(QStringLiteral("label_6"));
@@ -154,17 +163,16 @@ public:
         label_6->setMinimumSize(QSize(0, 25));
         label_6->setFont(font1);
         label_6->setTextFormat(Qt::AutoText);
+        label_6->setScaledContents(true);
         label_6->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
+        label_6->setWordWrap(true);
 
         gridLayout_2->addWidget(label_6, 1, 0, 1, 1);
 
         label_4 = new QLabel(SelectModuleWidget);
         label_4->setObjectName(QStringLiteral("label_4"));
-        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(label_4->sizePolicy().hasHeightForWidth());
-        label_4->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(label_4->sizePolicy().hasHeightForWidth());
+        label_4->setSizePolicy(sizePolicy1);
         label_4->setMinimumSize(QSize(0, 0));
         QFont font3;
         font3.setFamily(QStringLiteral("Purisa"));
@@ -174,7 +182,9 @@ public:
         font3.setKerning(true);
         label_4->setFont(font3);
         label_4->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
+        label_4->setScaledContents(true);
         label_4->setWordWrap(true);
+        label_4->setMargin(0);
 
         gridLayout_2->addWidget(label_4, 2, 2, 1, 1, Qt::AlignHCenter);
 
@@ -189,9 +199,9 @@ public:
         font4.setWeight(75);
         m_btn_Cat_and_Dog->setFont(font4);
         m_btn_Cat_and_Dog->setStyleSheet(QLatin1String("color: rgb(0, 0, 0);\n"
-"border-image: url(:/images/2-training/subpage/background/classification-pets.jpg);"));
+"border-image: url(:/images/2-training/subpage/background/pets.jpg);"));
 
-        gridLayout_2->addWidget(m_btn_Cat_and_Dog, 0, 1, 1, 1, Qt::AlignHCenter);
+        gridLayout_2->addWidget(m_btn_Cat_and_Dog, 0, 1, 1, 1);
 
         label_10 = new QLabel(SelectModuleWidget);
         label_10->setObjectName(QStringLiteral("label_10"));
@@ -199,7 +209,9 @@ public:
         label_10->setSizePolicy(sizePolicy);
         label_10->setMinimumSize(QSize(0, 25));
         label_10->setFont(font1);
+        label_10->setScaledContents(true);
         label_10->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
+        label_10->setWordWrap(true);
 
         gridLayout_2->addWidget(label_10, 3, 1, 1, 1);
 
@@ -213,10 +225,12 @@ public:
 "border-image: url(:/images/2-training/subpage/background/pose-estimation.jpg);\n"
 ""));
 
-        gridLayout_2->addWidget(m_btn_Human, 0, 2, 1, 1, Qt::AlignHCenter);
+        gridLayout_2->addWidget(m_btn_Human, 0, 2, 1, 1);
 
         label_2 = new QLabel(SelectModuleWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
+        sizePolicy1.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy1);
         QFont font5;
         font5.setFamily(QStringLiteral("Purisa"));
         font5.setBold(true);
@@ -224,28 +238,35 @@ public:
         font5.setStrikeOut(false);
         font5.setStyleStrategy(QFont::PreferDefault);
         label_2->setFont(font5);
-        label_2->setMouseTracking(false);
+        label_2->setMouseTracking(true);
         label_2->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
         label_2->setTextFormat(Qt::AutoText);
-        label_2->setScaledContents(false);
+        label_2->setScaledContents(true);
         label_2->setWordWrap(true);
+        label_2->setMargin(0);
 
         gridLayout_2->addWidget(label_2, 4, 0, 1, 1, Qt::AlignHCenter);
 
         label_3 = new QLabel(SelectModuleWidget);
         label_3->setObjectName(QStringLiteral("label_3"));
+        sizePolicy1.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
+        label_3->setSizePolicy(sizePolicy1);
         QFont font6;
         font6.setFamily(QStringLiteral("Purisa"));
         font6.setBold(true);
         font6.setWeight(75);
         label_3->setFont(font6);
         label_3->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
+        label_3->setScaledContents(true);
         label_3->setWordWrap(true);
+        label_3->setMargin(0);
 
         gridLayout_2->addWidget(label_3, 4, 1, 1, 1, Qt::AlignHCenter);
 
         label_5 = new QLabel(SelectModuleWidget);
         label_5->setObjectName(QStringLiteral("label_5"));
+        sizePolicy1.setHeightForWidth(label_5->sizePolicy().hasHeightForWidth());
+        label_5->setSizePolicy(sizePolicy1);
         QFont font7;
         font7.setFamily(QStringLiteral("Purisa"));
         font7.setPointSize(18);
@@ -253,17 +274,22 @@ public:
         font7.setWeight(75);
         label_5->setFont(font7);
         label_5->setStyleSheet(QStringLiteral("color: rgb(255, 255, 255);"));
+        label_5->setScaledContents(true);
         label_5->setAlignment(Qt::AlignCenter);
         label_5->setWordWrap(true);
+        label_5->setMargin(0);
 
         gridLayout_2->addWidget(label_5, 4, 2, 1, 1, Qt::AlignHCenter);
 
-        gridLayout_2->setRowStretch(0, 2);
-        gridLayout_2->setRowStretch(2, 2);
+        gridLayout_2->setRowStretch(0, 1);
+        gridLayout_2->setRowStretch(2, 1);
+        gridLayout_2->setRowStretch(4, 1);
+        gridLayout_2->setColumnStretch(0, 1);
+        gridLayout_2->setColumnStretch(1, 1);
+        gridLayout_2->setColumnStretch(2, 1);
 
         verticalLayout->addLayout(gridLayout_2);
 
-        verticalLayout->setStretch(1, 2);
 
         retranslateUi(SelectModuleWidget);
 

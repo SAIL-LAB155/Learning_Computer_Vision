@@ -18,6 +18,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -29,6 +30,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout_2;
     QFrame *frame;
+    QSpacerItem *verticalSpacer;
     QPushButton *m_btn_Visualize;
     QVBoxLayout *verticalLayout;
     QLabel *label;
@@ -46,7 +48,7 @@ public:
     {
         if (VisualizationWidget->objectName().isEmpty())
             VisualizationWidget->setObjectName(QStringLiteral("VisualizationWidget"));
-        VisualizationWidget->resize(700, 500);
+        VisualizationWidget->resize(700, 519);
         VisualizationWidget->setStyleSheet(QStringLiteral("background-color: rgb(177, 181, 182);"));
         horizontalLayout = new QHBoxLayout(VisualizationWidget);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -59,6 +61,10 @@ public:
 
         verticalLayout_2->addWidget(frame);
 
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_2->addItem(verticalSpacer);
+
         m_btn_Visualize = new QPushButton(VisualizationWidget);
         m_btn_Visualize->setObjectName(QStringLiteral("m_btn_Visualize"));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
@@ -66,7 +72,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(m_btn_Visualize->sizePolicy().hasHeightForWidth());
         m_btn_Visualize->setSizePolicy(sizePolicy);
-        m_btn_Visualize->setMinimumSize(QSize(0, 20));
+        m_btn_Visualize->setMinimumSize(QSize(0, 10));
         QFont font;
         font.setFamily(QStringLiteral("Purisa"));
         font.setBold(true);
@@ -76,6 +82,8 @@ public:
 
         verticalLayout_2->addWidget(m_btn_Visualize);
 
+        verticalLayout_2->setStretch(0, 1);
+        verticalLayout_2->setStretch(2, 1);
 
         horizontalLayout->addLayout(verticalLayout_2);
 

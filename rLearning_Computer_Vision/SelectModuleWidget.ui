@@ -19,7 +19,7 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(177, 181, 182);</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,2">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0">
    <item>
     <widget class="QLabel" name="label">
      <property name="sizePolicy">
@@ -51,7 +51,16 @@
     </widget>
    </item>
    <item>
-    <layout class="QGridLayout" name="gridLayout_2" rowstretch="2,0,2,0,0">
+    <layout class="QGridLayout" name="gridLayout_2" rowstretch="1,0,1,0,1" columnstretch="1,1,1" rowminimumheight="0,0,0,0,0">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="horizontalSpacing">
+      <number>6</number>
+     </property>
      <item row="1" column="2">
       <widget class="QLabel" name="label_8">
        <property name="sizePolicy">
@@ -77,15 +86,21 @@
        <property name="text">
         <string>Human</string>
        </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
        <property name="alignment">
         <set>Qt::AlignHCenter|Qt::AlignTop</set>
        </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
-     <item row="2" column="1" alignment="Qt::AlignHCenter">
+     <item row="2" column="1">
       <widget class="QPushButton" name="m_btn_Vehicles">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -137,15 +152,21 @@ border-image: url(:/images/2-training/subpage/background/classification-others.j
        <property name="text">
         <string>Cat and Dog</string>
        </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
        <property name="alignment">
         <set>Qt::AlignHCenter|Qt::AlignTop</set>
        </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
-     <item row="0" column="0" alignment="Qt::AlignHCenter">
+     <item row="0" column="0">
       <widget class="QPushButton" name="m_btn_Fruit">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -165,7 +186,7 @@ border-image: url(:/images/2-training/subpage/background/classification-others.j
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-border-image: url(:/images/2-training/subpage/background/detection-fruits.jpg);</string>
+border-image: url(:/images/2-training/subpage/background/fruits.jpg);</string>
        </property>
        <property name="text">
         <string/>
@@ -197,15 +218,21 @@ border-image: url(:/images/2-training/subpage/background/detection-fruits.jpg);<
        <property name="text">
         <string>Creatures</string>
        </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
        <property name="alignment">
         <set>Qt::AlignHCenter|Qt::AlignTop</set>
        </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
-     <item row="2" column="0" alignment="Qt::AlignHCenter">
+     <item row="2" column="0">
       <widget class="QPushButton" name="m_btn_Creatures">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -260,8 +287,14 @@ border-image: url(:/images/2-training/subpage/background/detection-creature.jpg)
        <property name="textFormat">
         <enum>Qt::AutoText</enum>
        </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
        <property name="alignment">
         <set>Qt::AlignHCenter|Qt::AlignTop</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -294,15 +327,21 @@ border-image: url(:/images/2-training/subpage/background/detection-creature.jpg)
        <property name="text">
         <string>Pose estimation could extract human skeleton through a series of key-ponits.</string>
        </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
        <property name="wordWrap">
         <bool>true</bool>
        </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
       </widget>
      </item>
-     <item row="0" column="1" alignment="Qt::AlignHCenter">
+     <item row="0" column="1">
       <widget class="QPushButton" name="m_btn_Cat_and_Dog">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -322,7 +361,7 @@ border-image: url(:/images/2-training/subpage/background/detection-creature.jpg)
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-border-image: url(:/images/2-training/subpage/background/classification-pets.jpg);</string>
+border-image: url(:/images/2-training/subpage/background/pets.jpg);</string>
        </property>
        <property name="text">
         <string/>
@@ -354,15 +393,21 @@ border-image: url(:/images/2-training/subpage/background/classification-pets.jpg
        <property name="text">
         <string>Vehicles</string>
        </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
        <property name="alignment">
         <set>Qt::AlignHCenter|Qt::AlignTop</set>
        </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
-     <item row="0" column="2" alignment="Qt::AlignHCenter">
+     <item row="0" column="2">
       <widget class="QPushButton" name="m_btn_Human">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -392,6 +437,12 @@ border-image: url(:/images/2-training/subpage/background/pose-estimation.jpg);
      </item>
      <item row="4" column="0" alignment="Qt::AlignHCenter">
       <widget class="QLabel" name="label_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="font">
         <font>
          <family>Purisa</family>
@@ -402,7 +453,7 @@ border-image: url(:/images/2-training/subpage/background/pose-estimation.jpg);
         </font>
        </property>
        <property name="mouseTracking">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(255, 255, 255);</string>
@@ -414,15 +465,24 @@ border-image: url(:/images/2-training/subpage/background/pose-estimation.jpg);
         <enum>Qt::AutoText</enum>
        </property>
        <property name="scaledContents">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
+       </property>
+       <property name="margin">
+        <number>0</number>
        </property>
       </widget>
      </item>
      <item row="4" column="1" alignment="Qt::AlignHCenter">
       <widget class="QLabel" name="label_3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="font">
         <font>
          <family>Purisa</family>
@@ -436,13 +496,25 @@ border-image: url(:/images/2-training/subpage/background/pose-estimation.jpg);
        <property name="text">
         <string>Object classification arms to classify different types of objects (like dogs, cats, etc.) in digital images and videos as well.</string>
        </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
        <property name="wordWrap">
         <bool>true</bool>
+       </property>
+       <property name="margin">
+        <number>0</number>
        </property>
       </widget>
      </item>
      <item row="4" column="2" alignment="Qt::AlignHCenter">
       <widget class="QLabel" name="label_5">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="font">
         <font>
          <family>Purisa</family>
@@ -457,11 +529,17 @@ border-image: url(:/images/2-training/subpage/background/pose-estimation.jpg);
        <property name="text">
         <string>TBC...</string>
        </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
+       </property>
+       <property name="margin">
+        <number>0</number>
        </property>
       </widget>
      </item>

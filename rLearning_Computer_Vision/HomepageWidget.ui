@@ -61,6 +61,12 @@ Computer Vision</string>
        <property name="textFormat">
         <enum>Qt::AutoText</enum>
        </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
       </widget>
      </item>
      <item>

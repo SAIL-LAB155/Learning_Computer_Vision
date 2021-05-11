@@ -64,7 +64,7 @@ public:
     {
         if (TrainWidget->objectName().isEmpty())
             TrainWidget->setObjectName(QStringLiteral("TrainWidget"));
-        TrainWidget->resize(700, 500);
+        TrainWidget->resize(730, 523);
         TrainWidget->setStyleSheet(QStringLiteral(""));
         gridLayout_2 = new QGridLayout(TrainWidget);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
@@ -193,11 +193,8 @@ public:
 
         m_btn_Image = new QPushButton(m_groupBox_Setting);
         m_btn_Image->setObjectName(QStringLiteral("m_btn_Image"));
-        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(m_btn_Image->sizePolicy().hasHeightForWidth());
-        m_btn_Image->setSizePolicy(sizePolicy2);
+        sizePolicy.setHeightForWidth(m_btn_Image->sizePolicy().hasHeightForWidth());
+        m_btn_Image->setSizePolicy(sizePolicy);
         m_btn_Image->setMinimumSize(QSize(140, 140));
         m_btn_Image->setSizeIncrement(QSize(0, 0));
         m_btn_Image->setFont(font);
@@ -208,8 +205,8 @@ public:
 
         m_btn_Model = new QPushButton(m_groupBox_Setting);
         m_btn_Model->setObjectName(QStringLiteral("m_btn_Model"));
-        sizePolicy2.setHeightForWidth(m_btn_Model->sizePolicy().hasHeightForWidth());
-        m_btn_Model->setSizePolicy(sizePolicy2);
+        sizePolicy.setHeightForWidth(m_btn_Model->sizePolicy().hasHeightForWidth());
+        m_btn_Model->setSizePolicy(sizePolicy);
         m_btn_Model->setMinimumSize(QSize(140, 140));
         m_btn_Model->setSizeIncrement(QSize(0, 0));
         m_btn_Model->setFont(font);
@@ -269,6 +266,9 @@ public:
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label_2 = new QLabel(groupBox_2);
         label_2->setObjectName(QStringLiteral("label_2"));
+        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
         label_2->setSizePolicy(sizePolicy2);
         label_2->setFont(font);

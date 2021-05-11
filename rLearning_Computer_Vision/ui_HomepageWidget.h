@@ -58,6 +58,8 @@ public:
         label->setStyleSheet(QLatin1String("color: rgb(255, 255, 255);\n"
 "background: transparent;"));
         label->setTextFormat(Qt::AutoText);
+        label->setScaledContents(true);
+        label->setWordWrap(false);
 
         verticalLayout->addWidget(label);
 

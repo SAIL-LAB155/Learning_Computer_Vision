@@ -28,7 +28,7 @@ public:
     {
         if (AnnotationWidget->objectName().isEmpty())
             AnnotationWidget->setObjectName(QStringLiteral("AnnotationWidget"));
-        AnnotationWidget->resize(800, 500);
+        AnnotationWidget->resize(800, 600);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);

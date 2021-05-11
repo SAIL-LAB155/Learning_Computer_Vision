@@ -8,6 +8,7 @@
 void Learn_Computer_Vision_Dialog::resizeEvent(QResizeEvent *event){
     m_pHomepageDlg->resize(width()-100, height()-100);
     m_pHomepageDlg->setStyleSheet("HomepageWidget{ border-image: url(:/images/1-home/background.jpg) }");
+    // m_pHomepageDlg->setAcceptDrops();
     m_pSelectModuleDlg->resize(width()-100, height()-100);
     m_pTrainDlg->resize(width()-100, height()-100);
     m_pVisualizationDlg->resize(width()-100, height()-100);
@@ -28,7 +29,7 @@ Learn_Computer_Vision_Dialog::Learn_Computer_Vision_Dialog(QWidget *parent) :
 			qDebug() << "new pPythonCommInshtance fail";
 			exit(2);
 		}
-	}
+    }
 
     QSizePolicy sp_retain = ui->m_btn_Annotation->sizePolicy();
     sp_retain.setRetainSizeWhenHidden(true);
@@ -80,9 +81,7 @@ Learn_Computer_Vision_Dialog::Learn_Computer_Vision_Dialog(QWidget *parent) :
         m_pCurrentWidgetArr[Widget_Index_Visualization] = m_pVisualizationDlg;
         m_pCurrentWidgetArr[Widget_Index_Annotation] = m_pAnnotationDlg;
 
-        // this->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-        // this->setFixedSize(width,height);
-
+        // this->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
         m_CurrentWidgetIndex = Widget_Index_Max;
         SwitchWidget(Widget_Index_Homepage);
 

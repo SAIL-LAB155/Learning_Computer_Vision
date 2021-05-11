@@ -20,5 +20,7 @@
         <file>images/2-training/subpage/background/detection-creature.png</file>
         <file>images/2-training/subpage/background/detection-fruits.png</file>
         <file>images/2-training/subpage/background/pose-estimation.png</file>
+        <file>images/2-training/subpage/background/fruits.jpg</file>
+        <file>images/2-training/subpage/background/pets.jpg</file>
     </qresource>
 </RCC>
