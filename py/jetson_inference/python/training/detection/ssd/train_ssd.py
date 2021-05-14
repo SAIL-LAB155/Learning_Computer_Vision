@@ -113,6 +113,13 @@ def train(loader, net, criterion, optimizer, device, debug_steps=100, epoch=-1):
     running_regression_loss = 0.0
     running_classification_loss = 0.0
     for i, data in enumerate(loader):
+        comm_handler()
+        signal = ParaCB.Get_Signal()
+        if signal == "stop":
+            SendToQt_Log("Task terminated, exiting program.")
+            logging.info("Task terminated, exiting program.")
+            SendToQt_Train_Ok()
+
         images, boxes, labels = data
         images = images.to(device)
         boxes = boxes.to(device)
@@ -155,6 +162,13 @@ def test(loader, net, criterion, device):
     running_classification_loss = 0.0
     num = 0
     for _, data in enumerate(loader):
+        comm_handler()
+        signal = ParaCB.Get_Signal()
+        if signal == "stop":
+            SendToQt_Log("Task terminated, exiting program.")
+            logging.info("Task terminated, exiting program.")
+            SendToQt_Train_Ok()
+
         images, boxes, labels = data
         images = images.to(device)
         boxes = boxes.to(device)
@@ -248,7 +262,7 @@ def main(epochs, model_dir, data_path):
         val_dataset = VOCDataset(dataset_path, transform=test_transform,
                                  target_transform=target_transform, is_test=True)
     elif args.dataset_type == 'open_images':
-        val_dataset = OpenImagesDataset(dataset_path,
+        val_dataset = OpenImagesDataset(data_path,
                                         transform=test_transform, target_transform=target_transform,
                                         dataset_type="test")
         logging.info(val_dataset)
@@ -361,5 +375,7 @@ def main(epochs, model_dir, data_path):
             logging.info(f"Saved model {model_path}")
 
     logging.info("Task done, exiting program.")
+    SendToQt_Train_Ok()
+
 if __name__ == '__main__':
     main()

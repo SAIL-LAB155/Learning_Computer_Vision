@@ -69,7 +69,9 @@ class OpenImagesDataset:
         data = []
         for image_id, group in annotations.groupby("ImageID"):
             img_path = os.path.join(self.root, self.dataset_type, image_id + '.jpg')
+            # print(img_path)
             if os.path.isfile(img_path) is False:
+                 print(img_path)
                  logging.error(f'missing ImageID {image_id}.jpg - dropping from annotations')
                  continue
             boxes = group.loc[:, ["XMin", "YMin", "XMax", "YMax"]].values.astype(np.float32)
