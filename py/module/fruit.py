@@ -1,5 +1,6 @@
 
 from jetson_inference.python.training.detection.ssd.train_ssd import main
+from labelImg.labelImg import label
 
 class Fruit:
     def __init__(self):
@@ -23,10 +24,11 @@ class Fruit:
         pass
 
     def visualize_webcam(self, model_path=None):
-        pass
+        label()
 
     def annotate(self, img_folder):
-        pass
+        label()
+        #execfile('labelImg-1.8.1/labelImg.py')
 
     def reset(self):
         pass
