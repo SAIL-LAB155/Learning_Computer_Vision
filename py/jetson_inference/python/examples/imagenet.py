@@ -26,10 +26,13 @@ import jetson.utils
 
 import argparse
 import sys
+# from apis import *
 
+sys.argv.insert(2, "--input_blob=input_0")
+sys.argv.insert(3, "--output_blob=output_0")
 
 # parse the command line
-parser = argparse.ArgumentParser(description="Classify a live camera stream using an image recognition DNN.", 
+parser = argparse.ArgumentParser(description="Classify a live camera stream using an image recognition DNN.",
                                  formatter_class=argparse.RawTextHelpFormatter, epilog=jetson.inference.imageNet.Usage() +
                                  jetson.utils.videoSource.Usage() + jetson.utils.videoOutput.Usage() + jetson.utils.logUsage())
 
@@ -70,14 +73,16 @@ while True:
 	# find the object description
 	class_desc = net.GetClassDesc(class_id)
 
-	# overlay the result on the image	
+	# overlay the result on the image
 	font.OverlayText(img, img.width, img.height, "{:05.2f}% {:s}".format(confidence * 100, class_desc), 5, 5, font.White, font.Gray40)
-	
+
 	# render the image
 	output.Render(img)
-
+	# out_img = jetson.utils.cudaToNumpy(img, 720, 480, 4)
+	# SendToQt_Update_Display(out_img)
 	# update the title bar
 	output.SetStatus("{:s} | Network {:.0f} FPS".format(net.GetNetworkName(), net.GetNetworkFPS()))
+	np_image = jetson.utils.cudaToNumpy(img)
 
 	# print out performance info
 	net.PrintProfilerTimes()
@@ -86,6 +91,6 @@ while True:
 	if not input.IsStreaming() or not output.IsStreaming():
 		break
 
-	
+
 
 
