@@ -185,6 +185,12 @@ def decode(len):
                 ParaCB.Signal = 5;
                 print("Signal : ", ParaCB.Signal);
         pass;
+    elif (0x46 == RxBuffer[3]):
+        if (len == 8):
+            if ((0x00 == RxBuffer[4]) and (0x00 == RxBuffer[5])):
+                ParaCB.Signal = 6;
+                print("Signal : ", ParaCB.Signal);
+        pass;
     else :
         print("cmd not found ",RxBuffer[3]);
     return;

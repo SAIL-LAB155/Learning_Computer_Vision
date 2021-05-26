@@ -41,7 +41,7 @@ class CAT:
         print('model_path:', model_path)
         print('Cat dog web_vis start')
 
-    def annotate(self, img_folder):
+    def annotate(self):
         print('Cat dog training start')
 
     def reset(self):

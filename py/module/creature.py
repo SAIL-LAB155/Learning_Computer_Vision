@@ -8,10 +8,13 @@ class Creature:
 
     def train(self, img_path, model_path=None, epochs=10):
         for epoch in range(int(epochs)):
+            comm_handler()
+            signal = ParaCB.Get_Signal()
             time.sleep(1)
             message = "{}: {}".format(time.asctime(time.localtime(time.time())), epoch)
             print(message)
             SendToQt_Log(message)
+        SendToQt_Train_Ok()
 
     def plot(self):
         pass
@@ -26,7 +29,7 @@ class Creature:
     def visualize_webcam(self, model_path=None):
         pass
 
-    def annotate(self, img_folder):
+    def annotate(self):
         pass
 
     def reset(self):

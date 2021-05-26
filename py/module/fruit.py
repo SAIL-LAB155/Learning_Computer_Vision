@@ -24,9 +24,9 @@ class Fruit:
         pass
 
     def visualize_webcam(self, model_path=None):
-        label()
+        pass
 
-    def annotate(self, img_folder):
+    def annotate(self):
         label()
         #execfile('labelImg-1.8.1/labelImg.py')
 

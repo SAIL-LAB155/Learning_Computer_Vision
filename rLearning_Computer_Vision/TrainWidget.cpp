@@ -144,6 +144,17 @@ void TrainWidget::Train_OK(void)
 		ParaCB.Set_isTrainOkay(true);
 		ui->m_btn_Display->setEnabled(true);
 		ui->m_label_SystemStatus->setStyleSheet("background-color: rgb(0, 255, 0)");
+
+		ui->m_btn_Run->setText("Run");
+
+		ui->m_btn_Image->setEnabled(true);
+		ui->m_btn_ImageReset->setEnabled(true);
+		ui->m_btn_Model->setEnabled(true);
+		ui->m_btn_ModelReset->setEnabled(true);
+		ui->m_btn_Reset->setEnabled(true);
+		ui->horizontalSlider->setEnabled(true);
+
+		Training_Stop();
 	}
 }
 
@@ -258,20 +269,22 @@ void TrainWidget::on_m_btn_Run_clicked()
 {
 	if(true == m_isTraining)
 	{
-		ui->m_btn_Run->setText("Run");
-		ui->m_label_SystemStatus->setStyleSheet("background-color: rgb(255, 0, 0)");
+//		ui->m_btn_Run->setText("Run");
+//		ui->m_label_SystemStatus->setStyleSheet("background-color: rgb(255, 0, 0)");
 
-		ui->m_btn_Image->setEnabled(true);
-		ui->m_btn_ImageReset->setEnabled(true);
-		ui->m_btn_Model->setEnabled(true);
-		ui->m_btn_ModelReset->setEnabled(true);
-		ui->m_btn_Reset->setEnabled(true);
-		ui->horizontalSlider->setEnabled(true);
+//		ui->m_btn_Image->setEnabled(true);
+//		ui->m_btn_ImageReset->setEnabled(true);
+//		ui->m_btn_Model->setEnabled(true);
+//		ui->m_btn_ModelReset->setEnabled(true);
+//		ui->m_btn_Reset->setEnabled(true);
+//		ui->horizontalSlider->setEnabled(true);
 
-		Plotting_Clear();
-		TrainingLog_Clear();
+//		Plotting_Clear();
+//		TrainingLog_Clear();
 
-		Training_Stop();
+//		Training_Stop();
+
+		emit(pPythonCommInshtance->Signal_Train_Ok());
 	}
 	else
 	{

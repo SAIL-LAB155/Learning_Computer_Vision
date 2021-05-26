@@ -315,6 +315,20 @@ void Learn_Computer_Vision_Dialog::on_m_btn_Visualization_clicked()
 void Learn_Computer_Vision_Dialog::on_m_btn_Annotation_clicked()
 {
 	SwitchWidget(Widget_Index_Annotation);
+	if(pPythonCommInshtance)
+	{
+		uint8_t tmpbuf[TX_CMD_ANNOTATION_CLICKED_LEN] = {0};
+		tmpbuf[0] = TX_HEAD;
+		tmpbuf[1] = (TX_CMD_ANNOTATION_CLICKED_LEN >> 8) & 0xFF;
+		tmpbuf[2] = TX_CMD_ANNOTATION_CLICKED_LEN & 0xFF;
+		tmpbuf[3] = TX_CMD_ANNOTATION_CLICKED;
+		tmpbuf[4] = 0;
+		tmpbuf[5] = 0;
+		tmpbuf[6] = pPythonCommInshtance->getLRC(tmpbuf,TX_CMD_ANNOTATION_CLICKED_LEN - 2);
+		tmpbuf[7] = pPythonCommInshtance->getSum(tmpbuf,TX_CMD_ANNOTATION_CLICKED_LEN - 1);
+
+		pPythonCommInshtance->SendtoPython(tmpbuf,TX_CMD_ANNOTATION_CLICKED_LEN);
+	}
 }
 
 void Learn_Computer_Vision_Dialog::SelectModuleWidget_Show()

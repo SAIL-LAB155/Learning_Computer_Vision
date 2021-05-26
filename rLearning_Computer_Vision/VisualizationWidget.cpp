@@ -147,6 +147,7 @@ void VisualizationWidget::OpenImage_Start(void)
 void VisualizationWidget::OpenImage_Stop(void)
 {
 	m_isOpenImage = false;
+	m_isRequestUpdate = false;
 }
 
 void VisualizationWidget::OpenCamera_Start(void)
@@ -172,6 +173,7 @@ void VisualizationWidget::OpenCamera_Start(void)
 void VisualizationWidget::OpenCamera_Stop(void)
 {
 	m_isVisualizing = false;
+	m_isRequestUpdate = false;
 
 	if(pPythonCommInshtance)
 	{
@@ -204,7 +206,7 @@ void VisualizationWidget::paintEvent(QPaintEvent*)
 		rcPhoto.translate(ui->frame->pos());
 		painter.drawImage(rcPhoto,image);
 
-		m_isRequestUpdate = false;
+		//m_isRequestUpdate = false;
 	}
 }
 

@@ -15,7 +15,7 @@ class Human_pose:
     def visualize_webcam(self, model_path=None):
         pass
 
-    def annotate(self, img_folder):
+    def annotate(self):
         pass
 
     def reset(self):
