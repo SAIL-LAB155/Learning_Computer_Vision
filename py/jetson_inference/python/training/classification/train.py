@@ -276,10 +276,14 @@ def main_worker(gpu, ngpus_per_node, args,epochs,model_dir,data_path):
         adjust_learning_rate(optimizer, epoch, args)
 
         # train for one epoch
-        train(train_loader, model, criterion, optimizer, epoch, num_classes, args)
+        index = train(train_loader, model, criterion, optimizer, epoch, num_classes, args)
+        if index == -1:
+            return
 
         # evaluate on validation set
         acc1 = validate(val_loader, model, criterion, num_classes, args)
+        if acc1 == -1:
+            return
 
         # remember best acc@1 and save checkpoint
         is_best = acc1 > best_acc1
@@ -322,6 +326,15 @@ def train(train_loader, model, criterion, optimizer, epoch, num_classes, args):
     # train over each image batch from the dataset
     for i, (images, target) in enumerate(train_loader):
         # measure data loading time
+        comm_handler()
+        signal = ParaCB.Get_Signal()
+        if signal == 2:
+            message = "The training has been stopped"
+            print(message)
+            SendToQt_Log(message)
+            SendToQt_Train_Ok()
+            return -1
+
         data_time.update(time.time() - end)
 
         if args.gpu is not None:
@@ -358,7 +371,7 @@ def train(train_loader, model, criterion, optimizer, epoch, num_classes, args):
             SendToQt_Log(msg)
 
     print("Epoch: [{:d}] completed, elapsed time {:6.3f} seconds".format(epoch, time.time() - epoch_start))
-
+    return 0
 
 #
 # measure model performance across the val dataset
@@ -379,6 +392,15 @@ def validate(val_loader, model, criterion, num_classes, args):
     with torch.no_grad():
         end = time.time()
         for i, (images, target) in enumerate(val_loader):
+            comm_handler()
+            signal = ParaCB.Get_Signal()
+            if signal == 2:
+                message = "The training has been stopped"
+                print(message)
+                SendToQt_Log(message)
+                SendToQt_Train_Ok()
+                return -1
+
             if args.gpu is not None:
                 images = images.cuda(args.gpu, non_blocking=True)
             target = target.cuda(args.gpu, non_blocking=True)

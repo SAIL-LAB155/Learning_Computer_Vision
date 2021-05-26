@@ -50,7 +50,7 @@ class SignalParser:
             print(index)
             raise NotImplementedError
 
-    def parse_signal(self,ParaCB,action_signal):
+    def parse_signal(self, ParaCB, action_signal):
         # module, action = "", ""
         signal = {}
         signal['Data_Path'] = ParaCB.Data_Path
@@ -68,4 +68,6 @@ class SignalParser:
         self.parse_module(self.signal['Module_Index'])
         self.parse_action(self.signal['signal'])
 
+
+# def slight_parse_single(ParaCB):
 

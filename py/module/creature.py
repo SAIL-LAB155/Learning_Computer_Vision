@@ -10,6 +10,12 @@ class Creature:
         for epoch in range(int(epochs)):
             comm_handler()
             signal = ParaCB.Get_Signal()
+            if signal == 2:
+                message = "The training has been stopped"
+                print(message)
+                SendToQt_Log(message)
+                SendToQt_Train_Ok()
+                return
             time.sleep(1)
             message = "{}: {}".format(time.asctime(time.localtime(time.time())), epoch)
             print(message)

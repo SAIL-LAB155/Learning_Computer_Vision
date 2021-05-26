@@ -12,6 +12,6 @@ if __name__ == '__main__':
         comm_handler()
         signal = ParaCB.Get_Signal()
         # Module_singal = ParaCB.Module_Index
-        parse.parse(ParaCB,signal)
+        parse.parse(ParaCB, signal)
 
 
