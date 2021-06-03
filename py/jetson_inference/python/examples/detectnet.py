@@ -26,6 +26,7 @@ import jetson.utils
 
 import argparse
 import sys
+import os
 
 # parse the command line
 parser = argparse.ArgumentParser(description="Locate objects in a live camera stream using an object detection DNN.", 
@@ -40,45 +41,53 @@ parser.add_argument("--threshold", type=float, default=0.5, help="minimum detect
 
 is_headless = ["--headless"] if sys.argv[0].find('console.py') != -1 else [""]
 
-try:
-	opt = parser.parse_known_args()[0]
-except:
-	print("")
-	parser.print_help()
-	sys.exit(0)
+def main_det(model_path, img_path, label_path):
+	sys.argv = [os.getcwd(), img_path, "output.jpg"]
+	sys.argv.append("--model={}".format(model_path))
+	sys.argv.append("--labels={}".format(label_path))
+	sys.argv.append("--input_blob=input_0")
+	sys.argv.append("--output_cvg=scores")
+	sys.argv.append("--output_bbox=boxes")
 
-# load the object detection network
-net = jetson.inference.detectNet(opt.network, sys.argv, opt.threshold)
+	try:
+		opt = parser.parse_known_args()[0]
+	except:
+		print("")
+		parser.print_help()
+		sys.exit(0)
 
-# create video sources & outputs
-input = jetson.utils.videoSource(opt.input_URI, argv=sys.argv)
-output = jetson.utils.videoOutput(opt.output_URI, argv=sys.argv+is_headless)
+	# load the object detection network
+	net = jetson.inference.detectNet('ssd-mobilenet-v2', sys.argv, opt.threshold)
 
-# process frames until the user exits
-while True:
-	# capture the next image
-	img = input.Capture()
+	# create video sources & outputs
+	input = jetson.utils.videoSource(img_path, argv=sys.argv)
+	output = jetson.utils.videoOutput('output.jpg', argv=sys.argv+is_headless)
 
-	# detect objects in the image (with overlay)
-	detections = net.Detect(img, overlay=opt.overlay)
+	# process frames until the user exits
+	while True:
+		# capture the next image
+		img = input.Capture()
 
-	# print the detections
-	print("detected {:d} objects in image".format(len(detections)))
+		# detect objects in the image (with overlay)
+		detections = net.Detect(img, overlay="box,labels,conf")
 
-	for detection in detections:
-		print(detection)
+		# print the detections
+		print("detected {:d} objects in image".format(len(detections)))
 
-	# render the image
-	output.Render(img)
+		for detection in detections:
+			print(detection)
 
-	# update the title bar
-	output.SetStatus("{:s} | Network {:.0f} FPS".format(opt.network, net.GetNetworkFPS()))
+		# render the image
+		output.Render(img)
 
-	# print out performance info
-	net.PrintProfilerTimes()
+		# update the title bar
+		output.SetStatus("{:s} | Network {:.0f} FPS".format("ssd-mobilenet-v2", net.GetNetworkFPS()))
 
-	# exit on input/output EOS
-	if not input.IsStreaming() or not output.IsStreaming():
-		break
+		# print out performance info
+		net.PrintProfilerTimes()
+
+		# exit on input/output EOS
+		if not input.IsStreaming() or not output.IsStreaming():
+			break
 
 

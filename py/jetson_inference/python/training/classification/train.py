@@ -11,7 +11,7 @@ import random
 import shutil
 import time
 import warnings
-
+import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
 import torch.nn.parallel
@@ -24,7 +24,7 @@ import torch.utils.data.distributed
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import torchvision.models as models
-
+import cv2
 from jetson_inference.python.training.classification.reshape import reshape_model
 from apis import *
 import numpy as np
@@ -266,7 +266,9 @@ def main_worker(gpu, ngpus_per_node, args,epochs,model_dir,data_path):
     if args.evaluate:
         validate(val_loader, model, criterion, num_classes, args)
         return
-
+    loss = []
+    acc = []
+    x = []
     # train for the specified number of epochs
     for epoch in range(args.start_epoch, epochs):
         if args.distributed:
@@ -276,7 +278,17 @@ def main_worker(gpu, ngpus_per_node, args,epochs,model_dir,data_path):
         adjust_learning_rate(optimizer, epoch, args)
 
         # train for one epoch
-        index = train(train_loader, model, criterion, optimizer, epoch, num_classes, args)
+        index, acc1, loss1 = train(train_loader, model, criterion, optimizer, epoch, num_classes, args)
+        loss.append(loss1)
+        acc.append(acc1)
+        x.append(epoch+1)
+        plt.figure(figsize=(10,8), dpi = 200)
+        plt.plot(x,loss, color='r',label='loss')
+        plt.plot(x, acc, color='b', label='acc')
+        plt.legend(loc='upper right')
+        plt.savefig('/home/nvidia/tmp/plot.jpg')
+        img = cv2.imread('/home/nvidia/tmp/plot.jpg')
+        SendToQt_Update_Plot(img)
         if index == -1:
             return
 
@@ -371,7 +383,7 @@ def train(train_loader, model, criterion, optimizer, epoch, num_classes, args):
             SendToQt_Log(msg)
 
     print("Epoch: [{:d}] completed, elapsed time {:6.3f} seconds".format(epoch, time.time() - epoch_start))
-    return 0
+    return 0,round(acc1.cpu().tolist()[0]/100,2),round(loss.cpu().tolist(),2)
 
 #
 # measure model performance across the val dataset

@@ -53,7 +53,7 @@ def SendToQt_Train_Ok():
     return;
 
 def SendToQt_Update_Plot(img):
-    cv2.imwrite("/home/tmp/plot.jpg",img);
+    cv2.imwrite("/home/nvidia/tmp/plot.jpg",img);
 
     tmpBuf = bytearray(8);
     tmpBuf[0] = 0xA5;

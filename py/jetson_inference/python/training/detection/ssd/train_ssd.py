@@ -378,4 +378,4 @@ def main(epochs, model_dir, data_path):
     SendToQt_Train_Ok()
 
 if __name__ == '__main__':
-    main()
+    main(30,'/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/models','/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/data/fruit')

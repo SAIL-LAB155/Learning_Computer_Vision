@@ -1,6 +1,8 @@
 
 from jetson_inference.python.training.detection.ssd.train_ssd import main
 from labelImg.labelImg import label
+from jetson_inference.python.examples.detectnet import main_det
+
 
 class Fruit:
     def __init__(self):
@@ -11,6 +13,8 @@ class Fruit:
         print('data_path:', data_path)
         print('model_path:', model_path)
         print('epoch_num: ', epoch)
+        self.label_path = data_path[:-1] + '/labels.txt'
+        print(self.label_path)
         # cmd = 'python3 /home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/train.py --epochs {} --model-dir {} {}'.format(epoch, '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/models', data_path[:-1])
         # print(cmd)
         # os.system(cmd)
@@ -20,8 +24,9 @@ class Fruit:
     def plot(self):
         pass
 
-    def visualize(self, img_path, model_path=None):
-        pass
+    def visualize(self, img_path, model_path):
+        label_path = '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/models/fruit/labels.txt'
+        main_det(model_path[:-1],img_path[:-1], label_path)
 
     def visualize_webcam(self, model_path=None):
         pass
