@@ -1,5 +1,4 @@
 from apis import *
-from Module_init import Module
 from Parse_signal import SignalParser
 import os
 
@@ -11,7 +10,4 @@ if __name__ == '__main__':
     while True:
         comm_handler()
         signal = ParaCB.Get_Signal()
-        # Module_singal = ParaCB.Module_Index
         parse.parse(ParaCB, signal)
-
-

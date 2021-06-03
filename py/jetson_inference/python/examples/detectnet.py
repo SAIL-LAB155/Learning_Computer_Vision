@@ -59,7 +59,7 @@ def main_det(model_path, img_path, label_path):
 
 	# load the object detection network
 	net = jetson.inference.detectNet('ssd-mobilenet-v2', sys.argv, opt.threshold)
-
+	sys.argv = []
 	# create video sources & outputs
 	input = jetson.utils.videoSource(img_path, argv=sys.argv)
 	output = jetson.utils.videoOutput('output.jpg', argv=sys.argv+is_headless)
@@ -94,6 +94,6 @@ def main_det(model_path, img_path, label_path):
 
 if __name__ == '__main__':
 	device = "/dev/video0"
-	model_path = "jetson_inference/python/training/detection/ssd/models/fruit/ssd-mobilenet.onnx"
-	label_path = "/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/models/fruit/labels.txt"
+	model_path = "/home/nvidia/Desktop/Learning_Computer_Vision/models/det_model/ssd-mobilenet.onnx"
+	label_path = "/home/nvidia/Desktop/Learning_Computer_Vision/data/det_data/fruit/labels.txt"
 	main_det(model_path, device, label_path)
