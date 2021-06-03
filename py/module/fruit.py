@@ -9,7 +9,7 @@ class Fruit:
     def __init__(self):
         print('Fruit_cls init ')
 
-    def train(self, data_path, model_path,epoch):
+    def train(self, data_path, model_path, epoch):
         print('Cat dog training start')
         print('data_path:', data_path)
         print('model_path:', model_path)
@@ -25,14 +25,19 @@ class Fruit:
     def plot(self):
         pass
 
-    def visualize(self, img_path, model_path):
+    def visualize(self, img_path, model_path, label_path=None):
+        if not label_path:
+            label_path = self.label_path
+
         import cv2
-        label_path = '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/models/fruit/labels.txt'
         main_det(model_path[:-1],img_path[:-1], label_path)
         img = cv2.imread('/home/nvidia/Desktop/Learning_Computer_Vision/py/output.jpg')
         SendToQt_Update_Display(img)
 
-    def visualize_webcam(self, model_path=None):
+    def visualize_webcam(self, model_path=None, label_path=None):
+        if not label_path:
+            label_path = self.label_path
+
         label_path = '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/models/fruit/labels.txt'
         main_det(model_path[:-1], "/dev/video0", label_path)
 

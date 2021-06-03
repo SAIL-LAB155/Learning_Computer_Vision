@@ -28,7 +28,7 @@ import sys
 # from apis import *
 
 
-def main_img(model_path, img_path, label_path):
+def cls_img(model_path, img_path, label_path):
 	sys.argv = [os.getcwd(), img_path, "output.jpg"]
 	# sys.argv.insert(1, img_path)
 	sys.argv.insert(2, "--input_blob=input_0")
@@ -38,6 +38,47 @@ def main_img(model_path, img_path, label_path):
 	sys.argv.append("--labels={}".format(label_path))
 	# load the recognition network
 	net = jetson.inference.imageNet("googlenet", sys.argv)
+
+	# create video sources & outputs
+	input = jetson.utils.videoSource(img_path, argv=sys.argv)
+	output = jetson.utils.videoOutput('output.jpg', argv=sys.argv+[''])
+	font = jetson.utils.cudaFont()
+
+	# capture the next image
+	img = input.Capture()
+
+	# classify the image
+	class_id, confidence = net.Classify(img)
+
+	# find the object description
+	class_desc = net.GetClassDesc(class_id)
+
+	# overlay the result on the image
+	font.OverlayText(img, img.width, img.height, "{:05.2f}% {:s}".format(confidence * 100, class_desc), 5, 5, font.White, font.Gray40)
+
+	# render the image
+	output.Render(img)
+	# out_img = jetson.utils.cudaToNumpy(img, 720, 480, 4)
+	# SendToQt_Update_Display(out_img)
+	np_image = jetson.utils.cudaToNumpy(img)
+	# SendToQt_Update_Display(np_image)
+	# print out performance info
+	net.PrintProfilerTimes()
+	sys.argv = []
+	return np_image
+
+
+def cls_video(model_path, img_path, label_path):
+	sys.argv = [os.getcwd(), img_path, "output.jpg"]
+	# sys.argv.insert(1, img_path)
+	sys.argv.insert(2, "--input_blob=input_0")
+	sys.argv.insert(3, "--output_blob=output_0")
+	# sys.argv.insert(4, 'output.jpg')
+	sys.argv.append("--model={}".format(model_path))
+	sys.argv.append("--labels={}".format(label_path))
+	# load the recognition network
+	net = jetson.inference.imageNet("googlenet", sys.argv)
+	sys.argv = []
 
 	# create video sources & outputs
 	input = jetson.utils.videoSource(img_path, argv=sys.argv)
@@ -75,7 +116,7 @@ def main_img(model_path, img_path, label_path):
 
 
 if __name__ == '__main__':
-	main_img('/home/nvidia/Desktop/Learning_Computer_Vision/models/cls_models/cat_dog/resnet18.onnx',
+	cls_video('/home/nvidia/Desktop/Learning_Computer_Vision/models/cls_models/cat_dog/resnet18.onnx',
 			 '/dev/video0',
 			 '/home/nvidia/Desktop/Learning_Computer_Vision/data/cls_data/cat_dog/labels.txt')
 

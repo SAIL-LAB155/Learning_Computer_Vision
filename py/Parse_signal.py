@@ -1,5 +1,5 @@
 from module.cat import CAT
-from module.human import Human_pose
+from module.human import HumanPose
 from module.fruit import Fruit
 from module.creature import Creature
 from module.vehicles import Vehicle
@@ -9,7 +9,7 @@ class SignalParser:
     def __init__(self):
         # Init all the modules. Init here when more modules
         self.fruit = Fruit()
-        self.human = Human_pose()
+        self.human = HumanPose()
         self.cat = CAT()
         self.creature = Creature()
         self.vehicle = Vehicle()

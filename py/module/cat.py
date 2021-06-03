@@ -1,6 +1,6 @@
 import os
 from jetson_inference.python.training.classification.train import main
-from jetson_inference.python.examples.imagenet import main_img
+from jetson_inference.python.examples.imagenet import cls_video, cls_img
 from apis import *
 import cv2
 
@@ -37,9 +37,9 @@ class CAT:
         # print(cmd)
         # os.system(cmd)
         # img = cv2.imread('/home/nvidia/Desktop/Learning_Computer_Vision/py/output.jpg')
-        main_img(model_path[:-1],img_path[:-1], label_path)
-        img = cv2.imread('/home/nvidia/Desktop/Learning_Computer_Vision/py/output.jpg')
-        SendToQt_Update_Display(img)
+        vis_img = cls_img(model_path[:-1], img_path[:-1], label_path)
+        # img = cv2.imread('/home/nvidia/Desktop/Learning_Computer_Vision/py/output.jpg')
+        SendToQt_Update_Display(vis_img)
         # SendToQt_Update_Display(img)
         # 'python3 imagenet.py --model=../training/classification/models/cat_dog/resnet18.onnx --input_blob=input_0 --output_blob=output_0 --labels=../training/classification/data/cat_dog/labels.txt ../training/classification/data/cat_dog/test/cat/01.jpg catttt.jpg^'
 
@@ -55,7 +55,7 @@ class CAT:
         # print(cmd)
         # os.system(cmd)
         # img = cv2.imread('/home/nvidia/Desktop/Learning_Computer_Vision/py/output.jpg')
-        main_img(model_path[:-1], "/dev/video0", label_path)
+        cls_video(model_path[:-1], "/dev/video0", label_path)
         # cmd = 'python3 /home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/examples/imagenet.py /dev/video0 --model={} --input_blob=input_0 --output_blob=output_0 --labels=/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/data/cat_dog/labels.txt output.jpg'.format(
         #     model_path[:-1])
 
