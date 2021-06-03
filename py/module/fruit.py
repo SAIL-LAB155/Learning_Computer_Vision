@@ -2,6 +2,7 @@
 from jetson_inference.python.training.detection.ssd.train_ssd import main
 from labelImg.labelImg import label
 from jetson_inference.python.examples.detectnet import main_det
+from apis import *
 
 
 class Fruit:
@@ -25,11 +26,15 @@ class Fruit:
         pass
 
     def visualize(self, img_path, model_path):
+        import cv2
         label_path = '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/models/fruit/labels.txt'
         main_det(model_path[:-1],img_path[:-1], label_path)
+        img = cv2.imread('/home/nvidia/Desktop/Learning_Computer_Vision/py/output.jpg')
+        SendToQt_Update_Display(img)
 
     def visualize_webcam(self, model_path=None):
-        pass
+        label_path = '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/models/fruit/labels.txt'
+        main_det(model_path[:-1], "/dev/video0", label_path)
 
     def annotate(self):
         label()

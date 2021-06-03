@@ -7,6 +7,7 @@ import logging
 import argparse
 import itertools
 import torch
+import matplotlib.pyplot as plt
 
 from torch.utils.data import DataLoader, ConcatDataset
 from torch.optim.lr_scheduler import CosineAnnealingLR, MultiStepLR
@@ -110,6 +111,7 @@ if args.use_cuda and torch.cuda.is_available():
 def train(loader, net, criterion, optimizer, device, debug_steps=100, epoch=-1):
     net.train(True)
     running_loss = 0.0
+    whole_loss = 0.0
     running_regression_loss = 0.0
     running_classification_loss = 0.0
     for i, data in enumerate(loader):
@@ -119,6 +121,7 @@ def train(loader, net, criterion, optimizer, device, debug_steps=100, epoch=-1):
             SendToQt_Log("Task terminated, exiting program.")
             logging.info("Task terminated, exiting program.")
             SendToQt_Train_Ok()
+            return -1
 
         images, boxes, labels = data
         images = images.to(device)
@@ -132,6 +135,7 @@ def train(loader, net, criterion, optimizer, device, debug_steps=100, epoch=-1):
         loss.backward()
         optimizer.step()
 
+        whole_loss += loss.item()
         running_loss += loss.item()
         running_regression_loss += regression_loss.item()
         running_classification_loss += classification_loss.item()
@@ -153,6 +157,7 @@ def train(loader, net, criterion, optimizer, device, debug_steps=100, epoch=-1):
             running_loss = 0.0
             running_regression_loss = 0.0
             running_classification_loss = 0.0
+    return whole_loss/len(loader.dataset)
 
 
 def test(loader, net, criterion, device):
@@ -168,6 +173,7 @@ def test(loader, net, criterion, device):
             SendToQt_Log("Task terminated, exiting program.")
             logging.info("Task terminated, exiting program.")
             SendToQt_Train_Ok()
+            return -1
 
         images, boxes, labels = data
         images = images.to(device)
@@ -184,6 +190,7 @@ def test(loader, net, criterion, device):
         running_regression_loss += regression_loss.item()
         running_classification_loss += classification_loss.item()
     return running_loss / num, running_regression_loss / num, running_classification_loss / num
+
 
 def main(epochs, model_dir, data_path):
     timer = Timer()
@@ -356,26 +363,46 @@ def main(epochs, model_dir, data_path):
 
     # train for the desired number of epochs
     logging.info(f"Start training from epoch {last_epoch + 1}.")
+    epoch_ls, val_loss_ls, train_loss_ls = [], [], []
 
     for epoch in range(last_epoch + 1, epochs):
         scheduler.step()
-        train(train_loader, net, criterion, optimizer,
+        t_out = train(train_loader, net, criterion, optimizer,
               device=DEVICE, debug_steps=args.debug_steps, epoch=epoch)
+        if t_out == -1:
+            return
+        train_loss = t_out
 
-        if epoch % args.validation_epochs == 0 or epoch == epochs - 1:
-            val_loss, val_regression_loss, val_classification_loss = test(val_loader, net, criterion, DEVICE)
-            logging.info(
-                f"Epoch: {epoch}, " +
-                f"Validation Loss: {val_loss:.4f}, " +
-                f"Validation Regression Loss {val_regression_loss:.4f}, " +
-                f"Validation Classification Loss: {val_classification_loss:.4f}"
-            )
-            model_path = os.path.join(model_dir, f"{args.net}-Epoch-{epoch}-Loss-{val_loss}.pth")
-            net.save(model_path)
-            logging.info(f"Saved model {model_path}")
+        v_out = test(val_loader, net, criterion, DEVICE)
+        if v_out == -1:
+            return
+        val_loss, val_regression_loss, val_classification_loss = v_out
+
+        logging.info(
+            f"Epoch: {epoch}, " +
+            f"Validation Loss: {val_loss:.4f}, " +
+            f"Validation Regression Loss {val_regression_loss:.4f}, " +
+            f"Validation Classification Loss: {val_classification_loss:.4f}"
+        )
+        model_path = os.path.join(model_dir, f"{args.net}-Epoch-{epoch}-Loss-{val_loss}.pth")
+        net.save(model_path)
+        logging.info(f"Saved model {model_path}")
+
+        epoch_ls.append(epoch)
+        train_loss_ls.append(train_loss)
+        val_loss_ls.append(val_loss)
+
+        plt.figure(figsize=(10, 8), dpi=200)
+        plt.plot(epoch_ls, train_loss_ls, color='b', label='train_loss')
+        plt.plot(epoch_ls, val_loss_ls, color='r', label='valid_loss')
+        plt.legend(loc='upper right')
+        plt.savefig('/home/nvidia/tmp/plot.jpg')
+        img = cv2.imread('/home/nvidia/tmp/plot.jpg')
+        SendToQt_Update_Plot(img)
 
     logging.info("Task done, exiting program.")
     SendToQt_Train_Ok()
 
+
 if __name__ == '__main__':
-    main(30,'/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/models','/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/data/fruit')
+    main(30, '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/models','/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/data/fruit')

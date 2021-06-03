@@ -16,7 +16,7 @@ class OpenImagesDataset:
         self.target_transform = target_transform
         self.dataset_type = dataset_type.lower()
 
-        self.data, self.class_names, self.class_dict = self._read_data()
+        self.data, self.class_names, self.class_dict = self._read_data(root)
         self.balance_data = balance_data
         self.min_image_num = -1
         if self.balance_data:
@@ -59,8 +59,8 @@ class OpenImagesDataset:
             image, _ = self.transform(image)
         return image
 
-    def _read_data(self):
-        annotation_file = f"/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/data/fruit/sub-{self.dataset_type}-annotations-bbox.csv"
+    def _read_data(self, root):
+        annotation_file = root + f"/sub-{self.dataset_type}-annotations-bbox.csv"
         logging.info(f'loading annotations from: {annotation_file}')
         annotations = pd.read_csv(annotation_file)
         logging.info(f'annotations loaded from:  {annotation_file}')

@@ -41,6 +41,7 @@ parser.add_argument("--threshold", type=float, default=0.5, help="minimum detect
 
 is_headless = ["--headless"] if sys.argv[0].find('console.py') != -1 else [""]
 
+
 def main_det(model_path, img_path, label_path):
 	sys.argv = [os.getcwd(), img_path, "output.jpg"]
 	sys.argv.append("--model={}".format(model_path))
@@ -91,3 +92,8 @@ def main_det(model_path, img_path, label_path):
 			break
 
 
+if __name__ == '__main__':
+	device = "/dev/video0"
+	model_path = "jetson_inference/python/training/detection/ssd/models/fruit/ssd-mobilenet.onnx"
+	label_path = "/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/models/fruit/labels.txt"
+	main_det(model_path, device, label_path)

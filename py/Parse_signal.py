@@ -41,7 +41,7 @@ class SignalParser:
         elif index == 3:
             self.target.visualize(self.signal['Image_Path'], self.signal['Vis_Model_Path'])
         elif index == 4:
-            self.target.visualize_webcam(self.signal['Model_Path'])
+            self.target.visualize_webcam(self.signal['Vis_Model_Path'])
         elif index == 5:
             print('Back')
         elif index == 6:

@@ -51,7 +51,7 @@ parser.add_argument('-a', '--arch', metavar='ARCH', default='resnet18',
 parser.add_argument('--resolution', default=224, type=int, metavar='N',
                     help='input NxN image resolution of model (default: 224x224) '
                          'note than Inception models should use 299x299')
-parser.add_argument('-j', '--workers', default=2, type=int, metavar='N',
+parser.add_argument('-j', '--workers', default=1, type=int, metavar='N',
                     help='number of data loading workers (default: 2)')
 parser.add_argument('--epochs', default=35, type=int, metavar='N',
                     help='number of total epochs to run')
@@ -266,9 +266,9 @@ def main_worker(gpu, ngpus_per_node, args,epochs,model_dir,data_path):
     if args.evaluate:
         validate(val_loader, model, criterion, num_classes, args)
         return
-    loss = []
-    acc = []
-    x = []
+    train_loss, val_loss = [], []
+    train_acc, val_acc = [], []
+    epochs_ls = []
     # train for the specified number of epochs
     for epoch in range(args.start_epoch, epochs):
         if args.distributed:
@@ -278,28 +278,35 @@ def main_worker(gpu, ngpus_per_node, args,epochs,model_dir,data_path):
         adjust_learning_rate(optimizer, epoch, args)
 
         # train for one epoch
-        index, acc1, loss1 = train(train_loader, model, criterion, optimizer, epoch, num_classes, args)
-        loss.append(loss1)
-        acc.append(acc1)
-        x.append(epoch+1)
+        t_out = train(train_loader, model, criterion, optimizer, epoch, num_classes, args)
+        if t_out == -1:
+            return
+
+        # evaluate on validation set
+        v_out = validate(val_loader, model, criterion, num_classes, args)
+        if v_out == -1:
+            return
+
+        train_loss.append(t_out[1])
+        train_acc.append(t_out[0])
+        val_loss.append(v_out[1])
+        val_acc.append(v_out[0])
+        epochs_ls.append(epoch+1)
+
         plt.figure(figsize=(10,8), dpi = 200)
-        plt.plot(x,loss, color='r',label='loss')
-        plt.plot(x, acc, color='b', label='acc')
+        plt.plot(epochs_ls, train_loss, color='r',label='train_loss')
+        plt.plot(epochs_ls, train_acc, color='b', label='train_acc')
+        plt.plot(epochs_ls, val_loss, color='r',label='valid_loss')
+        plt.plot(epochs_ls, val_acc, color='b', label='valid_acc')
         plt.legend(loc='upper right')
         plt.savefig('/home/nvidia/tmp/plot.jpg')
         img = cv2.imread('/home/nvidia/tmp/plot.jpg')
         SendToQt_Update_Plot(img)
-        if index == -1:
-            return
 
-        # evaluate on validation set
-        acc1 = validate(val_loader, model, criterion, num_classes, args)
-        if acc1 == -1:
-            return
-
+        v_acc = v_out[0]
         # remember best acc@1 and save checkpoint
-        is_best = acc1 > best_acc1
-        best_acc1 = max(acc1, best_acc1)
+        is_best = v_acc > best_acc1
+        best_acc1 = max(v_acc, best_acc1)
 
         if not args.multiprocessing_distributed or (args.multiprocessing_distributed
                 and args.rank % ngpus_per_node == 0):
@@ -383,7 +390,7 @@ def train(train_loader, model, criterion, optimizer, epoch, num_classes, args):
             SendToQt_Log(msg)
 
     print("Epoch: [{:d}] completed, elapsed time {:6.3f} seconds".format(epoch, time.time() - epoch_start))
-    return 0,round(acc1.cpu().tolist()[0]/100,2),round(loss.cpu().tolist(),2)
+    return round(top1.avg.cpu().tolist()/100, 2), round(losses.avg, 2)
 
 #
 # measure model performance across the val dataset
@@ -438,7 +445,7 @@ def validate(val_loader, model, criterion, num_classes, args):
         print(' * Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f}'
               .format(top1=top1, top5=top5))
 
-    return top1.avg
+    return round(top1.avg.cpu().tolist()/100, 2), losses.avg
 
 
 #

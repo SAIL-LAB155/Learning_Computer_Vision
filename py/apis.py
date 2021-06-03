@@ -7,6 +7,7 @@ import ctypes
 import time
 from time import strftime, localtime
 
+
 class ParaControlBlock:
     Module_Index = 0;
     Data_Path = '';

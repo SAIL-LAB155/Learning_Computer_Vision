@@ -25,7 +25,7 @@ import jetson.inference
 import jetson.utils
 import os
 import sys
-from apis import *
+# from apis import *
 
 
 def main_img(model_path, img_path, label_path):
@@ -75,7 +75,8 @@ def main_img(model_path, img_path, label_path):
 
 
 if __name__ == '__main__':
-	main_img('/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/models/cat_dog/resnet18.onnx',
-'/dev/video0','/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/data/cat_dog/labels.txt')
+	main_img('/home/nvidia/Desktop/Learning_Computer_Vision/models/cls_models/cat_dog/resnet18.onnx',
+			 '/dev/video0',
+			 '/home/nvidia/Desktop/Learning_Computer_Vision/data/cls_data/cat_dog/labels.txt')
 
 # ['/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/examples/imagenet.py', '/dev/video0', '--input_blob=input_0', '--output_blob=output_0', 'output.jpg', '--model=/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/models/cat_dog/resnet18.onnx', '--labels=/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/data/cat_dog/labels.txt']
