@@ -25,7 +25,7 @@ import jetson.inference
 import jetson.utils
 import os
 import sys
-# from apis import *
+from apis import *
 
 
 def cls_img(model_path, img_path, label_path):

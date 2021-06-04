@@ -1,4 +1,4 @@
-# from tasks.human_pose.detect_video_final import haha
+from tasks.human_pose.detect_video_final import detect
 
 
 class HumanPose:
@@ -15,7 +15,7 @@ class HumanPose:
         pass
 
     def visualize_webcam(self, model_path):
-        # haha(0)
+        detect(0)
         pass
 
     def annotate(self):

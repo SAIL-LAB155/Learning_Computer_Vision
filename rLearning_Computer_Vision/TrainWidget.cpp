@@ -230,13 +230,11 @@ void TrainWidget::on_m_btn_Model_clicked()
 	}
 
 
-	QString modelPath = QFileDialog::getOpenFileName(
+    QString modelPath = QFileDialog::getExistingDirectory(
         nullptr,
 		tr("Select Image Path"),
-		defaultDirName,
 		"model(*)",
-        0,
-        QFileDialog::DontUseNativeDialog);
+        QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
 	if("" != modelPath)
 	{
