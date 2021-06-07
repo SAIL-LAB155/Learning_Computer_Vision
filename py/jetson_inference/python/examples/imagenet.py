@@ -87,6 +87,13 @@ def cls_video(model_path, img_path, label_path):
 
 	# process frames until the user exits
 	while True:
+		comm_handler()
+		signal = ParaCB.Get_Signal()
+		if signal == 5:
+			message = "The visualization is stopped"
+			print(message)
+			break
+
 		# capture the next image
 		img = input.Capture()
 
@@ -106,7 +113,7 @@ def cls_video(model_path, img_path, label_path):
 		# update the title bar
 		output.SetStatus("{:s} | Network {:.0f} FPS".format(net.GetNetworkName(), net.GetNetworkFPS()))
 		np_image = jetson.utils.cudaToNumpy(img)
-		# SendToQt_Update_Display(np_image)
+		SendToQt_Update_Display(np_image)
 		# print out performance info
 		net.PrintProfilerTimes()
 
