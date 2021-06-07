@@ -3,5 +3,6 @@
 *.idea*
 data
 models
+*.pth
 
 
