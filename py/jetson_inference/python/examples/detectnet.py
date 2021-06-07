@@ -42,7 +42,7 @@ parser.add_argument("--threshold", type=float, default=0.5, help="minimum detect
 is_headless = ["--headless"] if sys.argv[0].find('console.py') != -1 else [""]
 
 
-def main_det(model_path, img_path, label_path):
+def det_video(model_path, img_path, label_path):
 	sys.argv = [os.getcwd(), img_path, "output.jpg"]
 	sys.argv.append("--model={}".format(model_path))
 	sys.argv.append("--labels={}".format(label_path))
@@ -66,6 +66,13 @@ def main_det(model_path, img_path, label_path):
 
 	# process frames until the user exits
 	while True:
+		comm_handler()
+		signal = ParaCB.Get_Signal()
+		if signal == 5:
+			message = "The visualization is stopped"
+			print(message)
+			break
+
 		# capture the next image
 		img = input.Capture()
 
@@ -87,13 +94,63 @@ def main_det(model_path, img_path, label_path):
 		# print out performance info
 		net.PrintProfilerTimes()
 
+		np_image = jetson.utils.cudaToNumpy(img)
+		SendToQt_Update_Display(np_image)
 		# exit on input/output EOS
 		if not input.IsStreaming() or not output.IsStreaming():
 			break
+
+
+def det_img(model_path, img_path, label_path):
+	sys.argv = [os.getcwd(), img_path, "output.jpg"]
+	sys.argv.append("--model={}".format(model_path))
+	sys.argv.append("--labels={}".format(label_path))
+	sys.argv.append("--input_blob=input_0")
+	sys.argv.append("--output_cvg=scores")
+	sys.argv.append("--output_bbox=boxes")
+
+	try:
+		opt = parser.parse_known_args()[0]
+	except:
+		print("")
+		parser.print_help()
+		sys.exit(0)
+
+	# load the object detection network
+	net = jetson.inference.detectNet('ssd-mobilenet-v2', sys.argv, opt.threshold)
+	sys.argv = []
+	# create video sources & outputs
+	input = jetson.utils.videoSource(img_path, argv=sys.argv)
+	output = jetson.utils.videoOutput('output.jpg', argv=sys.argv + is_headless)
+
+	# capture the next image
+	img = input.Capture()
+
+	# detect objects in the image (with overlay)
+	detections = net.Detect(img, overlay="box,labels,conf")
+
+	# print the detections
+	print("detected {:d} objects in image".format(len(detections)))
+
+	for detection in detections:
+		print(detection)
+
+	# render the image
+	output.Render(img)
+
+	# update the title bar
+	output.SetStatus("{:s} | Network {:.0f} FPS".format("ssd-mobilenet-v2", net.GetNetworkFPS()))
+
+	# print out performance info
+	net.PrintProfilerTimes()
+
+	np_image = jetson.utils.cudaToNumpy(img)
+	return np_image
+
 
 
 if __name__ == '__main__':
 	device = "/dev/video0"
 	model_path = "/home/nvidia/Desktop/Learning_Computer_Vision/models/det_model/ssd-mobilenet.onnx"
 	label_path = "/home/nvidia/Desktop/Learning_Computer_Vision/data/det_data/fruit/labels.txt"
-	main_det(model_path, device, label_path)
+	det_video(model_path, device, label_path)

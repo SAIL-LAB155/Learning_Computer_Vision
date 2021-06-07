@@ -1,13 +1,14 @@
 
 from jetson_inference.python.training.detection.ssd.train_ssd import main
 from labelImg.labelImg import label
-from jetson_inference.python.examples.detectnet import main_det
+from jetson_inference.python.examples.detectnet import det_video, det_img
 from apis import *
 
 
 class Fruit:
     def __init__(self):
         print('Fruit_cls init ')
+        self.label_path = "/home/nvidia/Desktop/Learning_Computer_Vision/data/det_data/fruit/labels.txt"
 
     def train(self, data_path, model_path, epoch):
         print('Cat dog training start')
@@ -20,7 +21,7 @@ class Fruit:
         # print(cmd)
         # os.system(cmd)
         model_path = '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/models'
-        main(epoch,model_path,data_path[:-1])
+        main(epoch, model_path, data_path[:-1])
 
     def plot(self):
         pass
@@ -28,18 +29,14 @@ class Fruit:
     def visualize(self, img_path, model_path, label_path=None):
         if not label_path:
             label_path = self.label_path
-
-        import cv2
-        main_det(model_path[:-1],img_path[:-1], label_path)
-        img = cv2.imread('/home/nvidia/Desktop/Learning_Computer_Vision/py/output.jpg')
+        img = det_img(model_path[:-1], img_path[:-1], label_path)
         SendToQt_Update_Display(img)
 
     def visualize_webcam(self, model_path=None, label_path=None):
         if not label_path:
             label_path = self.label_path
 
-        label_path = '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/models/fruit/labels.txt'
-        main_det(model_path[:-1], "/dev/video0", label_path)
+        det_video(model_path[:-1], "/dev/video0", label_path)
 
     def annotate(self):
         label()

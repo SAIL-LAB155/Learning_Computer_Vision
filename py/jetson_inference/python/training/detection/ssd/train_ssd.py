@@ -117,7 +117,7 @@ def train(loader, net, criterion, optimizer, device, debug_steps=100, epoch=-1):
     for i, data in enumerate(loader):
         comm_handler()
         signal = ParaCB.Get_Signal()
-        if signal == "stop":
+        if signal == 2:
             SendToQt_Log("Task terminated, exiting program.")
             logging.info("Task terminated, exiting program.")
             SendToQt_Train_Ok()
@@ -169,7 +169,7 @@ def test(loader, net, criterion, device):
     for _, data in enumerate(loader):
         comm_handler()
         signal = ParaCB.Get_Signal()
-        if signal == "stop":
+        if signal == 2:
             SendToQt_Log("Task terminated, exiting program.")
             logging.info("Task terminated, exiting program.")
             SendToQt_Train_Ok()
