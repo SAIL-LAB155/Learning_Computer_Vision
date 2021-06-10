@@ -64,7 +64,7 @@ public:
     {
         if (TrainWidget->objectName().isEmpty())
             TrainWidget->setObjectName(QStringLiteral("TrainWidget"));
-        TrainWidget->resize(730, 523);
+        TrainWidget->resize(829, 601);
         TrainWidget->setStyleSheet(QStringLiteral(""));
         gridLayout_2 = new QGridLayout(TrainWidget);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
@@ -258,7 +258,7 @@ public:
 
         horizontalLayout->addWidget(frame);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer = new QSpacerItem(50, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
 
@@ -271,7 +271,12 @@ public:
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
         label_2->setSizePolicy(sizePolicy2);
-        label_2->setFont(font);
+        QFont font2;
+        font2.setFamily(QStringLiteral("Purisa"));
+        font2.setPointSize(9);
+        font2.setBold(true);
+        font2.setWeight(75);
+        label_2->setFont(font2);
         label_2->setStyleSheet(QStringLiteral("background-color: rgb(255, 255, 255);"));
         label_2->setAlignment(Qt::AlignCenter);
 
@@ -282,7 +287,7 @@ public:
         m_btn_Display->setEnabled(true);
         sizePolicy2.setHeightForWidth(m_btn_Display->sizePolicy().hasHeightForWidth());
         m_btn_Display->setSizePolicy(sizePolicy2);
-        m_btn_Display->setFont(font);
+        m_btn_Display->setFont(font2);
         m_btn_Display->setLayoutDirection(Qt::LeftToRight);
         m_btn_Display->setStyleSheet(QStringLiteral("background-color: rgb(225, 225, 225);"));
 

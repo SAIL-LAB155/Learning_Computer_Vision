@@ -97,6 +97,7 @@ void TrainWidget::TrainingLog_Clear(void)
 
 void TrainWidget::Training_Start(void)
 {
+    TrainingLog_Clear();
 	m_isTraining = true;
 
 	if(pPythonCommInshtance)

@@ -34,7 +34,8 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(AnnotationWidget->sizePolicy().hasHeightForWidth());
         AnnotationWidget->setSizePolicy(sizePolicy);
-        AnnotationWidget->setStyleSheet(QStringLiteral(""));
+        AnnotationWidget->setAutoFillBackground(false);
+        AnnotationWidget->setStyleSheet(QStringLiteral("background-image: url(:/images/416lZbwGldL._AC_.jpg)"));
         verticalLayout = new QVBoxLayout(AnnotationWidget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
 

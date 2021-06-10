@@ -19,8 +19,11 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">background-image: url(:/images/416lZbwGldL._AC_.jpg)</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout"/>
  </widget>

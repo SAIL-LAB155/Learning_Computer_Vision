@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/l4t-base:r32.5.0
+FROM nvcr.io/nvidia/l4t-pytorch:r32.4.4-pth1.6-py3
 
 ENV TZ=Asia/Hong_Kong
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -27,7 +27,7 @@ RUN pip install pandas
 RUN pip install pyqt5
 RUN pip install lxml
 
-WORKDIR .
+WORKDIR /Learning_Computer_Vision
 COPY . .
 
 

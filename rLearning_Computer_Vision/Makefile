@@ -386,6 +386,7 @@ compiler_rcc_clean:
 qrc_resourse.o: resourse.qrc \
 		/usr/lib/qt5/bin/rcc \
 		images/company-logo.png \
+		images/416lZbwGldL._AC_.jpg \
 		images/left-navigator/home-g.png \
 		images/left-navigator/home-w.png \
 		images/left-navigator/func-g.png \

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>730</width>
-    <height>523</height>
+    <width>829</width>
+    <height>601</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -449,7 +449,7 @@ p, li { white-space: pre-wrap; }
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>40</width>
+          <width>50</width>
           <height>20</height>
          </size>
         </property>
@@ -468,6 +468,7 @@ p, li { white-space: pre-wrap; }
           <property name="font">
            <font>
             <family>Purisa</family>
+            <pointsize>9</pointsize>
             <weight>75</weight>
             <bold>true</bold>
            </font>
@@ -497,6 +498,7 @@ p, li { white-space: pre-wrap; }
           <property name="font">
            <font>
             <family>Purisa</family>
+            <pointsize>9</pointsize>
             <weight>75</weight>
             <bold>true</bold>
            </font>

@@ -13,6 +13,27 @@ void Learn_Computer_Vision_Dialog::resizeEvent(QResizeEvent *event){
     m_pTrainDlg->resize(width()-100, height()-100);
     m_pVisualizationDlg->resize(width()-100, height()-100);
     m_pAnnotationDlg->resize(width()-100, height()-100);
+    switch (ParaCB.Get_ModuleIndex())
+    {
+        case Module_Fruit:
+            m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ border-image: url(:/images/416lZbwGldL._AC_.jpg) }");
+            break;
+        case Module_Creatures:
+            m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ border-image: url(:/images/416lZbwGldL._AC_.jpg) }");
+            break;
+        case Module_Cat_and_Dog:
+            m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ color : black }");
+            break;
+        case Module_Vehicles:
+            m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ border-image: url(:/images/416lZbwGldL._AC_.jpg) }");
+            break;
+        case Module_Human:
+            m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ color : black }");
+            break;
+        default:
+            m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ border-image: url(:/images/416lZbwGldL._AC_.jpg) }");
+            break;
+    }
 }
 
 Learn_Computer_Vision_Dialog::Learn_Computer_Vision_Dialog(QWidget *parent) :
@@ -223,6 +244,28 @@ void Learn_Computer_Vision_Dialog::SwitchWidget(Widget_Index_t index)
 			ui->m_btn_Training->setStyleSheet("background-color: rgb(155, 255, 255);color: rgb(255, 0, 0);");
 			ui->m_btn_Visualization->setStyleSheet("background-color: rgb(155, 255, 255);color: rgb(255, 0, 0);");
 			ui->m_btn_Annotation->setStyleSheet("background-color: rgb(38, 67, 255);color: rgb(255, 0, 0);");
+
+            switch (ParaCB.Get_ModuleIndex())
+            {
+                case Module_Fruit:
+                    m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ border-image: url(:/images/416lZbwGldL._AC_.jpg) }");
+                    break;
+                case Module_Creatures:
+                    m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ border-image: url(:/images/416lZbwGldL._AC_.jpg) }");
+                    break;
+                case Module_Cat_and_Dog:
+                    m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ color : black }");
+                    break;
+                case Module_Vehicles:
+                    m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ border-image: url(:/images/416lZbwGldL._AC_.jpg) }");
+                    break;
+                case Module_Human:
+                    m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ color : black }");
+                    break;
+                default:
+                    m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ border-image: url(:/images/416lZbwGldL._AC_.jpg) }");
+                    break;
+            }
 		}
         else
         {
