@@ -305,8 +305,8 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>140</width>
-          <height>140</height>
+          <width>120</width>
+          <height>120</height>
          </size>
         </property>
         <property name="sizeIncrement">
@@ -342,8 +342,8 @@ PATH</string>
         </property>
         <property name="minimumSize">
          <size>
-          <width>140</width>
-          <height>140</height>
+          <width>120</width>
+          <height>120</height>
          </size>
         </property>
         <property name="sizeIncrement">

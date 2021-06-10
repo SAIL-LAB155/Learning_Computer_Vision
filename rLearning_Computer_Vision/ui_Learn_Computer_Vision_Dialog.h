@@ -53,8 +53,8 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(Learn_Computer_Vision_Dialog->sizePolicy().hasHeightForWidth());
         Learn_Computer_Vision_Dialog->setSizePolicy(sizePolicy);
-        Learn_Computer_Vision_Dialog->setMinimumSize(QSize(800, 600));
-        Learn_Computer_Vision_Dialog->setMaximumSize(QSize(1024, 768));
+        Learn_Computer_Vision_Dialog->setMinimumSize(QSize(1024, 768));
+        Learn_Computer_Vision_Dialog->setMaximumSize(QSize(1280, 1024));
         Learn_Computer_Vision_Dialog->setSizeIncrement(QSize(0, 0));
         Learn_Computer_Vision_Dialog->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
         Learn_Computer_Vision_Dialog->setSizeGripEnabled(false);

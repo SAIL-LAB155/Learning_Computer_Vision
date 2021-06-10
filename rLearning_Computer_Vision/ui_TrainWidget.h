@@ -195,7 +195,7 @@ public:
         m_btn_Image->setObjectName(QStringLiteral("m_btn_Image"));
         sizePolicy.setHeightForWidth(m_btn_Image->sizePolicy().hasHeightForWidth());
         m_btn_Image->setSizePolicy(sizePolicy);
-        m_btn_Image->setMinimumSize(QSize(140, 140));
+        m_btn_Image->setMinimumSize(QSize(120, 120));
         m_btn_Image->setSizeIncrement(QSize(0, 0));
         m_btn_Image->setFont(font);
         m_btn_Image->setStyleSheet(QLatin1String("border-image: url(:/images/2-training/subpage/image-path.png);\n"
@@ -207,7 +207,7 @@ public:
         m_btn_Model->setObjectName(QStringLiteral("m_btn_Model"));
         sizePolicy.setHeightForWidth(m_btn_Model->sizePolicy().hasHeightForWidth());
         m_btn_Model->setSizePolicy(sizePolicy);
-        m_btn_Model->setMinimumSize(QSize(140, 140));
+        m_btn_Model->setMinimumSize(QSize(120, 120));
         m_btn_Model->setSizeIncrement(QSize(0, 0));
         m_btn_Model->setFont(font);
         m_btn_Model->setStyleSheet(QLatin1String("border-image: url(:/images/2-training/subpage/model-path.png);\n"

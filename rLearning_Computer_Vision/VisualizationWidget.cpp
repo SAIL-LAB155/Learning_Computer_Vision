@@ -310,10 +310,12 @@ void VisualizationWidget::on_m_btn_OpenImage_clicked()
 		ui->m_btn_OpenCamera->setEnabled(false);
 		ui->m_btn_OpenCamera_Reset->setEnabled(false);
 
-		ui->m_btn_OpenImage_Reset->setEnabled(true);
+        ui->m_btn_OpenImage_Reset->setEnabled(false);
 		ui->m_btn_OpenImage_Reset->setStyleSheet("background-color: rgb(0, 255, 0)");
 
-		ui->m_btn_Visualize->setEnabled(true);
+        ui->m_btn_Visualize->setEnabled(true);
+
+        ui->m_btn_Visualize->setText("Stop");
 
 		OpenImage_Start();
 	}
@@ -370,7 +372,7 @@ void VisualizationWidget::on_m_btn_ModelPath_Reset_clicked()
 void VisualizationWidget::on_m_btn_OpenImage_Reset_clicked()
 {
 	ui->m_btn_ImagePath->setEnabled(true);
-	ui->m_btn_ImagePath_Reset->setEnabled(true);
+    ui->m_btn_ImagePath_Reset->setEnabled(false);
 
 	ui->m_btn_ModelPath->setEnabled(true);
 	ui->m_btn_ModelPath_Reset->setEnabled(true);
@@ -395,43 +397,74 @@ void VisualizationWidget::on_m_btn_OpenCamera_Reset_clicked()
 	Update_OpenCameraBtn();
 }
 
+#include <iostream>
+
 void VisualizationWidget::on_m_btn_Visualize_clicked()
 {
-	if(m_isOpenImage)
+    std::cout << "m_isVisualizing: " << m_isVisualizing << " m_isOpenImage: " << m_isOpenImage << std::endl;
+    if(m_isVisualizing && !m_isOpenImage)
+    {
+        ui->m_btn_ImagePath->setEnabled(true);
+        ui->m_btn_ImagePath_Reset->setEnabled(true);
+
+        ui->m_btn_ModelPath->setEnabled(true);
+        ui->m_btn_ModelPath_Reset->setEnabled(true);
+
+        ui->m_btn_OpenImage->setEnabled(true);
+        ui->m_btn_OpenImage_Reset->setEnabled(true);
+
+        ui->m_btn_Visualize->setText("VISUALIZE");
+
+        OpenCamera_Stop();
+    }
+
+    else if(m_isOpenImage && !m_isVisualizing)
 	{
-		if(m_isVisualizing)
-		{
-			ui->m_btn_ImagePath->setEnabled(true);
-			ui->m_btn_ImagePath_Reset->setEnabled(true);
 
-			ui->m_btn_ModelPath->setEnabled(true);
-			ui->m_btn_ModelPath_Reset->setEnabled(true);
+        ui->m_btn_ImagePath->setEnabled(true);
+        ui->m_btn_ImagePath_Reset->setEnabled(true);
 
-			ui->m_btn_OpenImage->setEnabled(true);
-			ui->m_btn_OpenImage_Reset->setEnabled(true);
+        ui->m_btn_ModelPath->setEnabled(true);
+        ui->m_btn_ModelPath_Reset->setEnabled(true);
 
-			ui->m_btn_Visualize->setText("VISUALIZE");
+        ui->m_btn_OpenImage->setEnabled(true);
+        ui->m_btn_OpenImage_Reset->setEnabled(true);
 
-			OpenCamera_Stop();
-		}
-		else
-		{
-			ui->m_btn_ImagePath->setEnabled(false);
-			ui->m_btn_ImagePath_Reset->setEnabled(false);
+        ui->m_btn_Visualize->setText("VISUALIZE");
 
-			ui->m_btn_ModelPath->setEnabled(false);
-			ui->m_btn_ModelPath_Reset->setEnabled(false);
+        OpenImage_Stop();
+    }
 
-			ui->m_btn_OpenImage->setEnabled(false);
-			ui->m_btn_OpenImage_Reset->setEnabled(false);
+    else if (ui->m_btn_ImagePath_Reset->isEnabled())
+    {
+        ui->m_btn_ImagePath->setEnabled(false);
+        ui->m_btn_ImagePath_Reset->setEnabled(false);
 
-			ui->m_btn_Visualize->setText("Stop");
+        ui->m_btn_ModelPath->setEnabled(false);
+        ui->m_btn_ModelPath_Reset->setEnabled(false);
 
-			OpenCamera_Start();
-		}
-	}
-	else
-	{
-		on_m_btn_OpenCamera_Reset_clicked();
-	}
+        ui->m_btn_OpenImage->setEnabled(false);
+        ui->m_btn_OpenImage_Reset->setEnabled(false);
+
+        ui->m_btn_Visualize->setText("Stop");
+
+        OpenImage_Start();
+    }
+
+    else if (ui->m_btn_OpenCamera_Reset->isEnabled())
+    {
+        ui->m_btn_ImagePath->setEnabled(false);
+        ui->m_btn_ImagePath_Reset->setEnabled(false);
+
+        ui->m_btn_ModelPath->setEnabled(false);
+        ui->m_btn_ModelPath_Reset->setEnabled(false);
+
+        ui->m_btn_OpenImage->setEnabled(false);
+        ui->m_btn_OpenImage_Reset->setEnabled(false);
+
+        ui->m_btn_Visualize->setText("Stop");
+
+        OpenCamera_Start();
+    }
+
 }

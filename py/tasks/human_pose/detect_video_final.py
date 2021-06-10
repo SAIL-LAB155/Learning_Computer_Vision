@@ -72,7 +72,7 @@ class human_detection:
                     peak1 = (j, float(peak[1]), float(peak[2]))
                     break
                 else:
-                    peak5 = (j, 0, 0)
+                    peak1 = (j, 0, 0)
                     break
             while j == 5:
                 if k >= 0:
@@ -221,7 +221,7 @@ class human_detection:
         else:
             return 0
 
-    def run(self, video):
+    def run_video(self, video):
         source_path = video
         cap = cv2.VideoCapture(source_path)
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
@@ -255,7 +255,31 @@ class human_detection:
         out_video.release()
         cap.release()
 
+    def run_image(self, image):
+        source_path = image
+        cap = cv2.imread(cv2.samples.findFile(source_path))
+        cap = cv2.resize(cap, dsize=(1920, 1080))
 
-def detect(video):
+        if cap is None:
+            sys.exit("Could not read the image.")
+
+        t = time.time()
+
+        img = cv2.resize(cap, dsize=(self.WIDTH, self.HEIGHT), interpolation=cv2.INTER_AREA)
+        img = self.visualize(img, cap, t)
+        return img
+
+        #cv2.imshow("result", img)
+        #cv2.imwrite("test.jpg", img)
+
+        #cv2.waitKey(0) 
+
+
+def detect_video(video):
     human = human_detection()
-    human.run(video)
+    human.run_video(video)
+
+def detect_image(image):
+    human = human_detection()
+    vis = human.run_image(image)
+    SendToQt_Update_Display(vis)
