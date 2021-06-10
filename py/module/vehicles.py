@@ -11,7 +11,6 @@ class Vehicle:
         print('model_path:', model_path)
         print('epoch_num: ', epoch)
 
-        model_path = '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/models'
         main(epoch,model_path,data_path[:-1])
 
     def plot(self):
