@@ -4,7 +4,6 @@ from module.fruit import Fruit
 from module.creature import Creature
 from module.vehicles import Vehicle
 
-
 class SignalParser:
     def __init__(self):
         # Init all the modules. Init here when more modules

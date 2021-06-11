@@ -371,6 +371,8 @@ void VisualizationWidget::on_m_btn_ModelPath_Reset_clicked()
 
 void VisualizationWidget::on_m_btn_OpenImage_Reset_clicked()
 {
+    ui->frame->show();
+
     OpenImage_Stop();
 
 	ui->m_btn_ImagePath->setEnabled(true);
@@ -381,12 +383,12 @@ void VisualizationWidget::on_m_btn_OpenImage_Reset_clicked()
 
 	Update_OpenImageBtn();
 	Update_OpenCameraBtn();
-
-    Update_Picture();
 }
 
 void VisualizationWidget::on_m_btn_OpenCamera_Reset_clicked()
 {
+    ui->frame->show();
+
     OpenCamera_Stop();
 
 	ui->m_btn_ImagePath->setEnabled(true);
@@ -397,6 +399,4 @@ void VisualizationWidget::on_m_btn_OpenCamera_Reset_clicked()
 
 	Update_OpenImageBtn();
 	Update_OpenCameraBtn();
-
-    Update_Picture();
 }
