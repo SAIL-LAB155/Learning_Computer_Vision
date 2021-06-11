@@ -29,6 +29,7 @@ from jetson_inference.python.training.classification.reshape import reshape_mode
 from apis import *
 import numpy as np
 
+
 model_names = sorted(name for name in models.__dict__
     if name.islower() and not name.startswith("__")
     and callable(models.__dict__[name]))
@@ -299,8 +300,8 @@ def main_worker(gpu, ngpus_per_node, args,epochs,model_dir,data_path):
         plt.plot(epochs_ls, val_loss, color='r',label='valid_loss')
         plt.plot(epochs_ls, val_acc, color='b', label='valid_acc')
         plt.legend(loc='upper right')
-        plt.savefig('/home/nvidia/tmp/plot.jpg')
-        img = cv2.imread('/home/nvidia/tmp/plot.jpg')
+        plt.savefig(plot_path)
+        img = cv2.imread(plot_path)
         SendToQt_Update_Plot(img)
 
         v_acc = v_out[0]
