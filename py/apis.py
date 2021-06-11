@@ -7,6 +7,7 @@ import ctypes
 import time
 from time import strftime, localtime
 
+plot_path = "/home/hkuit155/Desktop/plot.jpg"
 
 class ParaControlBlock:
     Module_Index = 0;
@@ -54,7 +55,7 @@ def SendToQt_Train_Ok():
     return;
 
 def SendToQt_Update_Plot(img):
-    cv2.imwrite("/home/nvidia/tmp/plot.jpg",img);
+    cv2.imwrite(plot_path, img);
 
     tmpBuf = bytearray(8);
     tmpBuf[0] = 0xA5;

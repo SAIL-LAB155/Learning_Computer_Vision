@@ -396,8 +396,8 @@ def main(epochs, model_dir, data_path):
         plt.plot(epoch_ls, train_loss_ls, color='b', label='train_loss')
         plt.plot(epoch_ls, val_loss_ls, color='r', label='valid_loss')
         plt.legend(loc='upper right')
-        plt.savefig('/home/nvidia/tmp/plot.jpg')
-        img = cv2.imread('/home/nvidia/tmp/plot.jpg')
+        plt.savefig(plot_path)
+        img = cv2.imread(plot_path)
         SendToQt_Update_Plot(img)
 
     logging.info("Task done, exiting program.")

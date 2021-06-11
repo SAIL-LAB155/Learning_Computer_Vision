@@ -8,7 +8,7 @@ from apis import *
 class Fruit:
     def __init__(self):
         print('Fruit_cls init ')
-        self.label_path = "/home/nvidia/Desktop/Learning_Computer_Vision/data/det_data/fruit/labels.txt"
+        self.label_path = "/home/hkuit155/Desktop/Learning_Computer_Vision/data/det_data/fruit/labels.txt"
 
     def train(self, data_path, model_path, epoch):
         print('Cat dog training start')
@@ -20,7 +20,6 @@ class Fruit:
         # cmd = 'python3 /home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/train.py --epochs {} --model-dir {} {}'.format(epoch, '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/models', data_path[:-1])
         # print(cmd)
         # os.system(cmd)
-        model_path = '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/models'
         main(epoch, model_path, data_path[:-1])
 
     def plot(self):
