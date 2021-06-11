@@ -25,6 +25,9 @@ public:
 	void Init(void);
 
 private:
+    float orignalWidth;
+    float orignalHeight;
+
 	void ImagePath_Init(void);
 	void ModelPath_Init(void);
 	void OpenImage_Init(void);
@@ -41,7 +44,7 @@ private:
 	void OpenCamera_Stop(void);
 
 private slots:
-	void Update_Picture(void);
+    void Update_Picture(void);
 
 private slots:
 	void on_m_btn_ImagePath_clicked();
@@ -59,8 +62,6 @@ private slots:
 	void on_m_btn_OpenImage_Reset_clicked();
 
 	void on_m_btn_OpenCamera_Reset_clicked();
-
-	void on_m_btn_Visualize_clicked();
 
 private:
 	void paintEvent(QPaintEvent*);

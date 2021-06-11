@@ -47,7 +47,7 @@ public:
             Learn_Computer_Vision_Dialog->setObjectName(QStringLiteral("Learn_Computer_Vision_Dialog"));
         Learn_Computer_Vision_Dialog->setWindowModality(Qt::NonModal);
         Learn_Computer_Vision_Dialog->setEnabled(true);
-        Learn_Computer_Vision_Dialog->resize(800, 600);
+        Learn_Computer_Vision_Dialog->resize(1024, 768);
         QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);

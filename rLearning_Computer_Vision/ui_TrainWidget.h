@@ -21,7 +21,6 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
-#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -55,7 +54,6 @@ public:
     QFrame *frame;
     QHBoxLayout *horizontalLayout_2;
     QTextBrowser *textBrowser_2;
-    QSpacerItem *horizontalSpacer;
     QVBoxLayout *verticalLayout;
     QLabel *label_2;
     QPushButton *m_btn_Display;
@@ -258,10 +256,6 @@ public:
 
         horizontalLayout->addWidget(frame);
 
-        horizontalSpacer = new QSpacerItem(50, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer);
-
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label_2 = new QLabel(groupBox_2);
@@ -297,7 +291,6 @@ public:
         horizontalLayout->addLayout(verticalLayout);
 
         horizontalLayout->setStretch(0, 3);
-        horizontalLayout->setStretch(1, 1);
 
         gridLayout_2->addWidget(groupBox_2, 2, 0, 1, 1);
 
