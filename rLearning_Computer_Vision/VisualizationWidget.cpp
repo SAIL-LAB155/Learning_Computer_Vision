@@ -14,7 +14,9 @@
 
 VisualizationWidget::VisualizationWidget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::VisualizationWidget)
+    ui(new Ui::VisualizationWidget),
+    orignalWidth(1024.0),
+    orignalHeight(768.0)
 {
     ui->setupUi(this);
 	setAttribute(Qt::WA_StyledBackground);
@@ -81,8 +83,6 @@ void VisualizationWidget::OpenImage_Init(void)
 	ui->m_btn_OpenImage_Reset->setEnabled(false);
 	ui->m_btn_OpenImage_Reset->setStyleSheet("background-color: rgb(255, 0, 0)");
 
-	ui->m_btn_Visualize->setEnabled(false);
-
 	OpenImage_Stop();
 }
 
@@ -91,10 +91,6 @@ void VisualizationWidget::OpenCamera_Init(void)
 	ui->m_btn_OpenCamera->setEnabled(true);
 	ui->m_btn_OpenCamera_Reset->setEnabled(false);
 	ui->m_btn_OpenCamera_Reset->setStyleSheet("background-color: rgb(255, 0, 0)");
-
-	ui->m_btn_Visualize->setEnabled(false);
-
-	ui->m_btn_Visualize->setText("VISUALIZE");
 
 	OpenCamera_Stop();
 }
@@ -200,11 +196,13 @@ void VisualizationWidget::paintEvent(QPaintEvent*)
 		int size = *pi;
 		uchar* ptr = (uchar*)m_ptr + sizeof(int);
 
-		QImage image = QImage::fromData(ptr,size);
+        QImage image = QImage::fromData(ptr, size);
 		QPainter painter(this);
 		QRect rcPhoto = ui->frame->frameRect();
 		rcPhoto.translate(ui->frame->pos());
-		painter.drawImage(rcPhoto,image);
+
+        painter.scale(1*(this->width()/orignalWidth),1*(this->height()/orignalHeight));
+        painter.drawImage(rcPhoto,image);
 
 		//m_isRequestUpdate = false;
 	}
@@ -301,21 +299,22 @@ void VisualizationWidget::on_m_btn_OpenImage_clicked()
 {
 	if(canOpenImage())
 	{
+        orignalWidth = this->width();
+        orignalHeight = this->height();
+
 		ui->m_btn_ImagePath->setEnabled(false);
 		ui->m_btn_ImagePath_Reset->setEnabled(false);
 
 		ui->m_btn_ModelPath->setEnabled(false);
 		ui->m_btn_ModelPath_Reset->setEnabled(false);
 
+        ui->m_btn_OpenImage->setEnabled(false);
+
 		ui->m_btn_OpenCamera->setEnabled(false);
 		ui->m_btn_OpenCamera_Reset->setEnabled(false);
 
-        ui->m_btn_OpenImage_Reset->setEnabled(false);
+        ui->m_btn_OpenImage_Reset->setEnabled(true);
 		ui->m_btn_OpenImage_Reset->setStyleSheet("background-color: rgb(0, 255, 0)");
-
-        ui->m_btn_Visualize->setEnabled(true);
-
-        ui->m_btn_Visualize->setText("Stop");
 
 		OpenImage_Start();
 	}
@@ -329,6 +328,9 @@ void VisualizationWidget::on_m_btn_OpenCamera_clicked()
 {
 	if(canOpenCamera())
 	{
+        orignalWidth = this->width();
+        orignalHeight = this->height();
+
 		ui->m_btn_ImagePath->setEnabled(false);
 		ui->m_btn_ImagePath_Reset->setEnabled(false);
 
@@ -338,12 +340,10 @@ void VisualizationWidget::on_m_btn_OpenCamera_clicked()
 		ui->m_btn_OpenImage->setEnabled(false);
 		ui->m_btn_OpenImage_Reset->setEnabled(false);
 
+        ui->m_btn_OpenCamera->setEnabled(false);
+
 		ui->m_btn_OpenCamera_Reset->setEnabled(true);
 		ui->m_btn_OpenCamera_Reset->setStyleSheet("background-color: rgb(0, 255, 0)");
-
-		ui->m_btn_Visualize->setEnabled(true);
-
-		ui->m_btn_Visualize->setText("Stop");
 
 		OpenCamera_Start();
 	}
@@ -371,100 +371,32 @@ void VisualizationWidget::on_m_btn_ModelPath_Reset_clicked()
 
 void VisualizationWidget::on_m_btn_OpenImage_Reset_clicked()
 {
+    OpenImage_Stop();
+
 	ui->m_btn_ImagePath->setEnabled(true);
-    ui->m_btn_ImagePath_Reset->setEnabled(false);
+    ui->m_btn_ImagePath_Reset->setEnabled(true);
 
 	ui->m_btn_ModelPath->setEnabled(true);
 	ui->m_btn_ModelPath_Reset->setEnabled(true);
 
-	OpenImage_Init();
-
 	Update_OpenImageBtn();
 	Update_OpenCameraBtn();
+
+    Update_Picture();
 }
 
 void VisualizationWidget::on_m_btn_OpenCamera_Reset_clicked()
 {
+    OpenCamera_Stop();
+
 	ui->m_btn_ImagePath->setEnabled(true);
 	ui->m_btn_ImagePath_Reset->setEnabled(true);
 
 	ui->m_btn_ModelPath->setEnabled(true);
 	ui->m_btn_ModelPath_Reset->setEnabled(true);
 
-	OpenCamera_Init();
-
 	Update_OpenImageBtn();
 	Update_OpenCameraBtn();
-}
 
-#include <iostream>
-
-void VisualizationWidget::on_m_btn_Visualize_clicked()
-{
-    std::cout << "m_isVisualizing: " << m_isVisualizing << " m_isOpenImage: " << m_isOpenImage << std::endl;
-    if(m_isVisualizing && !m_isOpenImage)
-    {
-        ui->m_btn_ImagePath->setEnabled(true);
-        ui->m_btn_ImagePath_Reset->setEnabled(true);
-
-        ui->m_btn_ModelPath->setEnabled(true);
-        ui->m_btn_ModelPath_Reset->setEnabled(true);
-
-        ui->m_btn_OpenImage->setEnabled(true);
-        ui->m_btn_OpenImage_Reset->setEnabled(true);
-
-        ui->m_btn_Visualize->setText("VISUALIZE");
-
-        OpenCamera_Stop();
-    }
-
-    else if(m_isOpenImage && !m_isVisualizing)
-	{
-
-        ui->m_btn_ImagePath->setEnabled(true);
-        ui->m_btn_ImagePath_Reset->setEnabled(true);
-
-        ui->m_btn_ModelPath->setEnabled(true);
-        ui->m_btn_ModelPath_Reset->setEnabled(true);
-
-        ui->m_btn_OpenImage->setEnabled(true);
-        ui->m_btn_OpenImage_Reset->setEnabled(true);
-
-        ui->m_btn_Visualize->setText("VISUALIZE");
-
-        OpenImage_Stop();
-    }
-
-    else if (ui->m_btn_ImagePath_Reset->isEnabled())
-    {
-        ui->m_btn_ImagePath->setEnabled(false);
-        ui->m_btn_ImagePath_Reset->setEnabled(false);
-
-        ui->m_btn_ModelPath->setEnabled(false);
-        ui->m_btn_ModelPath_Reset->setEnabled(false);
-
-        ui->m_btn_OpenImage->setEnabled(false);
-        ui->m_btn_OpenImage_Reset->setEnabled(false);
-
-        ui->m_btn_Visualize->setText("Stop");
-
-        OpenImage_Start();
-    }
-
-    else if (ui->m_btn_OpenCamera_Reset->isEnabled())
-    {
-        ui->m_btn_ImagePath->setEnabled(false);
-        ui->m_btn_ImagePath_Reset->setEnabled(false);
-
-        ui->m_btn_ModelPath->setEnabled(false);
-        ui->m_btn_ModelPath_Reset->setEnabled(false);
-
-        ui->m_btn_OpenImage->setEnabled(false);
-        ui->m_btn_OpenImage_Reset->setEnabled(false);
-
-        ui->m_btn_Visualize->setText("Stop");
-
-        OpenCamera_Start();
-    }
-
+    Update_Picture();
 }

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_VisualizationWidget_t {
-    QByteArrayData data[12];
-    char stringdata0[305];
+    QByteArrayData data[11];
+    char stringdata0[278];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,8 +41,7 @@ QT_MOC_LITERAL(6, 117, 27), // "on_m_btn_OpenCamera_clicked"
 QT_MOC_LITERAL(7, 145, 32), // "on_m_btn_ImagePath_Reset_clicked"
 QT_MOC_LITERAL(8, 178, 32), // "on_m_btn_ModelPath_Reset_clicked"
 QT_MOC_LITERAL(9, 211, 32), // "on_m_btn_OpenImage_Reset_clicked"
-QT_MOC_LITERAL(10, 244, 33), // "on_m_btn_OpenCamera_Reset_cli..."
-QT_MOC_LITERAL(11, 278, 26) // "on_m_btn_Visualize_clicked"
+QT_MOC_LITERAL(10, 244, 33) // "on_m_btn_OpenCamera_Reset_cli..."
 
     },
     "VisualizationWidget\0Update_Picture\0\0"
@@ -53,8 +52,7 @@ QT_MOC_LITERAL(11, 278, 26) // "on_m_btn_Visualize_clicked"
     "on_m_btn_ImagePath_Reset_clicked\0"
     "on_m_btn_ModelPath_Reset_clicked\0"
     "on_m_btn_OpenImage_Reset_clicked\0"
-    "on_m_btn_OpenCamera_Reset_clicked\0"
-    "on_m_btn_Visualize_clicked"
+    "on_m_btn_OpenCamera_Reset_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -64,7 +62,7 @@ static const uint qt_meta_data_VisualizationWidget[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      10,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -72,19 +70,17 @@ static const uint qt_meta_data_VisualizationWidget[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   64,    2, 0x08 /* Private */,
-       3,    0,   65,    2, 0x08 /* Private */,
-       4,    0,   66,    2, 0x08 /* Private */,
-       5,    0,   67,    2, 0x08 /* Private */,
-       6,    0,   68,    2, 0x08 /* Private */,
-       7,    0,   69,    2, 0x08 /* Private */,
-       8,    0,   70,    2, 0x08 /* Private */,
-       9,    0,   71,    2, 0x08 /* Private */,
-      10,    0,   72,    2, 0x08 /* Private */,
-      11,    0,   73,    2, 0x08 /* Private */,
+       1,    0,   59,    2, 0x08 /* Private */,
+       3,    0,   60,    2, 0x08 /* Private */,
+       4,    0,   61,    2, 0x08 /* Private */,
+       5,    0,   62,    2, 0x08 /* Private */,
+       6,    0,   63,    2, 0x08 /* Private */,
+       7,    0,   64,    2, 0x08 /* Private */,
+       8,    0,   65,    2, 0x08 /* Private */,
+       9,    0,   66,    2, 0x08 /* Private */,
+      10,    0,   67,    2, 0x08 /* Private */,
 
  // slots: parameters
-    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -113,7 +109,6 @@ void VisualizationWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         case 6: _t->on_m_btn_ModelPath_Reset_clicked(); break;
         case 7: _t->on_m_btn_OpenImage_Reset_clicked(); break;
         case 8: _t->on_m_btn_OpenCamera_Reset_clicked(); break;
-        case 9: _t->on_m_btn_Visualize_clicked(); break;
         default: ;
         }
     }
@@ -145,13 +140,13 @@ int VisualizationWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 10)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 10;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 10)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 10;
+        _id -= 9;
     }
     return _id;
 }

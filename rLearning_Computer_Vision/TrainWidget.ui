@@ -419,7 +419,7 @@ p, li { white-space: pre-wrap; }
      <property name="title">
       <string>Plotting</string>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,1,0">
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,0">
       <item>
        <widget class="QFrame" name="frame">
         <property name="frameShape">
@@ -441,19 +441,6 @@ p, li { white-space: pre-wrap; }
          </item>
         </layout>
        </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>50</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0">
