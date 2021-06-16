@@ -1,9 +1,11 @@
 
 from jetson_inference.python.training.detection.ssd.train_ssd import main
+from jetson_inference.python.training.detection.ssd.onnx_export import onnx
 from labelImg.labelImg import label
 from jetson_inference.python.examples.detectnet import det_video, det_img
 from apis import *
-
+import shutil
+import os
 
 class Fruit:
     def __init__(self):
@@ -17,11 +19,13 @@ class Fruit:
         print('epoch_num: ', epoch)
         self.label_path = data_path[:-1] + '/labels.txt'
         print(self.label_path)
+        if len(os.listdir(data_path[:-1])) > 4:
+            shutil.copyfile(self.label_path, model_path[:-1]+'/labels.txt')
         # cmd = 'python3 /home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/train.py --epochs {} --model-dir {} {}'.format(epoch, '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/models', data_path[:-1])
         # print(cmd)
         # os.system(cmd)
-        main(epoch, model_path, data_path[:-1])
-
+        main(epoch, model_path[:-1], data_path[:-1])
+        onnx(model_path[:-1])
     def plot(self):
         pass
 

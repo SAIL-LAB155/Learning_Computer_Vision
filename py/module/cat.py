@@ -1,5 +1,6 @@
 import os
 from jetson_inference.python.training.classification.train import main
+from jetson_inference.python.training.classification.onnx_export import onnx
 from jetson_inference.python.examples.imagenet import cls_video, cls_img
 from apis import *
 import cv2
@@ -19,7 +20,7 @@ class CAT:
         # cmd = 'python3 /home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/train.py --epochs {} --model-dir {} {}'.format(epoch, '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/models', data_path[:-1])
         # os.system(cmd)
         main(epoch,model_path[:-1],data_path[:-1])
-
+        onnx(model_path[:-1])
     def plot(self):
         print('Cat dog plot start')
 

@@ -15,16 +15,19 @@ class VOCDataset:
                 Annotations, ImageSets, JPEGImages, SegmentationClass, SegmentationObject.
         """
         self.root = pathlib.Path(root)
+        print(self.root)
         self.transform = transform
         self.target_transform = target_transform
 
         # determine the image set file to use
+        is_test = False
         if is_test:
             image_sets_file = self.root / "ImageSets/Main/test.txt"
         else:
             image_sets_file = self.root / "ImageSets/Main/trainval.txt"
             
         if not os.path.isfile(image_sets_file):
+            print('-------------------',image_sets_file)
             image_sets_default = self.root / "ImageSets/Main/default.txt"   # CVAT only saves default.txt
 
             if os.path.isfile(image_sets_default):

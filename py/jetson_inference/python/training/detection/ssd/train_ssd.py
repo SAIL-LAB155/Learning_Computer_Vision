@@ -27,7 +27,7 @@ from jetson_inference.python.training.detection.ssd.vision.ssd.config import mob
 from jetson_inference.python.training.detection.ssd.vision.ssd.config import squeezenet_ssd_config
 from jetson_inference.python.training.detection.ssd.vision.ssd.data_preprocessing import TrainAugmentation, TestTransform
 from apis import *
-
+from voc import process
 
 parser = argparse.ArgumentParser(
     description='Single Shot MultiBox Detector Training With PyTorch')
@@ -236,13 +236,16 @@ def main(epochs, model_dir, data_path):
     logging.info("Prepare training datasets.")
     datasets = []
     for dataset_path in args.datasets:
-        if args.dataset_type == 'voc':
-            dataset = VOCDataset(dataset_path, transform=train_transform,
+        if len(os.listdir(data_path)) < 4:
+            print('voc.........................................')
+            process(data_path)
+            dataset = VOCDataset(data_path, transform=train_transform,
                                  target_transform=target_transform)
             label_file = os.path.join(args.checkpoint_folder, "labels.txt")
             store_labels(label_file, dataset.class_names)
             num_classes = len(dataset.class_names)
-        elif args.dataset_type == 'open_images':
+        else:
+            print('openimage.........................................')
             dataset = OpenImagesDataset(data_path,
                                         transform=train_transform, target_transform=target_transform,
                                         dataset_type="train", balance_data=args.balance_data)
@@ -251,8 +254,6 @@ def main(epochs, model_dir, data_path):
             logging.info(dataset)
             num_classes = len(dataset.class_names)
 
-        else:
-            raise ValueError(f"Dataset type {args.dataset_type} is not supported.")
         datasets.append(dataset)
 
     # create training dataset
@@ -265,10 +266,11 @@ def main(epochs, model_dir, data_path):
 
     # create validation dataset
     logging.info("Prepare Validation datasets.")
-    if args.dataset_type == "voc":
-        val_dataset = VOCDataset(dataset_path, transform=test_transform,
+    if len(os.listdir(data_path)) < 4:
+        print('voc.........................................')
+        val_dataset = VOCDataset(data_path, transform=test_transform,
                                  target_transform=target_transform, is_test=True)
-    elif args.dataset_type == 'open_images':
+    else:
         val_dataset = OpenImagesDataset(data_path,
                                         transform=test_transform, target_transform=target_transform,
                                         dataset_type="test")
