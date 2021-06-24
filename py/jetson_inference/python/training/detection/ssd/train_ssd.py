@@ -193,6 +193,7 @@ def test(loader, net, criterion, device):
 
 
 def main(epochs, model_dir, data_path):
+    flag = 0
     timer = Timer()
 
     logging.info(args)
@@ -403,7 +404,9 @@ def main(epochs, model_dir, data_path):
         SendToQt_Update_Plot(img)
 
     logging.info("Task done, exiting program.")
+    flag = 1
     SendToQt_Train_Ok()
+    return flag
 
 
 if __name__ == '__main__':

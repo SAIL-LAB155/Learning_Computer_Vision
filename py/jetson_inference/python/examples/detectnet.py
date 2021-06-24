@@ -27,6 +27,7 @@ from apis import *
 import argparse
 import sys
 import os
+import cv2
 
 # parse the command line
 parser = argparse.ArgumentParser(description="Locate objects in a live camera stream using an object detection DNN.", 

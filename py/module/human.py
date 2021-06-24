@@ -16,7 +16,7 @@ class HumanPose:
         pass
 
     def visualize_webcam(self, model_path):
-        detect_video(0)
+        detect_video('/dev/video0')
         pass
 
     def annotate(self):

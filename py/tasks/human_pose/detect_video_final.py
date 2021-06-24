@@ -153,10 +153,12 @@ class human_detection:
         data = self.preprocess(img)
         cmap, paf = self.model_trt(data)
         cmap, paf = cmap.detach().cpu(), paf.detach().cpu()
-        counts, objects, peaks = self.parse_objects(cmap, paf)  # , cmap_threshold=0.15, link_threshold=0.15)
+        counts, objects, peaks = self.parse_objects(cmap, paf)  # , cmap_threshold=0.keypoints0+
+        # 15, link_threshold=0.15)
         X_compress = 1920.0 / self.WIDTH * 1.0
         Y_compress = 1080.0 / self.HEIGHT * 1.0
         fps = 1.0 / (time.time() - t)
+        
         for i in range(counts[0]):
             keypoints = self.get_keypoint(objects, i, peaks)
             for j in range(len(keypoints)):

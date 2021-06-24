@@ -103,6 +103,7 @@ best_acc1 = 0
 # initiate worker threads (if using distributed multi-GPU)
 #
 def main(epochs, model_dir, data_path):
+    flag = 0
     args = parser.parse_args()
 
     if args.seed is not None:
@@ -136,7 +137,9 @@ def main(epochs, model_dir, data_path):
     else:
         # Simply call main_worker function
         main_worker(args.gpu, ngpus_per_node, args,epochs,model_dir,data_path)
+    flag = 1
     SendToQt_Train_Ok()
+    return flag
 
 #
 # worker thread (per-GPU)

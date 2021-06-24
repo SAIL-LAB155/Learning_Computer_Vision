@@ -6,6 +6,7 @@ from jetson_inference.python.examples.detectnet import det_video, det_img
 from apis import *
 import shutil
 import os
+import cv2
 
 class Fruit:
     def __init__(self):
@@ -24,8 +25,9 @@ class Fruit:
         # cmd = 'python3 /home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/train.py --epochs {} --model-dir {} {}'.format(epoch, '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/models', data_path[:-1])
         # print(cmd)
         # os.system(cmd)
-        main(epoch, model_path[:-1], data_path[:-1])
-        onnx(model_path[:-1])
+        flag =  main(epoch, model_path[:-1], data_path[:-1])
+        if flag:
+            onnx(model_path[:-1])
     def plot(self):
         pass
 
@@ -33,6 +35,7 @@ class Fruit:
         if not label_path:
             label_path = self.label_path
         img = det_img(model_path[:-1], img_path[:-1], label_path)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         SendToQt_Update_Display(img)
 
     def visualize_webcam(self, model_path=None, label_path=None):
