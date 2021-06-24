@@ -484,6 +484,204 @@ class human_detection:
         out_video.release()
         cap.release()
 
+    def visualize_image(self, img, src, t):
+        color = (0, 255, 0)
+        data = self.preprocess(img)
+        cmap, paf = self.model_trt(data)
+        cmap, paf = cmap.detach().cpu(), paf.detach().cpu()
+        counts, objects, peaks = self.parse_objects(cmap, paf)  # , cmap_threshold=0.keypoints0+
+        # 15, link_threshold=0.15)
+        X_compress = 1920 / self.WIDTH * 1.0
+        Y_compress = 1080 / self.HEIGHT * 1.0
+        fps = 1.0 / (time.time() - t)
+        
+        for i in range(counts[0]):
+            keypoints = self.get_keypoint(objects, i, peaks)
+
+            if keypoints[6][1] and keypoints[8][1]:
+                x1 = round(keypoints[6][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[6][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[8][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[8][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+
+            if keypoints[8][1] and keypoints[10][1]:
+                x1 = round(keypoints[8][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[8][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[10][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[10][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+
+            if keypoints[5][1] and keypoints[7][1]:
+                x1 = round(keypoints[5][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[5][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[7][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[7][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+            
+            if keypoints[7][1] and keypoints[9][1]:
+                x1 = round(keypoints[7][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[7][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[9][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[9][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+
+            if keypoints[6][1] and keypoints[17][1]:
+                x1 = round(keypoints[6][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[6][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[17][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[17][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+
+            if keypoints[5][1] and keypoints[17][1]:
+                x1 = round(keypoints[5][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[5][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[17][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[17][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+
+            if keypoints[17][1] and keypoints[12][1]:
+                x1 = round(keypoints[17][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[17][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[12][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[12][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+            
+            if keypoints[17][1] and keypoints[11][1]:
+                x1 = round(keypoints[17][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[17][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[11][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[11][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+
+            if keypoints[12][1] and keypoints[14][1]:
+                x1 = round(keypoints[12][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[12][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[14][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[14][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+            
+            if keypoints[14][1] and keypoints[16][1]:
+                x1 = round(keypoints[14][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[14][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[16][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[16][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+
+            if keypoints[11][1] and keypoints[13][1]:
+                x1 = round(keypoints[11][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[11][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[13][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[13][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+
+            if keypoints[13][1] and keypoints[15][1]:
+                x1 = round(keypoints[13][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[13][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[15][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[15][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+            
+            if keypoints[17][1] and keypoints[0][1]:
+                x1 = round(keypoints[17][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[17][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[0][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[0][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+            
+            if keypoints[4][1] and keypoints[2][1]:
+                x1 = round(keypoints[4][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[4][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[2][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[2][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+            
+            if keypoints[3][1] and keypoints[1][1]:
+                x1 = round(keypoints[3][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[3][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[1][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[1][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+            
+            if keypoints[0][1] and keypoints[2][1]:
+                x1 = round(keypoints[0][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[0][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[2][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[2][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+            
+            if keypoints[0][1] and keypoints[1][1]:
+                x1 = round(keypoints[0][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[0][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[1][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[1][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+            
+            if keypoints[1][1] and keypoints[2][1]:
+                x1 = round(keypoints[1][2] * self.WIDTH * X_compress)
+                y1 = round(keypoints[1][1] * self.HEIGHT * Y_compress)
+
+                x2 = round(keypoints[2][2] * self.WIDTH * X_compress)
+                y2 = round(keypoints[2][1] * self.HEIGHT * Y_compress)
+                cv2.line(src, (x1, y1), (x2, y2), color, 2)
+
+            for j in range(len(keypoints)):
+                if keypoints[j][1]:
+                    x = round(keypoints[j][2] * self.WIDTH * X_compress)
+                    y = round(keypoints[j][1] * self.HEIGHT * Y_compress)
+                    cv2.circle(src, (x, y), 3, color, 2)
+                    cv2.putText(src, "%d" % int(keypoints[j][0]), (x + 5, y), cv2.FONT_HERSHEY_SIMPLEX, 1,
+                                (0, 255, 255), 1)
+                    cv2.circle(src, (x, y), 3, color, 2)
+            # pose suggestion
+            if peak9[1] != 0 and peak10[1] != 0:
+                if (peak9[1] < peak1[1]) and (peak10[1] < peak1[1]):
+                    cv2.putText(src, "Tree pose", (20, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1)
+                    if math.isclose(peak10[2], peak9[2], rel_tol=0.05, abs_tol=0) == True:
+                        cv2.putText(src, "Pose is great!", (20, 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1)
+                    else:
+                        cv2.putText(src, "You should return more", (20, 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0),
+                                    1)
+                elif (peak9[1] < peak1[1]) or (peak10[1] < peak1[1]):
+                    cv2.putText(src, "Triangle pose", (20, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1)
+                    if math.isclose(peak5[2], peak9[2], rel_tol=0.05, abs_tol=0) == True or math.isclose(peak6[2],
+                                                                                                         peak10[2],
+                                                                                                         rel_tol=0.1,
+                                                                                                         abs_tol=0) == True:
+                        cv2.putText(src, "Pose is great!", (20, 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1)
+                    else:
+                        cv2.putText(src, "You should return more", (20, 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0),
+                                    1)
+                    break
+
+            if peak5[1] != 0 and peak7[1] != 0 and peak9[1] != 0:
+                leftelbow_angle = self.leftangle()
+                cv2.putText(src, str("left elbow angle: {}").format(leftelbow_angle), (100, 60),
+                            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+
+            if peak6[1] != 0 and peak8[1] != 0 and peak10[1] != 0:
+                rightelbow_angle = self.rightangle()
+                cv2.putText(src, str("right elbow angle: {}").format(rightelbow_angle), (100, 100),
+                            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+        return src
+
     def run_image(self, image):
         source_path = image
         cap = cv2.imread(cv2.samples.findFile(source_path))
@@ -495,7 +693,7 @@ class human_detection:
         t = time.time()
 
         img = cv2.resize(cap, dsize=(self.WIDTH, self.HEIGHT), interpolation=cv2.INTER_AREA)
-        img = self.visualize(img, cap, t)
+        img = self.visualize_image(img, cap, t)
         return img
 
         #cv2.imshow("result", img)
