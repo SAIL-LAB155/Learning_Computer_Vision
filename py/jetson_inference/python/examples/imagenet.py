@@ -64,7 +64,7 @@ def cls_img(model_path, img_path, label_path):
 	# SendToQt_Update_Display(np_image)
 	# print out performance info
 	net.PrintProfilerTimes()
-	sys.argv = []
+	output.Close()
 	return np_image
 
 
@@ -120,6 +120,7 @@ def cls_video(model_path, img_path, label_path):
 		# exit on input/output EOS
 		if not input.IsStreaming() or not output.IsStreaming():
 			break
+	output.Close()
 
 
 if __name__ == '__main__':

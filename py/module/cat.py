@@ -4,11 +4,13 @@ from jetson_inference.python.training.classification.onnx_export import onnx
 from jetson_inference.python.examples.imagenet import cls_video, cls_img
 from apis import *
 import cv2
+import sys
 
 class CAT:
     def __init__(self):
-        self.label_path = "/home/nvidia/Desktop/Learning_Computer_Vision/data/cls_data/cat_dog/labels.txt"
+        self.label_path = "../data/cls_data/cat_dog/labels.txt"
         print('Cat_dog init ')
+        self.basename = sys.argv[0]
 
     def train(self,data_path, model_path,epoch):
         print('Cat dog training start')
@@ -22,6 +24,8 @@ class CAT:
         flag = main(epoch,model_path[:-1],data_path[:-1])
         if flag:
             onnx(model_path[:-1])
+        sys.argv = [self.basename]
+
     def plot(self):
         print('Cat dog plot start')
 
@@ -41,6 +45,7 @@ class CAT:
         vis_img = cls_img(model_path[:-1], img_path[:-1], label_path)
         # img = cv2.imread('/home/nvidia/Desktop/Learning_Computer_Vision/py/output.jpg')
         SendToQt_Update_Display(vis_img)
+        sys.argv = [self.basename]
         # SendToQt_Update_Display(img)
         # 'python3 imagenet.py --model=../training/classification/models/cat_dog/resnet18.onnx --input_blob=input_0 --output_blob=output_0 --labels=../training/classification/data/cat_dog/labels.txt ../training/classification/data/cat_dog/test/cat/01.jpg catttt.jpg^'
 
@@ -59,6 +64,7 @@ class CAT:
         cls_video(model_path[:-1], "/dev/video0", label_path)
         # cmd = 'python3 /home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/examples/imagenet.py /dev/video0 --model={} --input_blob=input_0 --output_blob=output_0 --labels=/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/data/cat_dog/labels.txt output.jpg'.format(
         #     model_path[:-1])
+        sys.argv = [self.basename]
 
     def annotate(self):
         print('Cat dog training start')

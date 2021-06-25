@@ -6,12 +6,13 @@ from jetson_inference.python.examples.detectnet import det_video, det_img
 from apis import *
 import shutil
 import os
-import cv2
+import cv2, sys
 
 class Fruit:
     def __init__(self):
         print('Fruit_cls init ')
-        self.label_path = "/home/hkuit155/Desktop/Learning_Computer_Vision/data/det_data/fruit/labels.txt"
+        self.label_path = "../data/det_data/fruit/labels.txt"
+        self.basename = sys.argv[0]
 
     def train(self, data_path, model_path, epoch):
         print('Cat dog training start')
@@ -28,6 +29,8 @@ class Fruit:
         flag =  main(epoch, model_path[:-1], data_path[:-1])
         if flag:
             onnx(model_path[:-1])
+        sys.argv = [self.basename]
+
     def plot(self):
         pass
 
@@ -37,12 +40,13 @@ class Fruit:
         img = det_img(model_path[:-1], img_path[:-1], label_path)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         SendToQt_Update_Display(img)
+        sys.argv = [self.basename]
 
     def visualize_webcam(self, model_path=None, label_path=None):
         if not label_path:
             label_path = self.label_path
-
         det_video(model_path[:-1], "/dev/video0", label_path)
+        sys.argv = [self.basename]
 
     def annotate(self):
         label()

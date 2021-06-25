@@ -1,10 +1,11 @@
 from apis import *
-import cv2
+import cv2, sys
 
 
 class Creature:
     def __init__(self):
         print('Creature init ')
+        self.basename = sys.argv[0]
 
     def train(self, img_path, model_path=None, epochs=10):
         for epoch in range(int(epochs)):
