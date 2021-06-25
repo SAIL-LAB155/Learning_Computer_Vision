@@ -5,4 +5,7 @@ data
 models
 *.pth
 py/output.jpg
-
+*xlsx*
+*onnx*
+*autosave
+*.pth.tar

@@ -103,7 +103,7 @@ best_acc1 = 0
 # initiate worker threads (if using distributed multi-GPU)
 #
 def main(epochs, model_dir, data_path):
-    flag = 0
+
     args = parser.parse_args()
 
     if args.seed is not None:
@@ -133,11 +133,15 @@ def main(epochs, model_dir, data_path):
         args.world_size = ngpus_per_node * args.world_size
         # Use torch.multiprocessing.spawn to launch distributed processes: the
         # main_worker process function
-        mp.spawn(main_worker, nprocs=ngpus_per_node, args=(ngpus_per_node, args))
+        flag = mp.spawn(main_worker, nprocs=ngpus_per_node, args=(ngpus_per_node, args))
     else:
         # Simply call main_worker function
-        main_worker(args.gpu, ngpus_per_node, args,epochs,model_dir,data_path)
-    flag = 1
+        flag = main_worker(args.gpu, ngpus_per_node, args,epochs,model_dir,data_path)
+    if flag == -1:
+        SendToQt_Log("No model saved. Training ended")
+    else:
+        SendToQt_Log("Model saved. Beginning to convert to onnx")
+
     SendToQt_Train_Ok()
     return flag
 
@@ -166,16 +170,24 @@ def main_worker(gpu, ngpus_per_node, args,epochs,model_dir,data_path):
     valdir = os.path.join(data_path, 'val')
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])
+    saved = False
 
-    train_dataset = datasets.ImageFolder(
-        traindir,
-        transforms.Compose([
-            #transforms.Resize(224),
-            transforms.RandomResizedCrop(args.resolution),
-            transforms.RandomHorizontalFlip(),
-            transforms.ToTensor(),
-            normalize,
-        ]))
+    try:
+        train_dataset = datasets.ImageFolder(
+            traindir,
+            transforms.Compose([
+                #transforms.Resize(224),
+                transforms.RandomResizedCrop(args.resolution),
+                transforms.RandomHorizontalFlip(),
+                transforms.ToTensor(),
+                normalize,
+            ]))
+    except FileNotFoundError:
+        SendToQt_Log("The data folder loss something! Please check the folder")
+        return -1
+    except RuntimeError:
+        SendToQt_Log("The data folder loss something! Please check the folder")
+        return -1
 
     num_classes = len(train_dataset.classes)
     print('=> dataset classes:  ' + str(num_classes) + ' ' + str(train_dataset.classes))
@@ -284,12 +296,12 @@ def main_worker(gpu, ngpus_per_node, args,epochs,model_dir,data_path):
         # train for one epoch
         t_out = train(train_loader, model, criterion, optimizer, epoch, num_classes, args)
         if t_out == -1:
-            return
+            return 1 if saved else -1
 
         # evaluate on validation set
         v_out = validate(val_loader, model, criterion, num_classes, args)
         if v_out == -1:
-            return
+            return 1 if saved else -1
 
         train_loss.append(t_out[1])
         train_acc.append(t_out[0])
@@ -323,8 +335,9 @@ def main_worker(gpu, ngpus_per_node, args,epochs,model_dir,data_path):
                 'best_acc1': best_acc1,
                 'optimizer' : optimizer.state_dict(),
             }, is_best, args,model_dir)
+        saved = True
 
-
+    return 1
 #
 # train one epoch
 #

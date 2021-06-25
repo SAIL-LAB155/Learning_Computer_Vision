@@ -469,7 +469,8 @@ class human_detection:
                 break
             img = cv2.resize(dst, dsize=(self.WIDTH, self.HEIGHT), interpolation=cv2.INTER_AREA)
             img = self.visualize(img, dst, t, width, height, frameNumber, sheet)
-            cv2.imshow("result", img)
+            # cv2.imshow("result", img)
+            SendToQt_Update_Display(img)
             out_video.write(img)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break

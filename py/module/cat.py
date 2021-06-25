@@ -21,8 +21,8 @@ class CAT:
         print(self.label_path)
         # cmd = 'python3 /home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/train.py --epochs {} --model-dir {} {}'.format(epoch, '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/models', data_path[:-1])
         # os.system(cmd)
-        flag = main(epoch,model_path[:-1],data_path[:-1])
-        if flag:
+        flag = main(epoch, model_path[:-1], data_path[:-1])
+        if flag != -1:
             onnx(model_path[:-1])
         sys.argv = [self.basename]
 

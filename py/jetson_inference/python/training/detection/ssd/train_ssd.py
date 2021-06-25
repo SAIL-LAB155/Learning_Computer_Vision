@@ -193,7 +193,7 @@ def test(loader, net, criterion, device):
 
 
 def main(epochs, model_dir, data_path):
-    flag = 0
+
     timer = Timer()
 
     logging.info(args)
@@ -236,26 +236,32 @@ def main(epochs, model_dir, data_path):
     # load datasets (could be multiple)
     logging.info("Prepare training datasets.")
     datasets = []
-    for dataset_path in args.datasets:
-        if len(os.listdir(data_path)) < 4:
-            print('voc.........................................')
-            process(data_path)
-            dataset = VOCDataset(data_path, transform=train_transform,
-                                 target_transform=target_transform)
-            label_file = os.path.join(args.checkpoint_folder, "labels.txt")
-            store_labels(label_file, dataset.class_names)
-            num_classes = len(dataset.class_names)
-        else:
-            print('openimage.........................................')
-            dataset = OpenImagesDataset(data_path,
-                                        transform=train_transform, target_transform=target_transform,
-                                        dataset_type="train", balance_data=args.balance_data)
-            label_file = os.path.join(args.checkpoint_folder, "labels.txt")
-            store_labels(label_file, dataset.class_names)
-            logging.info(dataset)
-            num_classes = len(dataset.class_names)
 
-        datasets.append(dataset)
+    try:
+        for dataset_path in args.datasets:
+            if len(os.listdir(data_path)) < 4:
+                print('voc.........................................')
+                process(data_path)
+                dataset = VOCDataset(data_path, transform=train_transform,
+                                     target_transform=target_transform)
+                label_file = os.path.join(args.checkpoint_folder, "labels.txt")
+                store_labels(label_file, dataset.class_names)
+                num_classes = len(dataset.class_names)
+            else:
+                print('openimage.........................................')
+                dataset = OpenImagesDataset(data_path,
+                                            transform=train_transform, target_transform=target_transform,
+                                            dataset_type="train", balance_data=args.balance_data)
+                label_file = os.path.join(args.checkpoint_folder, "labels.txt")
+                store_labels(label_file, dataset.class_names)
+                logging.info(dataset)
+                num_classes = len(dataset.class_names)
+
+            datasets.append(dataset)
+    except FileNotFoundError:
+        SendToQt_Log("The data folder loss something! Please check the folder")
+        SendToQt_Train_Ok()
+        return -1
 
     # create training dataset
     logging.info(f"Stored labels into file {label_file}.")
@@ -368,17 +374,18 @@ def main(epochs, model_dir, data_path):
     logging.info(f"Start training from epoch {last_epoch + 1}.")
     epoch_ls, val_loss_ls, train_loss_ls = [], [], []
 
+    saved = False
     for epoch in range(last_epoch + 1, epochs):
         scheduler.step()
         t_out = train(train_loader, net, criterion, optimizer,
               device=DEVICE, debug_steps=args.debug_steps, epoch=epoch)
         if t_out == -1:
-            return
+            return 1 if saved else -1
         train_loss = t_out
 
         v_out = test(val_loader, net, criterion, DEVICE)
         if v_out == -1:
-            return
+            return 1 if saved else -1
         val_loss, val_regression_loss, val_classification_loss = v_out
 
         logging.info(
@@ -402,11 +409,11 @@ def main(epochs, model_dir, data_path):
         plt.savefig(plot_path)
         img = cv2.imread(plot_path)
         SendToQt_Update_Plot(img)
+        saved = True
 
     logging.info("Task done, exiting program.")
-    flag = 1
     SendToQt_Train_Ok()
-    return flag
+    return 1
 
 
 if __name__ == '__main__':
