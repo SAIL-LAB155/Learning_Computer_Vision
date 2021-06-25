@@ -27,6 +27,7 @@ from jetson_inference.python.training.detection.ssd.vision.ssd.config import mob
 from jetson_inference.python.training.detection.ssd.vision.ssd.config import squeezenet_ssd_config
 from jetson_inference.python.training.detection.ssd.vision.ssd.data_preprocessing import TrainAugmentation, TestTransform
 from apis import *
+from strings import *
 from voc import process
 
 parser = argparse.ArgumentParser(
@@ -118,9 +119,6 @@ def train(loader, net, criterion, optimizer, device, debug_steps=100, epoch=-1):
         comm_handler()
         signal = ParaCB.Get_Signal()
         if signal == 2:
-            SendToQt_Log("Task terminated, exiting program.")
-            logging.info("Task terminated, exiting program.")
-            SendToQt_Train_Ok()
             return -1
 
         images, boxes, labels = data
@@ -170,9 +168,6 @@ def test(loader, net, criterion, device):
         comm_handler()
         signal = ParaCB.Get_Signal()
         if signal == 2:
-            SendToQt_Log("Task terminated, exiting program.")
-            logging.info("Task terminated, exiting program.")
-            SendToQt_Train_Ok()
             return -1
 
         images, boxes, labels = data
@@ -259,8 +254,7 @@ def main(epochs, model_dir, data_path):
 
             datasets.append(dataset)
     except FileNotFoundError:
-        SendToQt_Log("The data folder loss something! Please check the folder")
-        SendToQt_Train_Ok()
+        SendToQt_Log(LOAD_DATA_ERROR)
         return -1
 
     # create training dataset
@@ -412,7 +406,7 @@ def main(epochs, model_dir, data_path):
         saved = True
 
     logging.info("Task done, exiting program.")
-    SendToQt_Train_Ok()
+
     return 1
 
 

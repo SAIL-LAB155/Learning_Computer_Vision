@@ -4,6 +4,7 @@ from jetson_inference.python.training.detection.ssd.onnx_export import onnx
 from labelImg.labelImg import label
 from jetson_inference.python.examples.detectnet import det_video, det_img
 from apis import *
+from strings import *
 import shutil
 import os
 import cv2, sys
@@ -27,8 +28,15 @@ class Fruit:
         # print(cmd)
         # os.system(cmd)
         flag = main(epoch, model_path[:-1], data_path[:-1])
+        SendToQt_Log(TRAINING_FINISH)
+
         if flag != -1:
+            SendToQt_Log(WITH_ONNX_CONVERT)
             onnx(model_path[:-1])
+        else:
+            SendToQt_Log(NO_ONNX_CONVERT)
+        SendToQt_Log(TASK_FINISH)
+        SendToQt_Train_Ok()
         sys.argv = [self.basename]
 
     def plot(self):

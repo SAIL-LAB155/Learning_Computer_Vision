@@ -27,6 +27,7 @@ import torchvision.models as models
 import cv2
 from jetson_inference.python.training.classification.reshape import reshape_model
 from apis import *
+from strings import *
 import numpy as np
 
 
@@ -137,12 +138,7 @@ def main(epochs, model_dir, data_path):
     else:
         # Simply call main_worker function
         flag = main_worker(args.gpu, ngpus_per_node, args,epochs,model_dir,data_path)
-    if flag == -1:
-        SendToQt_Log("No model saved. Training ended")
-    else:
-        SendToQt_Log("Model saved. Beginning to convert to onnx")
 
-    SendToQt_Train_Ok()
     return flag
 
 #
@@ -183,10 +179,10 @@ def main_worker(gpu, ngpus_per_node, args,epochs,model_dir,data_path):
                 normalize,
             ]))
     except FileNotFoundError:
-        SendToQt_Log("The data folder loss something! Please check the folder")
+        SendToQt_Log(LOAD_DATA_ERROR)
         return -1
     except RuntimeError:
-        SendToQt_Log("The data folder loss something! Please check the folder")
+        SendToQt_Log(LOAD_DATA_ERROR)
         return -1
 
     num_classes = len(train_dataset.classes)
@@ -368,7 +364,6 @@ def train(train_loader, model, criterion, optimizer, epoch, num_classes, args):
             message = "The training has been stopped"
             print(message)
             SendToQt_Log(message)
-            SendToQt_Train_Ok()
             return -1
 
         data_time.update(time.time() - end)
@@ -434,7 +429,6 @@ def validate(val_loader, model, criterion, num_classes, args):
                 message = "The training has been stopped"
                 print(message)
                 SendToQt_Log(message)
-                SendToQt_Train_Ok()
                 return -1
 
             if args.gpu is not None:

@@ -3,6 +3,7 @@ from jetson_inference.python.training.classification.train import main
 from jetson_inference.python.training.classification.onnx_export import onnx
 from jetson_inference.python.examples.imagenet import cls_video, cls_img
 from apis import *
+from strings import *
 import cv2
 import sys
 
@@ -22,8 +23,15 @@ class CAT:
         # cmd = 'python3 /home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/train.py --epochs {} --model-dir {} {}'.format(epoch, '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/models', data_path[:-1])
         # os.system(cmd)
         flag = main(epoch, model_path[:-1], data_path[:-1])
+        SendToQt_Log(TRAINING_FINISH)
+
         if flag != -1:
+            SendToQt_Log(WITH_ONNX_CONVERT)
             onnx(model_path[:-1])
+        else:
+            SendToQt_Log(NO_ONNX_CONVERT)
+        SendToQt_Log(TASK_FINISH)
+        SendToQt_Train_Ok()
         sys.argv = [self.basename]
 
     def plot(self):
