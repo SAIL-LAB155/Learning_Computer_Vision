@@ -95,7 +95,7 @@ def det_video(model_path, img_path, label_path):
 		# print out performance info
 		net.PrintProfilerTimes()
 
-		np_image = jetson.utils.cudaToNumpy(img)
+		np_image = cv2.cvtColor(jetson.utils.cudaToNumpy(img), cv2.COLOR_BGR2RGB)
 		SendToQt_Update_Display(np_image)
 		# exit on input/output EOS
 		if not input.IsStreaming() or not output.IsStreaming():
@@ -145,7 +145,7 @@ def det_img(model_path, img_path, label_path):
 	# print out performance info
 	net.PrintProfilerTimes()
 
-	np_image = jetson.utils.cudaToNumpy(img)
+	np_image = cv2.cvtColor(jetson.utils.cudaToNumpy(img), cv2.COLOR_BGR2RGB)
 	return np_image
 
 

@@ -60,11 +60,12 @@ def cls_img(model_path, img_path, label_path):
 	output.Render(img)
 	# out_img = jetson.utils.cudaToNumpy(img, 720, 480, 4)
 	# SendToQt_Update_Display(out_img)
-	np_image = jetson.utils.cudaToNumpy(img)
+	np_image = cv2.cvtColor(jetson.utils.cudaToNumpy(img), cv2.COLOR_BGR2RGB)
 	# SendToQt_Update_Display(np_image)
 	# print out performance info
 	net.PrintProfilerTimes()
 	output.Close()
+	input.Close()
 	return np_image
 
 
@@ -112,7 +113,7 @@ def cls_video(model_path, img_path, label_path):
 		# SendToQt_Update_Display(out_img)
 		# update the title bar
 		output.SetStatus("{:s} | Network {:.0f} FPS".format(net.GetNetworkName(), net.GetNetworkFPS()))
-		np_image = jetson.utils.cudaToNumpy(img)
+		np_image = cv2.cvtColor(jetson.utils.cudaToNumpy(img), cv2.COLOR_BGR2RGB)
 		SendToQt_Update_Display(np_image)
 		# print out performance info
 		net.PrintProfilerTimes()
@@ -124,8 +125,13 @@ def cls_video(model_path, img_path, label_path):
 
 
 if __name__ == '__main__':
-	cls_video('/home/nvidia/Desktop/Learning_Computer_Vision/models/cls_models/cat_dog/resnet18.onnx',
-			 '/dev/video0',
+	# cls_video('/home/nvidia/Desktop/Learning_Computer_Vision/models/cls_models/cat_dog/resnet18.onnx',
+	# 		 '/dev/video0',
+	# 		 '/home/nvidia/Desktop/Learning_Computer_Vision/data/cls_data/cat_dog/labels.txt')
+	import cv2
+	img = cls_img('/home/nvidia/Desktop/Learning_Computer_Vision/models/cls_models/cat_dog/resnet18.onnx',
+			 '/home/nvidia/Desktop/Learning_Computer_Vision/data/cls_data/cat_dog/train/dog/0008.jpg',
 			 '/home/nvidia/Desktop/Learning_Computer_Vision/data/cls_data/cat_dog/labels.txt')
-
+	cv2.imshow("das", img)
+	cv2.waitKey(0)
 # ['/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/examples/imagenet.py', '/dev/video0', '--input_blob=input_0', '--output_blob=output_0', 'output.jpg', '--model=/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/models/cat_dog/resnet18.onnx', '--labels=/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/data/cat_dog/labels.txt']
