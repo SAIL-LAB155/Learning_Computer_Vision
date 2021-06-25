@@ -23,7 +23,7 @@ class Vehicle:
 
     def visualize_webcam(self, model_path=None):
         # for _ in range(100):
-        cap = cv2.VideoCapture('/home/nvidia/Downloads/1.mp4')
+        cap = cv2.VideoCapture('../videos/1.mp4')
         # cv2.imread()
         while cap.isOpened():
             ret, frame = cap.read()
