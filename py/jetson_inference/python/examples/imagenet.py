@@ -57,7 +57,7 @@ def cls_img(model_path, img_path, label_path):
 	font.OverlayText(img, img.width, img.height, "{:05.2f}% {:s}".format(confidence * 100, class_desc), 5, 5, font.White, font.Gray40)
 
 	# render the image
-	output.Render(img)
+	# output.Render(img)
 	# out_img = jetson.utils.cudaToNumpy(img, 720, 480, 4)
 	# SendToQt_Update_Display(out_img)
 	np_image = cv2.cvtColor(jetson.utils.cudaToNumpy(img), cv2.COLOR_BGR2RGB)
@@ -108,11 +108,11 @@ def cls_video(model_path, img_path, label_path):
 		font.OverlayText(img, img.width, img.height, "{:05.2f}% {:s}".format(confidence * 100, class_desc), 5, 5, font.White, font.Gray40)
 
 		# render the image
-		output.Render(img)
+		# output.Render(img)
 		# out_img = jetson.utils.cudaToNumpy(img, 720, 480, 4)
 		# SendToQt_Update_Display(out_img)
 		# update the title bar
-		output.SetStatus("{:s} | Network {:.0f} FPS".format(net.GetNetworkName(), net.GetNetworkFPS()))
+		# output.SetStatus("{:s} | Network {:.0f} FPS".format(net.GetNetworkName(), net.GetNetworkFPS()))
 		np_image = cv2.cvtColor(jetson.utils.cudaToNumpy(img), cv2.COLOR_BGR2RGB)
 		SendToQt_Update_Display(np_image)
 		# print out performance info

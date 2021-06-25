@@ -87,10 +87,10 @@ def det_video(model_path, img_path, label_path):
 			print(detection)
 
 		# render the image
-		output.Render(img)
+		# output.Render(img)
 
 		# update the title bar
-		output.SetStatus("{:s} | Network {:.0f} FPS".format("ssd-mobilenet-v2", net.GetNetworkFPS()))
+		# output.SetStatus("{:s} | Network {:.0f} FPS".format("ssd-mobilenet-v2", net.GetNetworkFPS()))
 
 		# print out performance info
 		net.PrintProfilerTimes()
@@ -137,7 +137,7 @@ def det_img(model_path, img_path, label_path):
 		print(detection)
 
 	# render the image
-	output.Render(img)
+	# output.Render(img)
 
 	# update the title bar
 	output.SetStatus("{:s} | Network {:.0f} FPS".format("ssd-mobilenet-v2", net.GetNetworkFPS()))
