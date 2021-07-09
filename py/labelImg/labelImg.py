@@ -1477,7 +1477,10 @@ def main():
 def label():
     '''construct main app and run it'''
     app, _win = get_main_app(sys.argv)
-    return app.exec_()
+    try:
+        return app.exec_(), _win.dirname
+    except:
+        return app.exec_(), 0
 
 if __name__ == '__main__':
     sys.exit(main())

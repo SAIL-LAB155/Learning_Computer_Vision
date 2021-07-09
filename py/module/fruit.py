@@ -57,7 +57,8 @@ class Fruit:
         sys.argv = [self.basename]
 
     def annotate(self):
-        label()
+        _, dirname = label()
+        print(dirname)
         #execfile('labelImg-1.8.1/labelImg.py')
 
     def reset(self):
