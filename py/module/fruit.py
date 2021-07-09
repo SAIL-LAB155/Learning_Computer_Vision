@@ -59,6 +59,10 @@ class Fruit:
     def annotate(self):
         _, dirname = label()
         print(dirname)
+        if dirname:
+            # Add file movement
+            pass
+
         #execfile('labelImg-1.8.1/labelImg.py')
 
     def reset(self):
