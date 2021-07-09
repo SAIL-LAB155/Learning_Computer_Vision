@@ -9,3 +9,8 @@ py/output.jpg
 *onnx*
 *autosave
 *.pth.tar
+videos/
+*try*
+*NewFolder*
+
+
