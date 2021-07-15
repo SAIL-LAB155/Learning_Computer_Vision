@@ -57,11 +57,46 @@ class Fruit:
         sys.argv = [self.basename]
 
     def annotate(self):
-        _, dirname = label()
-        print(dirname)
-        if dirname:
-            # Add file movement
-            pass
+        _, path = label()
+        print(path)
+        if path:
+            name = os.listdir(path)
+            os.makedirs(path + '/' + 'JPEGImages')
+            os.makedirs(path + '/' + 'Annotations')
+            os.makedirs(path + '/' + 'ImageSets/Main')
+            for i in name:
+                tmp = path + '/' + i
+                if i.endswith('xml'):
+                    shutil.move(tmp,path+'/' + 'Annotations')
+                else:
+                    shutil.move(tmp,path+'/' + 'JPEGImages')
+
+            path1 = path + '/JPEGImages'
+            name = os.listdir(path1)
+            ratio = 0.1
+            for i in name:
+		tmp = i.split('.')[0]
+		with open(path + '/ImageSets/Main/trainval.txt','a+') as f:
+		    f.write(tmp)
+		    f.write('\n')
+	    name_test = name[:int(len(name) * ratio)]
+	    for i in name_test:
+		tmp = i.split('.')[0]
+		with open(path + '/ImageSets/Main/test.txt','a+') as f:
+		    f.write(tmp)
+		    f.write('\n')
+	    name_val = name[int(len(name) * (1-ratio)) : ]
+	    for i in name_val:
+		tmp = i.split('.')[0]
+		with open(path + '/ImageSets/Main/val.txt','a+') as f:
+		    f.write(tmp)
+		    f.write('\n')
+	    name_train = name[int(len(name) * ratio) : ]
+	    for i in name_train:
+		tmp = i.split('.')[0]
+		with open(path + '/ImageSets/Main/train.txt','a+') as f:
+		    f.write(tmp)
+		    f.write('\n')
 
         #execfile('labelImg-1.8.1/labelImg.py')
 
