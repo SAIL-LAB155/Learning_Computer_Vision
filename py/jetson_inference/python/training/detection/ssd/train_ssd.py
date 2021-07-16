@@ -52,7 +52,7 @@ parser.add_argument('--mb2-width-mult', default=1.0, type=float,
 
 # Params for loading pretrained basenet or checkpoints.
 parser.add_argument('--base-net', help='Pretrained base model')
-parser.add_argument('--pretrained-ssd', default='/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/detection/ssd/models/mobilenet-v1-ssd-mp-0_675.pth', type=str, help='Pre-trained base model')
+parser.add_argument('--pretrained-ssd', default='/home/hkuit155/Desktop/Learning_Computer_Vision/models/2/mb1-ssd-Epoch-0-Loss-6.5399054707707585.pth', type=str, help='Pre-trained base model')
 parser.add_argument('--resume', default=None, type=str,
                     help='Checkpoint state_dict file to resume training from')
 
@@ -184,6 +184,8 @@ def test(loader, net, criterion, device):
         running_loss += loss.item()
         running_regression_loss += regression_loss.item()
         running_classification_loss += classification_loss.item()
+        msg = 'Loss:{}'.format(running_loss//num)
+        SendToQt_Log(msg)
     return running_loss / num, running_regression_loss / num, running_classification_loss / num
 
 

@@ -7,7 +7,7 @@ import ctypes
 import time
 from time import strftime, localtime
 
-plot_path = "/home/nvidia/Desktop/plot.jpg"
+plot_path = "../plot.jpg"
 
 class ParaControlBlock:
     Module_Index = 0;

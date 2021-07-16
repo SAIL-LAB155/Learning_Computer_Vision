@@ -8,7 +8,7 @@
 
 #define Train_Server_Port 6666
 
-#define PLOT_PATH "/home/nvidia/tmp/plot.jpg"
+#define PLOT_PATH "../plot.jpg"
 
 TrainWidget::TrainWidget(QWidget *parent) :
     QWidget(parent),
