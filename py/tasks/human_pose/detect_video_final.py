@@ -15,6 +15,8 @@ from torch2trt import TRTModule
 from trt_pose.draw_objects import DrawObjects
 from trt_pose.parse_objects import ParseObjects
 from openpyxl import Workbook
+import jetson.inference
+import jetson.utils
 
 from apis import *
 
@@ -747,7 +749,22 @@ def detect_video(video):
     human.run_video(video, sheet)
     workbook.save(filename="../excel/" + video.split('/')[-1] + ".xlsx")
 
-def detect_image(image):
-    human = human_detection()
-    vis = human.run_image(image)
-    SendToQt_Update_Display(vis)
+def detect_image(imagePath):
+    # human = human_detection()
+    # vis = human.run_image(image)
+
+    net = jetson.inference.poseNet("resnet18-body")
+    
+    imageSrc = jetson.utils.videoSource(imagePath)
+
+    output = jetson.utils.videoOutput("output.jpg")
+
+    image = imageSrc.Capture()
+
+    poses = net.Process(image, "links,keypoints")
+
+    #output.Render(image)
+
+    np_image = cv2.cvtColor(jetson.utils.cudaToNumpy(image), cv2.COLOR_BGR2RGB)
+    return np_image
+    SendToQt_Update_Display(output)
