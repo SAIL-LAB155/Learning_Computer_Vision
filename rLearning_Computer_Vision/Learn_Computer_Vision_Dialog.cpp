@@ -22,13 +22,13 @@ void Learn_Computer_Vision_Dialog::resizeEvent(QResizeEvent *event){
             m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ color : black }");
             break;
         case Module_Cat_and_Dog:
-            m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ border-image: url(:/images/416lZbwGldL._AC_.jpg) }");
+            m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ border-image: url(:/images/unavailable.jpg) }");
             break;
         case Module_Vehicles:
             m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ color : black }");
             break;
         case Module_Human:
-            m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ border-image: url(:/images/416lZbwGldL._AC_.jpg) }");
+            m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ border-image: url(:/images/unavailable.jpg) }");
             break;
         default:
             m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ color : black }");
@@ -260,13 +260,13 @@ void Learn_Computer_Vision_Dialog::SwitchWidget(Widget_Index_t index)
                     m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ color : black }");
                     break;
                 case Module_Cat_and_Dog:
-                    m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ border-image: url(:/images/416lZbwGldL._AC_.jpg) }");
+                    m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ border-image: url(:/images/unavailable.jpg) }");
                     break;
                 case Module_Vehicles:
                     m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ color : black }");
                     break;
                 case Module_Human:
-                    m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ border-image: url(:/images/416lZbwGldL._AC_.jpg) }");
+                    m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ border-image: url(:/images/unavailable.jpg) }");
                     break;
                 default:
                     m_pAnnotationDlg->setStyleSheet("AnnotationWidget{ color : black }");

@@ -15,11 +15,13 @@ class HumanPose:
         pass
 
     def visualize(self, img_path, model_path=None):
+        SendToQt_Update_Display(cv2.imread('../rLearning_Computer_Vision/images/loading.jpg'))
         img = detect_image(img_path[:-1])
         SendToQt_Update_Display(img)
 
     def visualize_webcam(self, model_path):
-        detect_video('/home/jay/Desktop/Learning_Computer_Vision/video/sample2.mp4')
+        SendToQt_Update_Display(cv2.imread('../rLearning_Computer_Vision/images/loading.jpg'))
+        detect_video('/dev/video0')
         pass
 
     def annotate(self):

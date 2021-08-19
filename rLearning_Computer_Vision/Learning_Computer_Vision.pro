@@ -1,3 +1,4 @@
+
 #-------------------------------------------------
 #
 # Project created by QtCreator 2021-01-02T16:04:36
@@ -10,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
 CONFIG += resources_big
+CONFIG += qt
 
 TARGET = Learning_Computer_Vision
 TEMPLATE = app
