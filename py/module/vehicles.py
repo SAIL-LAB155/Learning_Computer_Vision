@@ -1,7 +1,8 @@
-
 from jetson_inference.python.training.detection.ssd.train_ssd import main
 import cv2
 from apis import *
+
+from module.inferencePy.segnet import segment
 
 class Vehicle:
     def __init__(self):
@@ -19,19 +20,12 @@ class Vehicle:
         pass
 
     def visualize(self, img_path, model_path=None):
-        pass
+        SendToQt_Update_Display(cv2.imread('../rLearning_Computer_Vision/images/loading.jpg'))
+        segment(img_path[:-1])
 
     def visualize_webcam(self, model_path=None):
-        # for _ in range(100):
-        cap = cv2.VideoCapture('../videos/1.mp4')
-        # cv2.imread()
-        while cap.isOpened():
-            ret, frame = cap.read()
-            if ret:
-                SendToQt_Update_Display(frame)
-            else:
-                cv2.destroyAllWindows()
-                break
+        SendToQt_Update_Display(cv2.imread('../rLearning_Computer_Vision/images/loading.jpg'))
+        segment("/dev/video0")
 
     def annotate(self):
         pass

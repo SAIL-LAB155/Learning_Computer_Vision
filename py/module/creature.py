@@ -1,6 +1,7 @@
 from apis import *
 import cv2, sys
 
+from module.inferencePy.depthnet import detectDepth
 
 class Creature:
     def __init__(self):
@@ -27,14 +28,12 @@ class Creature:
         pass
 
     def visualize(self, img_path, model_path):
-        print("Image is currently showing!")
-        img = cv2.imread(img_path[:-1])
-        img = cv2.flip(img, 1)
-        print("Image finishes showing!")
-        SendToQt_Update_Display(img)
+        SendToQt_Update_Display(cv2.imread('../rLearning_Computer_Vision/images/loading.jpg'))
+        detectDepth(img_path[:-1])
 
     def visualize_webcam(self, model_path=None):
-        pass
+        SendToQt_Update_Display(cv2.imread('../rLearning_Computer_Vision/images/loading.jpg'))
+        detectDepth("/dev/video0")
 
     def annotate(self):
         pass
