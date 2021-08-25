@@ -7,11 +7,10 @@ models
 *.pth
 py/output.jpg
 *xlsx*
-*onnx*
 *autosave
 *.pth.tar
 videos/
 *try*
 *NewFolder*
-
+*.onnx
 
