@@ -163,12 +163,18 @@ class VOCDataset:
                 np.array(is_difficult, dtype=np.uint8))
 
     def _find_image(self, image_id):
+
         image_file = os.path.join(self.root, "JPEGImages/{:s}.jpg".format(image_id))
-        
+
         if os.path.exists(image_file):
             return image_file
             
         image_file = os.path.join(self.root, "JPEGImages/{:s}.JPG".format(image_id))
+        
+        if os.path.exists(image_file):
+            return image_file
+
+        image_file = os.path.join(self.root, "JPEGImages/{:s}".format(image_id))
         
         if os.path.exists(image_file):
             return image_file
