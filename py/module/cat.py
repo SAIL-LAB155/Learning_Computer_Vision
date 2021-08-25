@@ -1,6 +1,6 @@
 from module.trainPy.classification.train import main
 from module.trainPy.classification.onnx_export import onnx
-from jetson_inference.python.examples.imagenet import cls_video, cls_img
+from module.inferencePy.imagenet import cls_video, cls_img
 from apis import *
 from strings import *
 import sys
