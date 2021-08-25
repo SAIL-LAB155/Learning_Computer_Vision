@@ -268,7 +268,7 @@ def main(epochs, model_dir, data_path):
 
     # create validation dataset
     logging.info("Prepare Validation datasets.")
-    if len(os.listdir(data_path)) < 4:
+    if len(os.listdir(data_path)) < 6:
         print('voc.........................................')
         val_dataset = VOCDataset(data_path, transform=test_transform,
                                  target_transform=target_transform, is_test=True)
