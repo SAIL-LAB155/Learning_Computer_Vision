@@ -235,7 +235,7 @@ def main(epochs, model_dir, data_path):
 
     try:
         for dataset_path in args.datasets:
-            if len(os.listdir(data_path)) < 4:
+            if len(os.listdir(data_path)) < 6:
                 print('voc.........................................')
                 process(data_path)
                 dataset = VOCDataset(data_path, transform=train_transform,

@@ -22,7 +22,7 @@ class Fruit:
         print('epoch_num: ', epoch)
         self.label_path = data_path[:-1] + '/labels.txt'
         print(self.label_path)
-        if len(os.listdir(data_path[:-1])) > 4:
+        if len(os.listdir(data_path[:-1])) > 6:
             shutil.copyfile(self.label_path, model_path[:-1]+'/labels.txt')
         # cmd = 'python3 /home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/train.py --epochs {} --model-dir {} {}'.format(epoch, '/home/nvidia/Desktop/Learning_Computer_Vision/py/jetson_inference/python/training/classification/models', data_path[:-1])
         # print(cmd)
@@ -46,7 +46,7 @@ class Fruit:
         if not label_path:
             label_path = self.label_path
         img = det_img(model_path[:-1], img_path[:-1], label_path)
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         SendToQt_Update_Display(img)
         sys.argv = [self.basename]
 
