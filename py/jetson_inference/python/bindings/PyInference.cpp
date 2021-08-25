@@ -24,7 +24,9 @@
 
 #include "PyTensorNet.h"
 #include "PyImageNet.h"
+#include "PyDepthNet.h"
 #include "PyDetectNet.h"
+#include "PyPoseNet.h"
 #include "PySegNet.h"
 
 #include "logging.h"
@@ -47,9 +49,15 @@ bool PyInference_Register( PyObject* module )
 	if( !PyImageNet_Register(module) )
 		LogError(LOG_PY_INFERENCE "failed to register imageNet type\n");
 	
+	if( !PyDepthNet_Register(module) )
+		LogError(LOG_PY_INFERENCE "failed to register depthNet type\n");
+	
 	if( !PyDetectNet_Register(module) )
 		LogError(LOG_PY_INFERENCE "failed to register detectNet type\n");
 
+	if( !PyPoseNet_Register(module) )
+		LogError(LOG_PY_INFERENCE "failed to register poseNet type\n");
+	
 	if( !PySegNet_Register(module) )
 		LogError(LOG_PY_INFERENCE "failed to register segNet type\n");
 

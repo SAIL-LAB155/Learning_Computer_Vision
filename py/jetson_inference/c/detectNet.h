@@ -175,6 +175,7 @@ public:
 		OVERLAY_BOX        = (1 << 0),	/**< Overlay the object bounding boxes */
 		OVERLAY_LABEL 	    = (1 << 1),	/**< Overlay the class description labels */
 		OVERLAY_CONFIDENCE = (1 << 2),	/**< Overlay the detection confidence values */
+		OVERLAY_DEFAULT    = OVERLAY_BOX,	/**< The default choice of overlay */
 	};
 	
 	/**
@@ -194,7 +195,12 @@ public:
 #if NV_TENSORRT_MAJOR > 4
 		SSD_MOBILENET_V1,	/**< SSD Mobilenet-v1 UFF model, trained on MS-COCO */
 		SSD_MOBILENET_V2,	/**< SSD Mobilenet-v2 UFF model, trained on MS-COCO */
-		SSD_INCEPTION_V2	/**< SSD Inception-v2 UFF model, trained on MS-COCO */
+		SSD_INCEPTION_V2,	/**< SSD Inception-v2 UFF model, trained on MS-COCO */
+		
+		/**< Default model is SSD-Mobilenet-v2 (or PedNet for legacy JetPack's) */
+		NETWORK_DEFAULT=SSD_MOBILENET_V2
+#else
+		NETWORK_DEFAULT=PEDNET_MULTI
 #endif
 	};
 
@@ -220,7 +226,7 @@ public:
 	 * @param threshold default minimum threshold for detection
 	 * @param maxBatchSize The maximum batch size that the network will support and be optimized for.
 	 */
-	static detectNet* Create( NetworkType networkType=PEDNET_MULTI, float threshold=DETECTNET_DEFAULT_THRESHOLD, 
+	static detectNet* Create( NetworkType networkType=NETWORK_DEFAULT, float threshold=DETECTNET_DEFAULT_THRESHOLD, 
 						 uint32_t maxBatchSize=DEFAULT_MAX_BATCH_SIZE, precisionType precision=TYPE_FASTEST, 
 						 deviceType device=DEVICE_GPU, bool allowGPUFallback=true );
 	
@@ -382,7 +388,7 @@ public:
 	 * @param output output image in CUDA device memory.
 	 * @param detections Array of detections allocated in CUDA device memory.
 	 */
-	template<typename T> bool Overlay( T* input, T* output, uint32_t width, uint32_t height, Detection* detections, uint32_t numDetections, uint32_t flags=OVERLAY_BOX )			{ return Overlay(input, output, width, height, imageFormatFromType<T>(), detections, flags); }
+	template<typename T> bool Overlay( T* input, T* output, uint32_t width, uint32_t height, Detection* detections, uint32_t numDetections, uint32_t flags=OVERLAY_DEFAULT )			{ return Overlay(input, output, width, height, imageFormatFromType<T>(), detections, flags); }
 	
 	/**
 	 * Draw the detected bounding boxes overlayed on an RGBA image.
@@ -391,7 +397,7 @@ public:
 	 * @param output output image in CUDA device memory.
 	 * @param detections Array of detections allocated in CUDA device memory.
 	 */
-	bool Overlay( void* input, void* output, uint32_t width, uint32_t height, imageFormat format, Detection* detections, uint32_t numDetections, uint32_t flags=OVERLAY_BOX );
+	bool Overlay( void* input, void* output, uint32_t width, uint32_t height, imageFormat format, Detection* detections, uint32_t numDetections, uint32_t flags=OVERLAY_DEFAULT );
 	
 	/**
 	 * Retrieve the minimum threshold for detection.

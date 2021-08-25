@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# this script benchmarks DNN models from jetson_inference
+# this script benchmarks DNN models from jetson-inference
 # using the TensorRT trtexec tool and logs the results.
 #
 # usage: ./benchmark-models.sh <log-dir> <iterations> <runs>
