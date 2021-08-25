@@ -1,6 +1,6 @@
 
-from jetson_inference.python.training.detection.ssd.train_ssd import main
-from jetson_inference.python.training.detection.ssd.onnx_export import onnx
+from module.trainPy.ssd.ssd.train_ssd import main
+from module.trainPy.ssd.ssd.onnx_export import onnx
 from labelImg.labelImg import label
 from jetson_inference.python.examples.detectnet import det_video, det_img
 from apis import *

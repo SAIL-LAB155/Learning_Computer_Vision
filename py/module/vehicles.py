@@ -1,5 +1,4 @@
-from jetson_inference.python.training.detection.ssd.train_ssd import main
-import cv2
+from module.trainPy.ssd.ssd.train_ssd import main
 from apis import *
 
 from module.inferencePy.segnet import segment
