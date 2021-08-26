@@ -10,7 +10,7 @@ import torch.onnx
 from module.trainPy.ssd.ssd.vision.ssd.vgg_ssd import create_vgg_ssd
 from module.trainPy.ssd.ssd.vision.ssd.mobilenetv1_ssd import create_mobilenetv1_ssd
 from module.trainPy.ssd.ssd.vision.ssd.mobilenetv1_ssd_lite import create_mobilenetv1_ssd_lite
-from module.trainPy.ssd.ssd.vision import create_squeezenet_ssd_lite
+from module.trainPy.ssd.ssd.vision.ssd.squeezenet_ssd_lite import create_squeezenet_ssd_lite
 from module.trainPy.ssd.ssd.vision.ssd.mobilenet_v2_ssd_lite import create_mobilenetv2_ssd_lite
 
 def onnx(model_dir):
@@ -106,3 +106,8 @@ def onnx(model_dir):
     torch.onnx.export(net, dummy_input, args.output, verbose=True, input_names=input_names, output_names=output_names)
     print('model exported to:  {:s}'.format(args.output))
     print('task done, exiting program')
+
+
+if __name__ == '__main__':
+    m_dir = "/home/nvidia/Desktop/Learning_Computer_Vision/weights/VOC"
+    onnx(m_dir)
