@@ -179,12 +179,18 @@ def test(loader, net, criterion, device):
             confidence, locations = net(images)
             regression_loss, classification_loss = criterion(confidence, locations, labels, boxes)
             loss = regression_loss + classification_loss
-
-        running_loss += loss.item()
-        running_regression_loss += regression_loss.item()
-        running_classification_loss += classification_loss.item()
-        msg = 'Loss:{}'.format(running_loss//num)
-        SendToQt_Log(msg)
+        if regression_loss > 9999 or classification_loss > 9999:
+            running_loss += loss.item()
+            running_regression_loss += regression_loss.item()
+            running_classification_loss += classification_loss.item()
+            # logging.info(
+            #     f"Epoch: {epoch}, Step: {i}/{len(loader)}, " +
+            #     f"Avg Loss: {avg_loss:.4f}, " +
+            #     f"Avg Regression Loss {avg_reg_loss:.4f}, " +
+            #     f"Avg Classification Loss: {avg_clf_loss:.4f}"
+            # )
+            msg = 'Loss:{}'.format(running_loss//num)
+            SendToQt_Log(msg)
     return running_loss / num, running_regression_loss / num, running_classification_loss / num
 
 
