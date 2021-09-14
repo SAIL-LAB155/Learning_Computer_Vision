@@ -109,5 +109,5 @@ def onnx(model_dir):
 
 
 if __name__ == '__main__':
-    m_dir = "/home/nvidia/Desktop/Learning_Computer_Vision/weights/VOC"
+    m_dir = "/home/nvidia/Desktop/Learning_Computer_Vision/weights/test"
     onnx(m_dir)

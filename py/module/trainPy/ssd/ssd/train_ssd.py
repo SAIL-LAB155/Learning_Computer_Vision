@@ -240,7 +240,7 @@ def main(epochs, model_dir, data_path):
                 process(data_path)
                 dataset = VOCDataset(data_path, transform=train_transform,
                                      target_transform=target_transform)
-                label_file = os.path.join(args.checkpoint_folder, "labels.txt")
+                label_file = os.path.join(model_dir, "labels.txt")
                 store_labels(label_file, dataset.class_names)
                 num_classes = len(dataset.class_names)
             else:
