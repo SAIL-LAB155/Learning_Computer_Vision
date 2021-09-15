@@ -127,7 +127,9 @@ def train(loader, net, criterion, optimizer, device, debug_steps=100, epoch=-1):
 
         optimizer.zero_grad()
         confidence, locations = net(images)
-        regression_loss, classification_loss = criterion(confidence, locations, labels, boxes)  # TODO CHANGE BOXES
+        regression_loss, classification_loss = criterion(confidence, locations, labels, boxes) # TODO CHANGE BOXES
+        if regression_loss > 9999:
+            regression_loss = classification_loss
         loss = regression_loss + classification_loss
         loss.backward()
         optimizer.step()
@@ -157,13 +159,14 @@ def train(loader, net, criterion, optimizer, device, debug_steps=100, epoch=-1):
     return whole_loss/len(loader.dataset)
 
 
-def test(loader, net, criterion, device):
+def test(loader, net, criterion, device, debug_steps, epoch):
     net.eval()
+    whole_loss = 0.0
     running_loss = 0.0
     running_regression_loss = 0.0
     running_classification_loss = 0.0
     num = 0
-    for _, data in enumerate(loader):
+    for i, data in enumerate(loader):
         comm_handler()
         signal = ParaCB.Get_Signal()
         if signal == 2:
@@ -179,18 +182,31 @@ def test(loader, net, criterion, device):
             confidence, locations = net(images)
             regression_loss, classification_loss = criterion(confidence, locations, labels, boxes)
             loss = regression_loss + classification_loss
-        if regression_loss > 9999 or classification_loss > 9999:
-            running_loss += loss.item()
-            running_regression_loss += regression_loss.item()
-            running_classification_loss += classification_loss.item()
-            # logging.info(
-            #     f"Epoch: {epoch}, Step: {i}/{len(loader)}, " +
-            #     f"Avg Loss: {avg_loss:.4f}, " +
-            #     f"Avg Regression Loss {avg_reg_loss:.4f}, " +
-            #     f"Avg Classification Loss: {avg_clf_loss:.4f}"
-            # )
-            msg = 'Loss:{}'.format(running_loss//num)
+        if regression_loss > 9999:
+            regression_loss = classification_loss
+
+        whole_loss += loss.item()
+        running_loss += loss.item()
+        running_regression_loss += regression_loss.item()
+        running_classification_loss += classification_loss.item()
+        if i and i % debug_steps == 0:
+            avg_loss = running_loss / debug_steps
+            avg_reg_loss = running_regression_loss / debug_steps
+            avg_clf_loss = running_classification_loss / debug_steps
+            logging.info(
+                f"Epoch: {epoch}, Step: {i}/{len(loader)}, " +
+                f"Avg Loss: {avg_loss:.4f}, " +
+                f"Avg Regression Loss {avg_reg_loss:.4f}, " +
+                f"Avg Classification Loss: {avg_clf_loss:.4f}"
+            )
+            msg =  (f"Epoch: {epoch}, Step: {i}/{len(loader)}, " +
+                f"Avg Loss: {avg_loss:.4f}, " +
+                f"Avg Regression Loss {avg_reg_loss:.4f}, " +
+                f"Avg Classification Loss: {avg_clf_loss:.4f}")
             SendToQt_Log(msg)
+            running_loss = 0.0
+            running_regression_loss = 0.0
+            running_classification_loss = 0.0
     return running_loss / num, running_regression_loss / num, running_classification_loss / num
 
 
@@ -384,17 +400,18 @@ def main(epochs, model_dir, data_path):
             return 1 if saved else -1
         train_loss = t_out
 
-        v_out = test(val_loader, net, criterion, DEVICE)
+        v_out = test(val_loader, net, criterion, DEVICE, debug_steps=args.debug_steps, epoch=epoch)
         if v_out == -1:
             return 1 if saved else -1
-        val_loss, val_regression_loss, val_classification_loss = v_out
+        val_loss = v_out
+        # val_loss, val_regression_loss, val_classification_loss = v_out
 
-        logging.info(
-            f"Epoch: {epoch}, " +
-            f"Validation Loss: {val_loss:.4f}, " +
-            f"Validation Regression Loss {val_regression_loss:.4f}, " +
-            f"Validation Classification Loss: {val_classification_loss:.4f}"
-        )
+        # logging.info(
+        #     f"Epoch: {epoch}, " +
+        #     f"Validation Loss: {val_loss:.4f}, " +
+        #     f"Validation Regression Loss {val_regression_loss:.4f}, " +
+        #     f"Validation Classification Loss: {val_classification_loss:.4f}"
+        # )
         model_path = os.path.join(model_dir, f"{args.net}-Epoch-{epoch}-Loss-{val_loss}.pth")
         net.save(model_path)
         logging.info(f"Saved model {model_path}")
