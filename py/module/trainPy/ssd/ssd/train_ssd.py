@@ -128,8 +128,14 @@ def train(loader, net, criterion, optimizer, device, debug_steps=100, epoch=-1):
         optimizer.zero_grad()
         confidence, locations = net(images)
         regression_loss, classification_loss = criterion(confidence, locations, labels, boxes) # TODO CHANGE BOXES
+        if regression_loss > 9999 and classification_loss > 9999:
+            regression_loss = 0
+            classification_loss = 0
         if regression_loss > 9999:
             regression_loss = classification_loss
+        if classification_loss > 9999:
+            classification_loss = regression_loss
+
         loss = regression_loss + classification_loss
         loss.backward()
         optimizer.step()
@@ -143,7 +149,7 @@ def train(loader, net, criterion, optimizer, device, debug_steps=100, epoch=-1):
             avg_reg_loss = running_regression_loss / debug_steps
             avg_clf_loss = running_classification_loss / debug_steps
             logging.info(
-                f"Epoch: {epoch}, Step: {i}/{len(loader)}, " +
+                f"Epoch: (Train) {epoch}, Step: {i}/{len(loader)}, " +
                 f"Avg Loss: {avg_loss:.4f}, " +
                 f"Avg Regression Loss {avg_reg_loss:.4f}, " +
                 f"Avg Classification Loss: {avg_clf_loss:.4f}"
@@ -181,10 +187,16 @@ def test(loader, net, criterion, device, debug_steps, epoch):
         with torch.no_grad():
             confidence, locations = net(images)
             regression_loss, classification_loss = criterion(confidence, locations, labels, boxes)
-            loss = regression_loss + classification_loss
+            if regression_loss > 9999 and classification_loss > 9999:
+                regression_loss = 0
+                classification_loss = 0
+
         if regression_loss > 9999:
             regression_loss = classification_loss
+        if classification_loss > 9999:
+            classification_loss = regression_loss
 
+        loss = regression_loss + classification_loss
         whole_loss += loss.item()
         running_loss += loss.item()
         running_regression_loss += regression_loss.item()
@@ -194,7 +206,7 @@ def test(loader, net, criterion, device, debug_steps, epoch):
             avg_reg_loss = running_regression_loss / debug_steps
             avg_clf_loss = running_classification_loss / debug_steps
             logging.info(
-                f"Epoch: {epoch}, Step: {i}/{len(loader)}, " +
+                f"Epoch: (Validation) {epoch}, Step: {i}/{len(loader)}, " +
                 f"Avg Loss: {avg_loss:.4f}, " +
                 f"Avg Regression Loss {avg_reg_loss:.4f}, " +
                 f"Avg Classification Loss: {avg_clf_loss:.4f}"
@@ -207,7 +219,7 @@ def test(loader, net, criterion, device, debug_steps, epoch):
             running_loss = 0.0
             running_regression_loss = 0.0
             running_classification_loss = 0.0
-    return running_loss / num, running_regression_loss / num, running_classification_loss / num
+    return whole_loss/len(loader.dataset)
 
 
 def main(epochs, model_dir, data_path):
@@ -217,11 +229,11 @@ def main(epochs, model_dir, data_path):
     logging.info(args)
 
     # make sure that the checkpoint output dir exists
-    if args.checkpoint_folder:
-        args.checkpoint_folder = os.path.expanduser(args.checkpoint_folder)
-
-        if not os.path.exists(args.checkpoint_folder):
-            os.mkdir(args.checkpoint_folder)
+    # if args.checkpoint_folder:
+    #     args.checkpoint_folder = os.path.expanduser(args.checkpoint_folder)
+    #
+    #     if not os.path.exists(args.checkpoint_folder):
+    #         os.mkdir(args.checkpoint_folder)
 
     # select the network architecture and config
     if args.net == 'vgg16-ssd':

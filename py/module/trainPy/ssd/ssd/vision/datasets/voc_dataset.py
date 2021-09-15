@@ -20,11 +20,11 @@ class VOCDataset:
         self.target_transform = target_transform
 
         # determine the image set file to use
-        is_test = False
+        # is_test = False
         if is_test:
-            image_sets_file = self.root / "ImageSets/Main/test.txt"
+            image_sets_file = self.root / "ImageSets/Main/val.txt"
         else:
-            image_sets_file = self.root / "ImageSets/Main/trainval.txt"
+            image_sets_file = self.root / "ImageSets/Main/train.txt"
             
         if not os.path.isfile(image_sets_file):
             print('-------------------',image_sets_file)
