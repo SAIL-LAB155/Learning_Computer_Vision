@@ -36,7 +36,7 @@ parser = argparse.ArgumentParser(description="Locate objects in a live camera st
 
 parser.add_argument("input_URI", type=str, default="", nargs='?', help="URI of the input stream")
 parser.add_argument("output_URI", type=str, default="", nargs='?', help="URI of the output stream")
-parser.add_argument("--network", type=str, default="ssd-mobilenet-v2", help="pre-trained model to load (see below for options)")
+parser.add_argument("--network", type=str, default="detection-mobilenet-v2", help="pre-trained model to load (see below for options)")
 parser.add_argument("--overlay", type=str, default="box,labels,conf", help="detection overlay flags (e.g. --overlay=box,labels,conf)\nvalid combinations are:  'box', 'labels', 'conf', 'none'")
 parser.add_argument("--threshold", type=float, default=0.5, help="minimum detection threshold to use") 
 
@@ -59,7 +59,7 @@ def det_video(model_path, img_path, label_path):
 		sys.exit(0)
 
 	# load the object detection network
-	net = jetson.inference.detectNet('ssd-mobilenet-v2', sys.argv, opt.threshold)
+	net = jetson.inference.detectNet('detection-mobilenet-v2', sys.argv, opt.threshold)
 	sys.argv = []
 	# create video sources & outputs
 	input = jetson.utils.videoSource(img_path, argv=sys.argv)
@@ -90,7 +90,7 @@ def det_video(model_path, img_path, label_path):
 		# output.Render(img)
 
 		# update the title bar
-		# output.SetStatus("{:s} | Network {:.0f} FPS".format("ssd-mobilenet-v2", net.GetNetworkFPS()))
+		# output.SetStatus("{:s} | Network {:.0f} FPS".format("detection-mobilenet-v2", net.GetNetworkFPS()))
 
 		# print out performance info
 		net.PrintProfilerTimes()
@@ -118,7 +118,7 @@ def det_img(model_path, img_path, label_path):
 		sys.exit(0)
 
 	# load the object detection network
-	net = jetson.inference.detectNet('ssd-mobilenet-v2', sys.argv, opt.threshold)
+	net = jetson.inference.detectNet('detection-mobilenet-v2', sys.argv, opt.threshold)
 	sys.argv = []
 	# create video sources & outputs
 	input = jetson.utils.videoSource(img_path, argv=sys.argv)
@@ -140,7 +140,7 @@ def det_img(model_path, img_path, label_path):
 	# output.Render(img)
 
 	# update the title bar
-	output.SetStatus("{:s} | Network {:.0f} FPS".format("ssd-mobilenet-v2", net.GetNetworkFPS()))
+	output.SetStatus("{:s} | Network {:.0f} FPS".format("detection-mobilenet-v2", net.GetNetworkFPS()))
 
 	# print out performance info
 	net.PrintProfilerTimes()
@@ -152,6 +152,6 @@ def det_img(model_path, img_path, label_path):
 
 if __name__ == '__main__':
 	device = "/dev/video0"
-	model_path = "/home/nvidia/Desktop/Learning_Computer_Vision/models/det_model/ssd-mobilenet.onnx"
+	model_path = "/home/nvidia/Desktop/Learning_Computer_Vision/models/det_model/detection-mobilenet.onnx"
 	label_path = "/home/nvidia/Desktop/Learning_Computer_Vision/data/det_data/fruit/labels.txt"
 	det_video(model_path, device, label_path)

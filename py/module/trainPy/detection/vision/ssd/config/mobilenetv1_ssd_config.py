@@ -1,6 +1,6 @@
 import numpy as np
 
-from module.trainPy.ssd.ssd.vision.utils import SSDSpec, SSDBoxSizes, generate_ssd_priors
+from module.trainPy.detection.vision.utils.box_utils import SSDSpec, SSDBoxSizes, generate_ssd_priors
 
 
 image_size = 300
@@ -29,6 +29,6 @@ priors = generate_ssd_priors(specs, image_size)
 #print(' ')
 
 #import torch
-#torch.save(priors, 'mb1-ssd-priors.pt')
+#torch.save(priors, 'mb1-detection-priors.pt')
 
-#np.savetxt('mb1-ssd-priors.txt', priors.numpy())
+#np.savetxt('mb1-detection-priors.txt', priors.numpy())

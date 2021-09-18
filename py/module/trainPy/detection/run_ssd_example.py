@@ -18,30 +18,30 @@ image_path = sys.argv[4]
 
 class_names = [name.strip() for name in open(label_path).readlines()]
 
-if net_type == 'vgg16-ssd':
+if net_type == 'vgg16-detection':
     net = create_vgg_ssd(len(class_names), is_test=True)
-elif net_type == 'mb1-ssd':
+elif net_type == 'mb1-detection':
     net = create_mobilenetv1_ssd(len(class_names), is_test=True)
-elif net_type == 'mb1-ssd-lite':
+elif net_type == 'mb1-detection-lite':
     net = create_mobilenetv1_ssd_lite(len(class_names), is_test=True)
-elif net_type == 'mb2-ssd-lite':
+elif net_type == 'mb2-detection-lite':
     net = create_mobilenetv2_ssd_lite(len(class_names), is_test=True)
-elif net_type == 'sq-ssd-lite':
+elif net_type == 'sq-detection-lite':
     net = create_squeezenet_ssd_lite(len(class_names), is_test=True)
 else:
-    print("The net type is wrong. It should be one of vgg16-ssd, mb1-ssd and mb1-ssd-lite.")
+    print("The net type is wrong. It should be one of vgg16-detection, mb1-detection and mb1-detection-lite.")
     sys.exit(1)
 net.load(model_path)
 
-if net_type == 'vgg16-ssd':
+if net_type == 'vgg16-detection':
     predictor = create_vgg_ssd_predictor(net, candidate_size=200)
-elif net_type == 'mb1-ssd':
+elif net_type == 'mb1-detection':
     predictor = create_mobilenetv1_ssd_predictor(net, candidate_size=200)
-elif net_type == 'mb1-ssd-lite':
+elif net_type == 'mb1-detection-lite':
     predictor = create_mobilenetv1_ssd_lite_predictor(net, candidate_size=200)
-elif net_type == 'mb2-ssd-lite':
+elif net_type == 'mb2-detection-lite':
     predictor = create_mobilenetv2_ssd_lite_predictor(net, candidate_size=200)
-elif net_type == 'sq-ssd-lite':
+elif net_type == 'sq-detection-lite':
     predictor = create_squeezenet_ssd_lite_predictor(net, candidate_size=200)
 else:
     predictor = create_vgg_ssd_predictor(net, candidate_size=200)

@@ -45,7 +45,7 @@ RUN apt-get update && \
 		  nano \
     && rm -rf /var/lib/apt/lists/*
     
-# pip dependencies for pytorch-ssd
+# pip dependencies for pytorch-detection
 RUN pip3 install --verbose --upgrade Cython && \
     pip3 install --verbose boto3 pandas
 
