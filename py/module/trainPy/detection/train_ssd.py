@@ -12,19 +12,19 @@ import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader, ConcatDataset
 from torch.optim.lr_scheduler import CosineAnnealingLR, MultiStepLR
 
-from module.trainPy.ssd.ssd.vision.utils.misc import str2bool, Timer, freeze_net_layers, store_labels
-from module.trainPy.ssd.ssd.vision.ssd.ssd import MatchPrior
-from module.trainPy.ssd.ssd.vision.ssd.vgg_ssd import create_vgg_ssd
-from module.trainPy.ssd.ssd.vision.ssd.mobilenetv1_ssd import create_mobilenetv1_ssd
-from module.trainPy.ssd.ssd.vision.ssd.mobilenetv1_ssd_lite import create_mobilenetv1_ssd_lite
-from module.trainPy.ssd.ssd.vision.ssd.mobilenet_v2_ssd_lite import create_mobilenetv2_ssd_lite
-from module.trainPy.ssd.ssd.vision.ssd.squeezenet_ssd_lite import create_squeezenet_ssd_lite
-from module.trainPy.ssd.ssd.vision.datasets.voc_dataset import VOCDataset
-from module.trainPy.ssd.ssd.vision.datasets.open_images import OpenImagesDataset
-from module.trainPy.ssd.ssd.vision.nn.multibox_loss import MultiboxLoss
-from module.trainPy.ssd.ssd.vision.ssd.config import vgg_ssd_config, mobilenetv1_ssd_config
-from module.trainPy.ssd.ssd.vision.ssd.config import squeezenet_ssd_config
-from module.trainPy.ssd.ssd.vision.ssd.data_preprocessing import TrainAugmentation, TestTransform
+from module.trainPy.detection.vision.utils.misc import str2bool, Timer, freeze_net_layers, store_labels
+from module.trainPy.detection.vision.ssd.ssd import MatchPrior
+from module.trainPy.detection.vision.ssd.vgg_ssd import create_vgg_ssd
+from module.trainPy.detection.vision.ssd.mobilenetv1_ssd import create_mobilenetv1_ssd
+from module.trainPy.detection.vision.ssd.mobilenetv1_ssd_lite import create_mobilenetv1_ssd_lite
+from module.trainPy.detection.vision.ssd.mobilenet_v2_ssd_lite import create_mobilenetv2_ssd_lite
+from module.trainPy.detection.vision.ssd.squeezenet_ssd_lite import create_squeezenet_ssd_lite
+from module.trainPy.detection.vision.datasets.voc_dataset import VOCDataset
+from module.trainPy.detection.vision.datasets.open_images import OpenImagesDataset
+from module.trainPy.detection.vision.nn.multibox_loss import MultiboxLoss
+from module.trainPy.detection.vision.ssd.config import vgg_ssd_config, mobilenetv1_ssd_config
+from module.trainPy.detection.vision.ssd.config import squeezenet_ssd_config
+from module.trainPy.detection.vision.ssd.data_preprocessing import TrainAugmentation, TestTransform
 from apis import *
 from strings import *
 from voc import process

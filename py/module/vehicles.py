@@ -1,4 +1,4 @@
-from module.trainPy.ssd.ssd.train_ssd import main
+from module.trainPy.detection.train_ssd import main
 from apis import *
 
 from module.inferencePy.segnet import segment

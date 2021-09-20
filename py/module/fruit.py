@@ -1,13 +1,13 @@
 
-from module.trainPy.ssd.ssd.train_ssd import main
-from module.trainPy.ssd.ssd.onnx_export import onnx
+from module.trainPy.detection.train_ssd import main
+from module.trainPy.detection.onnx_export import onnx
 from labelImg.labelImg import label
 from module.inferencePy.detectnet import det_video, det_img
 from apis import *
 from strings import *
 import shutil
 import os
-import cv2, sys
+import sys
 
 class Fruit:
     def __init__(self):
