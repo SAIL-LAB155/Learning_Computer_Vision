@@ -51,7 +51,7 @@ parser.add_argument('--mb2-width-mult', default=1.0, type=float,
 
 # Params for loading pretrained basenet or checkpoints.
 parser.add_argument('--base-net', help='Pretrained base model')
-parser.add_argument('--pretrained-detection', default='../weights/pretrain/mobilenet-v1-detection-mp-0_675.pth', type=str, help='Pre-trained base model')
+parser.add_argument('--pretrained_ssd', default='../weights/pretrain/mobilenet-v1-ssd-mp-0_675.pth', type=str, help='Pre-trained base model')
 parser.add_argument('--resume', default=None, type=str,
                     help='Checkpoint state_dict file to resume training from')
 
