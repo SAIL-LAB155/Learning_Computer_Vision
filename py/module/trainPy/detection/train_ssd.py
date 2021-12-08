@@ -40,8 +40,8 @@ parser.add_argument('--balance-data', action='store_true',
                     help="Balance training data by down-sampling more frequent labels.")
 
 # Params for network
-parser.add_argument('--net', default="mb1-ssd",
-                    help="The network architecture, it can be mb1-ssd, mb1-lite-ssd, mb2-ssd-lite or vgg16-ssd.")
+parser.add_argument('--net', default="mb1-detection",
+                    help="The network architecture, it can be mb1-detection, mb1-lite-detection, mb2-detection-lite or vgg16-detection.")
 parser.add_argument('--freeze-base-net', action='store_true',
                     help="Freeze base net layers.")
 parser.add_argument('--freeze-net', action='store_true',
@@ -51,7 +51,7 @@ parser.add_argument('--mb2-width-mult', default=1.0, type=float,
 
 # Params for loading pretrained basenet or checkpoints.
 parser.add_argument('--base-net', help='Pretrained base model')
-parser.add_argument('--pretrained-ssd', default='../weights/pretrain/mobilenet-v1-ssd-mp-0_675.pth', type=str, help='Pre-trained base model')
+parser.add_argument('--pretrained-detection', default='../weights/pretrain/mobilenet-v1-detection-mp-0_675.pth', type=str, help='Pre-trained base model')
 parser.add_argument('--resume', default=None, type=str,
                     help='Checkpoint state_dict file to resume training from')
 
@@ -236,19 +236,19 @@ def main(epochs, model_dir, data_path):
     #         os.mkdir(args.checkpoint_folder)
 
     # select the network architecture and config
-    if args.net == 'vgg16-ssd':
+    if args.net == 'vgg16-detection':
         create_net = create_vgg_ssd
         config = vgg_ssd_config
-    elif args.net == 'mb1-ssd':
+    elif args.net == 'mb1-detection':
         create_net = create_mobilenetv1_ssd
         config = mobilenetv1_ssd_config
-    elif args.net == 'mb1-ssd-lite':
+    elif args.net == 'mb1-detection-lite':
         create_net = create_mobilenetv1_ssd_lite
         config = mobilenetv1_ssd_config
-    elif args.net == 'sq-ssd-lite':
+    elif args.net == 'sq-detection-lite':
         create_net = create_squeezenet_ssd_lite
         config = squeezenet_ssd_config
-    elif args.net == 'mb2-ssd-lite':
+    elif args.net == 'mb2-detection-lite':
         create_net = lambda num: create_mobilenetv2_ssd_lite(num, width_mult=args.mb2_width_mult)
         config = mobilenetv1_ssd_config
     else:
@@ -370,7 +370,7 @@ def main(epochs, model_dir, data_path):
         logging.info(f"Init from base net {args.base_net}")
         net.init_from_base_net(args.base_net)
     elif args.pretrained_ssd:
-        logging.info(f"Init from pretrained ssd {args.pretrained_ssd}")
+        logging.info(f"Init from pretrained detection {args.pretrained_ssd}")
         net.init_from_pretrained_ssd(args.pretrained_ssd)
     logging.info(f'Took {timer.end("Load Model"):.2f} seconds to load the model.')
 
@@ -447,4 +447,4 @@ def main(epochs, model_dir, data_path):
 
 
 if __name__ == '__main__':
-    main(30, '/module/trainPy/ssd/ssd/models', '/module/trainPy/ssd/ssd/data/fruit')
+    main(30, '/module/trainPy/detection/detection/models', '/module/trainPy/detection/detection/data/fruit')

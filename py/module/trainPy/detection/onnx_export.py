@@ -13,11 +13,10 @@ from module.trainPy.detection.vision.ssd.mobilenetv1_ssd_lite import create_mobi
 from module.trainPy.detection.vision.ssd.squeezenet_ssd_lite import create_squeezenet_ssd_lite
 from module.trainPy.detection.vision.ssd.mobilenet_v2_ssd_lite import create_mobilenetv2_ssd_lite
 
-
 def onnx(model_dir):
     # parse command line
     parser = argparse.ArgumentParser()
-    parser.add_argument('--net', default="ssd-mobilenet", help="The network architecture, it can be mb1-ssd (aka ssd-mobilenet), mb1-lite-ssd, mb2-ssd-lite or vgg16-ssd.")
+    parser.add_argument('--net', default="detection-mobilenet", help="The network architecture, it can be mb1-detection (aka detection-mobilenet), mb1-lite-detection, mb2-detection-lite or vgg16-detection.")
     parser.add_argument('--input', type=str, default='', help="path to input PyTorch model (.pth checkpoint)")
     parser.add_argument('--output', type=str, default='', help="desired path of converted ONNX model (default: <NET>.onnx)")
     parser.add_argument('--labels', type=str, default='labels.txt', help="name of the class labels file")
@@ -68,18 +67,18 @@ def onnx(model_dir):
     print('creating network:  ' + args.net)
     print('num classes:       ' + str(num_classes))
 
-    if args.net == 'vgg16-ssd':
+    if args.net == 'vgg16-detection':
         net = create_vgg_ssd(len(class_names), is_test=True)
-    elif args.net == 'mb1-ssd' or args.net == 'ssd-mobilenet':
+    elif args.net == 'mb1-detection' or args.net == 'detection-mobilenet':
         net = create_mobilenetv1_ssd(len(class_names), is_test=True)
-    elif args.net == 'mb1-ssd-lite':
+    elif args.net == 'mb1-detection-lite':
         net = create_mobilenetv1_ssd_lite(len(class_names), is_test=True)
-    elif args.net == 'mb2-ssd-lite':
+    elif args.net == 'mb2-detection-lite':
         net = create_mobilenetv2_ssd_lite(len(class_names), is_test=True)
-    elif args.net == 'sq-ssd-lite':
+    elif args.net == 'sq-detection-lite':
         net = create_squeezenet_ssd_lite(len(class_names), is_test=True)
     else:
-        print("The net type is wrong. It should be one of vgg16-ssd, mb1-ssd and mb1-ssd-lite.")
+        print("The net type is wrong. It should be one of vgg16-detection, mb1-detection and mb1-detection-lite.")
         sys.exit(1)
 
     # load the model checkpoint
